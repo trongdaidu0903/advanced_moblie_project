@@ -132,98 +132,98 @@ class _LoginViewState extends State<LoginView> {
     }
   }
 
-  // void _handleGoogleLogin(AuthProvider authProvider) async {
-  //   try {
-  //     final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
-  //     final GoogleSignInAuthentication? googleAuth =
-  //         await googleUser?.authentication;
+  void _handleGoogleLogin(AuthProvider authProvider) async {
+    try {
+      final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
+      final GoogleSignInAuthentication? googleAuth =
+          await googleUser?.authentication;
 
-  //     final String? accessToken = googleAuth?.accessToken;
+      final String? accessToken = googleAuth?.accessToken;
 
-  //     if (accessToken != null) {
-  //       try {
-  //         await AuthService.loginByGoogle(
-  //           accessToken: accessToken,
-  //           onSuccess: (user, token) async {
-  //             authProvider.logIn(user, token);
+      if (accessToken != null) {
+        try {
+          await AuthService.loginByGoogle(
+            accessToken: accessToken,
+            onSuccess: (user, token) async {
+              authProvider.logIn(user, token);
 
-  //             final prefs = await SharedPreferences.getInstance();
-  //             await prefs.setString(
-  //               'refresh_token',
-  //               authProvider.token!.refresh!.token!,
-  //             );
+              final prefs = await SharedPreferences.getInstance();
+              await prefs.setString(
+                'refresh_token',
+                authProvider.token!.refresh!.token!,
+              );
 
-  //             setState(() {
-  //               _isAuthenticating = false;
-  //               _isAuthenticated = true;
-  //             });
+              setState(() {
+                _isAuthenticating = false;
+                _isAuthenticated = true;
+              });
 
-  //             Future.delayed(const Duration(seconds: 1), () {
-  //               Navigator.pushNamedAndRemoveUntil(
-  //                 context,
-  //                 Routes.main,
-  //                 (route) => false,
-  //               );
-  //             });
-  //           },
-  //         );
-  //       } catch (e) {
-  //         if (mounted) {
-  //           ScaffoldMessenger.of(context).showSnackBar(
-  //             SnackBar(
-  //                 content: Text('Error Login with Google: ${e.toString()}')),
-  //           );
-  //         }
-  //       }
-  //     }
-  //   } catch (e) {
-  //     ScaffoldMessenger.of(context).showSnackBar(
-  //       SnackBar(content: Text('Error Login with Google: ${e.toString()}')),
-  //     );
-  //   }
-  // }
+              Future.delayed(const Duration(seconds: 1), () {
+                Navigator.pushNamedAndRemoveUntil(
+                  context,
+                  Routes.main,
+                  (route) => false,
+                );
+              });
+            },
+          );
+        } catch (e) {
+          if (mounted) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                  content: Text('Error Login with Google: ${e.toString()}')),
+            );
+          }
+        }
+      }
+    } catch (e) {
+      // ignore: use_build_context_synchronously
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error Login with Google: ${e.toString()}')),
+      );
+    }
+  }
 
-  // void _handleFacebookLogin(AuthProvider authProvider) async {
-  //   final result = await FacebookAuth.instance.login();
+  void _handleFacebookLogin(AuthProvider authProvider) async {
+    final result = await FacebookAuth.instance.login();
 
-  //   if (result.status == LoginStatus.success) {
-  //     final accessToken = result.accessToken!.token;
-  //     try {
-  //       await AuthService.loginByFacebook(
-  //         accessToken: accessToken,
-  //         onSuccess: (user, token) async {
-  //           authProvider.logIn(user, token);
+    if (result.status == LoginStatus.success) {
+      final accessToken = result.accessToken!.token;
+      try {
+        await AuthService.loginByFacebook(
+          accessToken: accessToken,
+          onSuccess: (user, token) async {
+            authProvider.logIn(user, token);
 
-  //           final prefs = await SharedPreferences.getInstance();
-  //           await prefs.setString(
-  //             'refresh_token',
-  //             authProvider.token!.refresh!.token!,
-  //           );
+            final prefs = await SharedPreferences.getInstance();
+            await prefs.setString(
+              'refresh_token',
+              authProvider.token!.refresh!.token!,
+            );
 
-  //           setState(() {
-  //             _isAuthenticating = false;
-  //             _isAuthenticated = true;
-  //           });
+            setState(() {
+              _isAuthenticating = false;
+              _isAuthenticated = true;
+            });
 
-  //           Future.delayed(const Duration(seconds: 1), () {
-  //             Navigator.pushNamedAndRemoveUntil(
-  //               context,
-  //               Routes.main,
-  //               (route) => false,
-  //             );
-  //           });
-  //         },
-  //       );
-  //     } catch (e) {
-  //       print(e);
-  //       if (mounted) {
-  //         ScaffoldMessenger.of(context).showSnackBar(
-  //           SnackBar(content: Text('Error Login with Google: ${e.toString()}')),
-  //         );
-  //       }
-  //     }
-  //   } else {}
-  // }
+            Future.delayed(const Duration(seconds: 1), () {
+              Navigator.pushNamedAndRemoveUntil(
+                context,
+                Routes.main,
+                (route) => false,
+              );
+            });
+          },
+        );
+      } catch (e) {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Error Login with Google: ${e.toString()}')),
+          );
+        }
+      }
+    } else {}
+  }
 
   void _loadLanguage(AppProvider appProvider) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -260,210 +260,204 @@ class _LoginViewState extends State<LoginView> {
     }
 
     return Scaffold(
-      body:
-          //TODO: disable authentication
-          _isAuthenticating
-              ? const Center(
-                  child: CircularProgressIndicator(color: Colors.blue))
-              : _isAuthenticated
-                  ? const SizedBox.shrink()
-                  : SingleChildScrollView(
-                      padding: EdgeInsets.fromLTRB(
-                          16, MediaQuery.of(context).padding.top, 16, 16),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          Align(
-                            alignment: Alignment.centerRight,
-                            child: DropdownButton<String>(
-                              value: chosenLanguage,
-                              items: const [
-                                DropdownMenuItem<String>(
-                                  value: 'English',
-                                  child: Text('English'),
-                                ),
-                                DropdownMenuItem<String>(
-                                  value: 'Tiếng Việt',
-                                  child: Text('Tiếng Việt'),
-                                ),
-                              ],
-                              onChanged: (String? language) {
-                                if (language != null) {
-                                  _updateLanguage(appProvider, language);
-                                }
-                                setState(() {
-                                  chosenLanguage = language!;
-                                });
+      body: _isAuthenticating
+          ? const Center(child: CircularProgressIndicator(color: Colors.blue))
+          : _isAuthenticated
+              ? const SizedBox.shrink()
+              : SingleChildScrollView(
+                  padding: EdgeInsets.fromLTRB(
+                      16, MediaQuery.of(context).padding.top, 16, 16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: DropdownButton<String>(
+                          value: chosenLanguage,
+                          items: const [
+                            DropdownMenuItem<String>(
+                              value: 'English',
+                              child: Text('English'),
+                            ),
+                            DropdownMenuItem<String>(
+                              value: 'Tiếng Việt',
+                              child: Text('Tiếng Việt'),
+                            ),
+                          ],
+                          onChanged: (String? language) {
+                            if (language != null) {
+                              _updateLanguage(appProvider, language);
+                            }
+                            setState(() {
+                              chosenLanguage = language!;
+                            });
+                          },
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 36),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Image.asset(
+                              'assets/logo/lettutor.png',
+                              width: 100,
+                              height: 100,
+                            ),
+                            Text(
+                              ' LetTutor ',
+                              style: Theme.of(context).textTheme.headlineLarge,
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 16),
+                      Text(
+                        lang.email,
+                        style:
+                            const TextStyle(fontSize: 16, color: Colors.grey),
+                      ),
+                      const SizedBox(height: 8),
+                      TextField(
+                        controller: _emailController,
+                        keyboardType: TextInputType.emailAddress,
+                        autocorrect: false,
+                        onChanged: (value) {
+                          _handleValidation(lang);
+                        },
+                        decoration: InputDecoration(
+                          hintStyle: TextStyle(color: Colors.grey[400]),
+                          hintText: 'abc@example.com',
+                          errorText:
+                              _emailErrorText.isEmpty ? null : _emailErrorText,
+                          prefixIcon: Icon(
+                            Icons.mail,
+                            color: _emailErrorText.isEmpty
+                                ? Colors.blue
+                                : Colors.red[700],
+                          ),
+                          border: const OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: Colors.grey, width: 2),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10))),
+                        ),
+                      ),
+                      const SizedBox(height: 24),
+                      Text(
+                        lang.password,
+                        style:
+                            const TextStyle(fontSize: 16, color: Colors.grey),
+                      ),
+                      const SizedBox(height: 8),
+                      TextField(
+                        controller: _passwordController,
+                        obscureText: true,
+                        autocorrect: false,
+                        onChanged: (value) {
+                          _handleValidation(lang);
+                        },
+                        decoration: InputDecoration(
+                          hintStyle: TextStyle(color: Colors.grey[400]),
+                          hintText: '******',
+                          errorText: _passwordErrorText.isEmpty
+                              ? null
+                              : _passwordErrorText,
+                          prefixIcon: Icon(
+                            Icons.lock,
+                            color: _passwordErrorText.isEmpty
+                                ? Colors.blue
+                                : Colors.red[700],
+                          ),
+                          border: const OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: Colors.grey, width: 2),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10))),
+                        ),
+                      ),
+                      const SizedBox(height: 24),
+                      TextButton(
+                        onPressed: _isValidToLogin
+                            ? () {
+                                _handleLogin(authProvider);
+                              }
+                            : null,
+                        style: TextButton.styleFrom(
+                          minimumSize: const Size.fromHeight(56),
+                          backgroundColor:
+                              _isValidToLogin ? Colors.blue : Colors.grey[400],
+                        ),
+                        child: Text(
+                          lang.login,
+                          style: const TextStyle(
+                              fontSize: 20, color: Colors.white),
+                        ),
+                      ),
+                      const SizedBox(height: 16),
+                      TextButton(
+                        onPressed: () {
+                          // Navigator.pushNamed(context, Routes.forgotPassword);
+                        },
+                        child: Text(
+                          lang.forgotPassword,
+                          style: const TextStyle(fontSize: 16),
+                        ),
+                      ),
+                      const SizedBox(height: 16),
+                      Text(
+                        lang.loginWith,
+                        textAlign: TextAlign.center,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 12),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            TextButton(
+                              onPressed: () {
+                                _handleFacebookLogin(authProvider);
                               },
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 36),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Image.asset(
-                                  'assets/logo/lettutor.png',
-                                  width: 100,
-                                  height: 100,
-                                ),
-                                Text(
-                                  ' LetTutor ',
-                                  style: Theme.of(context).textTheme.headline1,
-                                ),
-                              ],
-                            ),
-                          ),
-                          const SizedBox(height: 16),
-                          Text(
-                            lang.email,
-                            style: const TextStyle(
-                                fontSize: 16, color: Colors.grey),
-                          ),
-                          const SizedBox(height: 8),
-                          TextField(
-                            controller: _emailController,
-                            keyboardType: TextInputType.emailAddress,
-                            autocorrect: false,
-                            onChanged: (value) {
-                              _handleValidation(lang);
-                            },
-                            decoration: InputDecoration(
-                              hintStyle: TextStyle(color: Colors.grey[400]),
-                              hintText: 'abc@example.com',
-                              errorText: _emailErrorText.isEmpty
-                                  ? null
-                                  : _emailErrorText,
-                              prefixIcon: Icon(
-                                Icons.mail,
-                                color: _emailErrorText.isEmpty
-                                    ? Colors.blue
-                                    : Colors.red[700],
+                              child: Image.asset(
+                                'assets/logo/facebook.png',
+                                width: 40,
+                                height: 40,
                               ),
-                              border: const OutlineInputBorder(
-                                  borderSide:
-                                      BorderSide(color: Colors.grey, width: 2),
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(10))),
                             ),
-                          ),
-                          const SizedBox(height: 24),
-                          Text(
-                            lang.password,
-                            style: const TextStyle(
-                                fontSize: 16, color: Colors.grey),
-                          ),
-                          const SizedBox(height: 8),
-                          TextField(
-                            controller: _passwordController,
-                            obscureText: true,
-                            autocorrect: false,
-                            onChanged: (value) {
-                              _handleValidation(lang);
-                            },
-                            decoration: InputDecoration(
-                              hintStyle: TextStyle(color: Colors.grey[400]),
-                              hintText: '******',
-                              errorText: _passwordErrorText.isEmpty
-                                  ? null
-                                  : _passwordErrorText,
-                              prefixIcon: Icon(
-                                Icons.lock,
-                                color: _passwordErrorText.isEmpty
-                                    ? Colors.blue
-                                    : Colors.red[700],
+                            TextButton(
+                              onPressed: () {
+                                _handleGoogleLogin(authProvider);
+                              },
+                              child: Image.asset(
+                                'assets/logo/google.png',
+                                width: 40,
+                                height: 40,
                               ),
-                              border: const OutlineInputBorder(
-                                  borderSide:
-                                      BorderSide(color: Colors.grey, width: 2),
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(10))),
                             ),
+                          ],
+                        ),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            lang.registerQuestion,
+                            style: const TextStyle(fontSize: 16),
                           ),
-                          const SizedBox(height: 24),
-                          TextButton(
-                            onPressed: _isValidToLogin
-                                ? () {
-                                    _handleLogin(authProvider);
-                                  }
-                                : null,
-                            style: TextButton.styleFrom(
-                              minimumSize: const Size.fromHeight(56),
-                              backgroundColor: _isValidToLogin
-                                  ? Colors.blue
-                                  : Colors.grey[400],
-                            ),
-                            child: Text(
-                              lang.login,
-                              style: const TextStyle(
-                                  fontSize: 20, color: Colors.white),
-                            ),
-                          ),
-                          const SizedBox(height: 16),
                           TextButton(
                             onPressed: () {
-                              // Navigator.pushNamed(context, Routes.forgotPassword);
+                              //Navigator.pushNamed(context, Routes.register);
                             },
-                            child: const Text(
-                              'Forgot password',
-                              //lang.forgotPassword,
-                              style: TextStyle(fontSize: 16),
+                            child: Text(
+                              lang.register,
+                              style: const TextStyle(fontSize: 16),
                             ),
                           ),
-                          const SizedBox(height: 16),
-                          Text(
-                            lang.loginWith,
-                            textAlign: TextAlign.center,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 12),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                TextButton(
-                                  onPressed: () {
-                                    //_handleFacebookLogin(authProvider);
-                                  },
-                                  child: Image.asset(
-                                    'assets/logo/facebook.png',
-                                    width: 40,
-                                    height: 40,
-                                  ),
-                                ),
-                                TextButton(
-                                  onPressed: () {
-                                    //_handleGoogleLogin(authProvider);
-                                  },
-                                  child: Image.asset(
-                                    'assets/logo/google.png',
-                                    width: 40,
-                                    height: 40,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                lang.registerQuestion,
-                                style: const TextStyle(fontSize: 16),
-                              ),
-                              TextButton(
-                                onPressed: () {
-                                  //Navigator.pushNamed(context, Routes.register);
-                                },
-                                child: Text(
-                                  lang.register,
-                                  style: const TextStyle(fontSize: 16),
-                                ),
-                              ),
-                            ],
-                          )
                         ],
-                      ),
-                    ),
+                      )
+                    ],
+                  ),
+                ),
     );
   }
 }

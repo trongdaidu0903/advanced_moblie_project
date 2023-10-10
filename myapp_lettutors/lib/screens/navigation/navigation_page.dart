@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:myapp_lettutors/constants/routes.dart';
-// import 'package:myapp_lettutors/features/courses/courses_page.dart';
-// import 'package:myapp_lettutors/features/homepage/views/homepage.dart';
-// import 'package:myapp_lettutors/features/schedules/schedule_page.dart';
-// import 'package:myapp_lettutors/features/settings/settings_page.dart';
-// import 'package:myapp_lettutors/features/tutor/search_tutor/views/tutor_search_page.dart';
 import 'package:myapp_lettutors/providers/auth_provider.dart';
+import 'package:myapp_lettutors/screens/courses/courses_page.dart';
 import 'package:myapp_lettutors/screens/homepage/homepage.dart';
+import 'package:myapp_lettutors/screens/schedule/schedule_page.dart';
+import 'package:myapp_lettutors/screens/setting/setting_page.dart';
+import 'package:myapp_lettutors/screens/tutors_search/tutors_search.dart';
 import 'package:provider/provider.dart';
 
 class NavigationPage extends StatefulWidget {
@@ -18,11 +17,11 @@ class NavigationPage extends StatefulWidget {
 
 class _NavigationPageState extends State<NavigationPage> {
   List<Widget> pages = [
-    HomePage(),
-    // const TutorSearchPage(),
-    // const SchedulePage(),
-    // const CoursesPage(),
-    // const SettingsPage(),
+    const HomePage(),
+    const TutorSearchPage(),
+    const SchedulePage(),
+    const CoursesPage(),
+    const SettingsPage(),
   ];
   List<String> pagesTitles = [
     'Home',
@@ -41,9 +40,18 @@ class _NavigationPageState extends State<NavigationPage> {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.white,
-        title: Text(
-          pagesTitles[_chosenPageIndex],
-          style: Theme.of(context).textTheme.headline2,
+        title: Row(
+          children: [
+            Image.asset(
+              'assets/logo/lettutor.png',
+              width: 50,
+              height: 50,
+            ),
+            Text(
+              pagesTitles[_chosenPageIndex],
+              style: Theme.of(context).textTheme.displayMedium,
+            ),
+          ],
         ),
         actions: _chosenPageIndex == 0
             ? [
