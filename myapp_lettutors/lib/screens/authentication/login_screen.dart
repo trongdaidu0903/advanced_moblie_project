@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:myapp_lettutors/models/languages/language.dart';
+import 'package:myapp_lettutors/providers/app_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -25,32 +27,32 @@ class _LoginViewState extends State<LoginView> {
 
   final _googleSignIn = GoogleSignIn();
 
-  // void _handleValidation(Language language) {
-  //   final emailRegExp = RegExp(
-  //       r'^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$');
-  //   if (_emailController.text.isEmpty) {
-  //     _emailErrorText = language.emptyEmail;
-  //     _isValidToLogin = false;
-  //   } else if (!emailRegExp.hasMatch(_emailController.text)) {
-  //     _emailErrorText = language.invalidEmail;
-  //     _isValidToLogin = false;
-  //   } else {
-  //     _emailErrorText = '';
-  //     _isValidToLogin = true;
-  //   }
+  void _handleValidation(Language language) {
+    final emailRegExp = RegExp(
+        r'^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$');
+    if (_emailController.text.isEmpty) {
+      _emailErrorText = language.emptyEmail;
+      _isValidToLogin = false;
+    } else if (!emailRegExp.hasMatch(_emailController.text)) {
+      _emailErrorText = language.invalidEmail;
+      _isValidToLogin = false;
+    } else {
+      _emailErrorText = '';
+      _isValidToLogin = true;
+    }
 
-  //   if (_passwordController.text.isEmpty) {
-  //     _passwordErrorText = language.emptyPassword;
-  //     _isValidToLogin = false;
-  //   } else if (_passwordController.text.length < 6) {
-  //     _passwordErrorText = language.passwordTooShort;
-  //     _isValidToLogin = false;
-  //   } else {
-  //     _passwordErrorText = '';
-  //     _isValidToLogin = true;
-  //   }
-  //   setState(() {});
-  // }
+    if (_passwordController.text.isEmpty) {
+      _passwordErrorText = language.emptyPassword;
+      _isValidToLogin = false;
+    } else if (_passwordController.text.length < 6) {
+      _passwordErrorText = language.passwordTooShort;
+      _isValidToLogin = false;
+    } else {
+      _passwordErrorText = '';
+      _isValidToLogin = true;
+    }
+    setState(() {});
+  }
 
   // void _handleLogin(AuthProvider authProvider) async {
   //   try {
@@ -243,8 +245,8 @@ class _LoginViewState extends State<LoginView> {
   @override
   Widget build(BuildContext context) {
     // final authProvider = context.watch<AuthProvider>();
-    // final appProvider = context.watch<AppProvider>();
-    // final lang = appProvider.language;
+    final appProvider = context.watch<AppProvider>();
+    final lang = appProvider.language;
 
     // _loadLanguage(appProvider);
     // if (_isAuthenticating) {
@@ -319,7 +321,7 @@ class _LoginViewState extends State<LoginView> {
               keyboardType: TextInputType.emailAddress,
               autocorrect: false,
               onChanged: (value) {
-                //_handleValidation(lang);
+                _handleValidation(lang);
               },
               decoration: InputDecoration(
                 hintStyle: TextStyle(color: Colors.grey[400]),
@@ -347,7 +349,7 @@ class _LoginViewState extends State<LoginView> {
               obscureText: true,
               autocorrect: false,
               onChanged: (value) {
-                //_handleValidation(lang);
+                _handleValidation(lang);
               },
               decoration: InputDecoration(
                 hintStyle: TextStyle(color: Colors.grey[400]),
