@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:myapp_lettutors/providers/app_provider.dart';
+import 'package:myapp_lettutors/providers/auth_provider.dart';
 import 'package:myapp_lettutors/screens/authentication/login_screen.dart';
 import 'package:provider/provider.dart';
 
@@ -29,9 +30,9 @@ class LetTutor extends StatelessWidget {
         ChangeNotifierProvider(
           create: (_) => AppProvider(),
         ),
-        // ChangeNotifierProvider(
-        //   create: (_) => AuthProvider(),
-        // ),
+        ChangeNotifierProvider(
+          create: (_) => AuthProvider(),
+        ),
       ],
       child: MaterialApp(
           title: 'LetTutor',
