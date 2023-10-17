@@ -66,17 +66,11 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    // final authProvider = context.watch<AuthProvider>();
-
-    // if (_isLoading && authProvider.token != null) {
-    //   _fetchRecommendedTutors(authProvider);
-    // }
-
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const HomepageHeader(),
+          //const HomepageHeader(),
           Padding(
             padding: const EdgeInsets.all(12),
             child: Text(

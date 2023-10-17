@@ -74,7 +74,7 @@ class LetTutor extends StatelessWidget {
           home: const LoginView(),
           routes: {
             Routes.login: (context) => const LoginView(),
-            Routes.register: (context) => const RegisterView(),
+            // Routes.register: (context) => const RegisterView(),
             // Routes.forgotPassword: (context) => const ForgotPasswordView(),
             Routes.main: (context) => const NavigationPage(),
             // Routes.becomeTutor: (context) => const BecomeTutorView(),

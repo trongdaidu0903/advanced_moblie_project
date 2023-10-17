@@ -3,12 +3,7 @@ import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
 import 'package:myapp_lettutors/constants/country_list.dart';
 import 'package:myapp_lettutors/constants/language_list.dart';
-// import 'package:myapp_lettutors/constants/country_list.dart';
-// import 'package:myapp_lettutors/constants/language_list.dart';
-// import 'package:myapp_lettutors/dummy/dummy_data.dart';
 import 'package:myapp_lettutors/constants/routes.dart';
-// import 'package:myapp_lettutors/features/booking/widgets/tutor_schedule.dart';
-// import 'package:myapp_lettutors/features/tutor/tutor_detail/tutor_report_dialog.dart';
 import 'package:myapp_lettutors/models/tutor/tutor_feedback.dart';
 import 'package:myapp_lettutors/models/tutor/tutor_info.dart';
 import 'package:myapp_lettutors/providers/auth_provider.dart';
@@ -100,8 +95,8 @@ class _TutorDetailViewState extends State<TutorDetailView> {
           color: Colors.blue[600],
         ),
         title: Text(
-          'Teacher Details',
-          style: Theme.of(context).textTheme.headline2,
+          'Tutorial Details',
+          style: Theme.of(context).textTheme.displayMedium,
         ),
       ),
       body: _isLoading
@@ -137,7 +132,7 @@ class _TutorDetailViewState extends State<TutorDetailView> {
                           children: [
                             Text(
                               _tutorInfo.user?.name ?? 'null name',
-                              style: Theme.of(context).textTheme.headline3,
+                              style: Theme.of(context).textTheme.displaySmall,
                             ),
                             Text(
                               countryList[_tutorInfo.user?.country] ??
@@ -188,7 +183,6 @@ class _TutorDetailViewState extends State<TutorDetailView> {
                               );
                               _fetchTutorInfo(authProvider);
                             }
-                            // print('IS FAVORITE (DETAIL): ${_tutorInfo.isFavorite}');
                           },
                           child: Column(
                             children: [
@@ -222,8 +216,8 @@ class _TutorDetailViewState extends State<TutorDetailView> {
                               arguments: feedbacks,
                             );
                           },
-                          child: Column(
-                            children: const [
+                          child: const Column(
+                            children: [
                               Icon(Icons.reviews_outlined, color: Colors.blue),
                               Text('Reviews',
                                   style: TextStyle(color: Colors.blue))
@@ -243,6 +237,7 @@ class _TutorDetailViewState extends State<TutorDetailView> {
                               ),
                             );
                             if (result) {
+                              // ignore: use_build_context_synchronously
                               await showDialog(
                                 context: context,
                                 builder: (context) {
@@ -260,8 +255,8 @@ class _TutorDetailViewState extends State<TutorDetailView> {
                               );
                             }
                           },
-                          child: Column(
-                            children: const [
+                          child: const Column(
+                            children: [
                               Icon(Icons.report_outlined, color: Colors.blue),
                               Text('Report',
                                   style: TextStyle(color: Colors.blue))
@@ -292,7 +287,7 @@ class _TutorDetailViewState extends State<TutorDetailView> {
                   ),
                   const SizedBox(height: 8),
                   Text('Languages',
-                      style: Theme.of(context).textTheme.headline3),
+                      style: Theme.of(context).textTheme.displaySmall),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 10),
                     child: Wrap(
@@ -313,7 +308,7 @@ class _TutorDetailViewState extends State<TutorDetailView> {
                   ),
                   const SizedBox(height: 8),
                   Text('Specialties',
-                      style: Theme.of(context).textTheme.headline3),
+                      style: Theme.of(context).textTheme.displaySmall),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 10),
                     child: Wrap(
@@ -341,7 +336,7 @@ class _TutorDetailViewState extends State<TutorDetailView> {
                   //           Text(
                   //             course.name,
                   //             style: Theme.of(context).textTheme.headline4,
-                  //           ),
+                  //           ),s
                   //           const SizedBox(width: 16),
                   //           TextButton(
                   //               onPressed: () {
@@ -353,14 +348,14 @@ class _TutorDetailViewState extends State<TutorDetailView> {
                   //     )),
                   const SizedBox(height: 12),
                   Text('Interests',
-                      style: Theme.of(context).textTheme.headline3),
+                      style: Theme.of(context).textTheme.displaySmall),
                   Padding(
                     padding: const EdgeInsets.only(left: 10, right: 8),
                     child: Text(_tutorInfo.interests ?? 'No interests'),
                   ),
                   const SizedBox(height: 12),
                   Text('Teaching Experiences',
-                      style: Theme.of(context).textTheme.headline3),
+                      style: Theme.of(context).textTheme.displaySmall),
                   Padding(
                     padding: const EdgeInsets.only(left: 10, right: 8),
                     child: Text(

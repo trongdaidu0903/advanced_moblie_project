@@ -97,7 +97,7 @@ class _HomepageHeaderState extends State<HomepageHeader> {
     }
 
     return Container(
-      color: Color.fromARGB(255, 38, 117, 197),
+      color: const Color.fromARGB(255, 38, 117, 197),
       width: double.maxFinite,
       height: 208,
       child: _isLoading

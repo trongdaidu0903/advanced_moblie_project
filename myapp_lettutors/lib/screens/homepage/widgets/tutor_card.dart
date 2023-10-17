@@ -1,13 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-// import 'package:myapp_lettutors/constants/country_list.dart';
+import 'package:myapp_lettutors/constants/country_list.dart';
 import 'package:myapp_lettutors/constants/routes.dart';
 import 'package:myapp_lettutors/models/tutor/tutor.dart';
 import 'package:myapp_lettutors/models/tutor/tutor_info.dart';
 import 'package:myapp_lettutors/providers/auth_provider.dart';
-import 'package:myapp_lettutors/screens/homepage/homepage.dart';
 import 'package:myapp_lettutors/services/tutor_service.dart';
-// import 'package:myapp_lettutors/services/tutor_service.dart';
 import 'package:provider/provider.dart';
 
 class TutorCard extends StatefulWidget {
@@ -50,10 +48,6 @@ class _TutorCardState extends State<TutorCard> {
         .map((e) => e.name ?? 'null');
     _specialties = [...learnTopics, ...testPreparations];
 
-    // _specialties.addAll(learnTopics.map((topic) => topic.name ?? 'null'));
-    // _specialties.addAll(testPreparations.map((test) => test.name ?? 'null'));
-    // print(_specialties);
-
     final result = await TutorService.getTutorInfoById(
       token: token,
       userId: widget.tutor.userId ?? '',
@@ -80,7 +74,7 @@ class _TutorCardState extends State<TutorCard> {
     }
 
     return Card(
-      surfaceTintColor: Colors.white,
+      surfaceTintColor: Colors.lightBlueAccent,
       elevation: 3.0,
       margin: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
       child: Padding(
@@ -106,7 +100,7 @@ class _TutorCardState extends State<TutorCard> {
                       fit: BoxFit.cover,
                       errorWidget: (context, error, stackTrace) => const Icon(
                         Icons.error_outline_rounded,
-                        color: Colors.red,
+                        color: Colors.orange,
                         size: 32,
                       ),
                     ),
@@ -122,13 +116,14 @@ class _TutorCardState extends State<TutorCard> {
                           onTap: () {
                             _handleTutorDetailView();
                           },
-                          child: Text(widget.tutor.name ?? 'null name',
-                              style: Theme.of(context).textTheme.headline3),
+                          child: Text(widget.tutor.name ?? 'Unknow name',
+                              style: Theme.of(context).textTheme.displaySmall),
                         ),
                         Text(
-                            //countryList[widget.tutor.country ?? 'null'] ??
-                            'unknown country',
-                            style: const TextStyle(fontSize: 16)),
+                            countryList[widget.tutor.country] ??
+                                "Unknow country",
+                            style: const TextStyle(
+                                fontSize: 17, color: Colors.blue)),
                         widget.tutor.rating == null
                             ? const Text(
                                 'No reviews yet',
@@ -159,7 +154,6 @@ class _TutorCardState extends State<TutorCard> {
                       );
                       _fetchTutorInfo(authProvider);
                     }
-                    // print('IS FAVORITE (CARD): ${_tutorInfo.isFavorite}');
                   },
                   icon: _tutorInfo?.isFavorite ?? false
                       ? const Icon(
@@ -168,22 +162,22 @@ class _TutorCardState extends State<TutorCard> {
                         )
                       : const Icon(
                           Icons.favorite_border_rounded,
-                          color: Colors.blue,
+                          color: Colors.green,
                         ),
                 )
               ],
             ),
             const SizedBox(height: 8),
             Wrap(
-              spacing: 8,
-              runSpacing: -4,
+              spacing: 5,
+              runSpacing: 0,
               children: List<Widget>.generate(
                 _specialties.length,
                 (index) => Chip(
-                  backgroundColor: Colors.lightBlue[50],
+                  backgroundColor: Colors.blue[50],
                   label: Text(
                     _specialties[index],
-                    style: const TextStyle(fontSize: 14, color: Colors.blue),
+                    style: const TextStyle(fontSize: 16, color: Colors.blue),
                   ),
                 ),
               ),
