@@ -5,7 +5,7 @@ import 'package:myapp_lettutors/models/user/token.dart';
 import 'package:myapp_lettutors/models/user/user.dart';
 
 class AuthProvider extends ChangeNotifier {
-  late User currentUser;
+  User? currentUser;
   Token? token;
   List<LearnTopic> learnTopics = [];
   List<TestPreparation> testPreparations = [];

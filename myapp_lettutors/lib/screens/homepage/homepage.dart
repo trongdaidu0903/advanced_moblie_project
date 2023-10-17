@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:lettutor/src/services/tutor_service.dart';
-import 'package:lettutor/src/services/user_service.dart';
+
 import 'package:myapp_lettutors/models/tutor/tutor.dart';
 import 'package:myapp_lettutors/models/tutor/tutor_info.dart';
 import 'package:myapp_lettutors/providers/auth_provider.dart';
 import 'package:myapp_lettutors/screens/homepage/widgets/homepage_header.dart';
 import 'package:myapp_lettutors/screens/homepage/widgets/tutor_card.dart';
+import 'package:myapp_lettutors/services/tutor_service.dart';
+import 'package:myapp_lettutors/services/user_service.dart';
 import 'package:provider/provider.dart';
-
-// import 'widgets/homepage_header.dart';
-// import 'widgets/tutor_card.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -19,51 +17,60 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  AuthProvider get _auth => context.read<AuthProvider>();
+
   List<Tutor> _tutors = [];
-  List<TutorInfo> _infos = [];
+  final List<TutorInfo> _infos = [];
   bool _isLoading = true;
 
   Future<void> _fetchRecommendedTutors(AuthProvider authProvider) async {
-    final String token = authProvider.token?.access?.token as String;
+    final String? token = authProvider.token?.access?.token;
+    if (token?.isNotEmpty ?? false) {
+      final topics = await UserService.getLearningTopic(token!);
+      final tests = await UserService.getTestPreparation(token);
+      authProvider.setLearnTopic(topics);
+      authProvider.setTestPreparation(tests);
 
-    final topics = await UserService.getLearningTopic(token);
-    final tests = await UserService.getTestPreparation(token);
-    authProvider.setLearnTopic(topics);
-    authProvider.setTestPreparation(tests);
-
-    _tutors = await TutorService.getListTutorWithPagination(
-      page: 1,
-      perPage: 10,
-      token: token,
-    );
-
-    _tutors.sort((a, b) {
-      if (a.rating == null || b.rating == null) return 0;
-      return a.rating!.compareTo(b.rating!);
-    });
-
-    for (var tutor in _tutors) {
-      final info = await TutorService.getTutorInfoById(
+      _tutors = await TutorService.getListTutorWithPagination(
+        page: 1,
+        perPage: 8,
         token: token,
-        userId: tutor.userId!,
       );
-      _infos.add(info);
-    }
 
-    if (mounted) {
-      setState(() {
-        _isLoading = false;
+      _tutors.sort((a, b) {
+        if (a.rating == null || b.rating == null) return 0;
+        return a.rating!.compareTo(b.rating!);
       });
+
+      for (var tutor in _tutors) {
+        final info = await TutorService.getTutorInfoById(
+          token: token,
+          userId: tutor.userId!,
+        );
+        _infos.add(info);
+      }
+
+      if (mounted) {
+        setState(() {
+          _isLoading = false;
+        });
+      }
     }
   }
 
   @override
-  Widget build(BuildContext context) {
-    final authProvider = context.watch<AuthProvider>();
+  void initState() {
+    _fetchRecommendedTutors(_auth);
+    super.initState();
+  }
 
-    if (_isLoading && authProvider.token != null) {
-      _fetchRecommendedTutors(authProvider);
-    }
+  @override
+  Widget build(BuildContext context) {
+    // final authProvider = context.watch<AuthProvider>();
+
+    // if (_isLoading && authProvider.token != null) {
+    //   _fetchRecommendedTutors(authProvider);
+    // }
 
     return SingleChildScrollView(
       child: Column(

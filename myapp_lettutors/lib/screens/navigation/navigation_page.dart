@@ -47,9 +47,12 @@ class _NavigationPageState extends State<NavigationPage> {
               width: 50,
               height: 50,
             ),
-            Text(
-              pagesTitles[_chosenPageIndex],
-              style: Theme.of(context).textTheme.displayMedium,
+            Expanded(
+              child: Text(
+                pagesTitles[_chosenPageIndex],
+                overflow: TextOverflow.ellipsis,
+                style: Theme.of(context).textTheme.displayMedium,
+              ),
             ),
           ],
         ),
@@ -69,12 +72,15 @@ class _NavigationPageState extends State<NavigationPage> {
                       decoration: const BoxDecoration(
                         shape: BoxShape.circle,
                       ),
-                      child: Image.network(
-                        authProvider.currentUser.avatar ?? '',
-                        fit: BoxFit.cover,
-                        errorBuilder: (context, error, stackTrace) =>
-                            const Icon(Icons.person_rounded),
-                      ),
+                      child: (authProvider.currentUser?.avatar?.isNotEmpty ??
+                              false)
+                          ? Image.network(
+                              authProvider.currentUser!.avatar!,
+                              fit: BoxFit.cover,
+                              errorBuilder: (context, error, stackTrace) =>
+                                  const Icon(Icons.person_rounded),
+                            )
+                          : const SizedBox(),
                     ),
                   ),
                 )

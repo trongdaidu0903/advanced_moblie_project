@@ -21,8 +21,8 @@ class LoginView extends StatefulWidget {
 class _LoginViewState extends State<LoginView> {
   String chosenLanguage = 'English';
 
-  final _emailController = TextEditingController();
-  final _passwordController = TextEditingController();
+  final _emailController = TextEditingController(text: 'phhai@ymail.co');
+  final _passwordController = TextEditingController(text: '123456');
   bool _isAuthenticating = true;
   bool _isAuthenticated = false;
 
@@ -126,9 +126,11 @@ class _LoginViewState extends State<LoginView> {
         },
       );
     } catch (e) {
-      setState(() {
-        _isAuthenticating = false;
-      });
+      if (mounted) {
+        setState(() {
+          _isAuthenticating = false;
+        });
+      }
     }
   }
 

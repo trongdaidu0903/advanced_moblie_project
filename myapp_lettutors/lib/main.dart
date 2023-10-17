@@ -6,6 +6,7 @@ import 'package:myapp_lettutors/providers/app_provider.dart';
 import 'package:myapp_lettutors/providers/auth_provider.dart';
 import 'package:myapp_lettutors/screens/authentication/login_screen.dart';
 import 'package:myapp_lettutors/screens/navigation/navigation_page.dart';
+import 'package:myapp_lettutors/screens/tutor/tutor_detail/tutor_detail_view.dart';
 import 'package:provider/provider.dart';
 
 class MyHttpOverrides extends HttpOverrides {
@@ -72,14 +73,14 @@ class LetTutor extends StatelessWidget {
           ),
           home: const LoginView(),
           routes: {
-            // Routes.login: (context) => const LoginView(),
-            // Routes.register: (context) => const RegisterView(),
+            Routes.login: (context) => const LoginView(),
+            Routes.register: (context) => const RegisterView(),
             // Routes.forgotPassword: (context) => const ForgotPasswordView(),
             Routes.main: (context) => const NavigationPage(),
             // Routes.becomeTutor: (context) => const BecomeTutorView(),
             // Routes.userProfile: (context) => const UserProfileView(),
             // Routes.courseDetail: (context) => const CourseDetailView(),
-            // Routes.teacherDetail: (context) => const TutorDetailView(),
+            Routes.teacherDetail: (context) => const TutorDetailView(),
             // Routes.review: (context) => const TutorFeedbackView(),
             // Routes.writeReview: (context) => const WriteReviewView(),
             // Routes.tutorSearchResult: (context) => const TutorSearchResult(),

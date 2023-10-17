@@ -1,11 +1,13 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:lettutor/src/constants/country_list.dart';
-import 'package:lettutor/src/constants/routes.dart';
-import 'package:lettutor/src/models/tutor/tutor.dart';
-import 'package:lettutor/src/models/tutor/tutor_info.dart';
-import 'package:lettutor/src/providers/auth_provider.dart';
-import 'package:lettutor/src/services/tutor_service.dart';
+// import 'package:myapp_lettutors/constants/country_list.dart';
+import 'package:myapp_lettutors/constants/routes.dart';
+import 'package:myapp_lettutors/models/tutor/tutor.dart';
+import 'package:myapp_lettutors/models/tutor/tutor_info.dart';
+import 'package:myapp_lettutors/providers/auth_provider.dart';
+import 'package:myapp_lettutors/screens/homepage/homepage.dart';
+import 'package:myapp_lettutors/services/tutor_service.dart';
+// import 'package:myapp_lettutors/services/tutor_service.dart';
 import 'package:provider/provider.dart';
 
 class TutorCard extends StatefulWidget {
@@ -39,10 +41,12 @@ class _TutorCardState extends State<TutorCard> {
     final String token = authProvider.token?.access?.token as String;
 
     final learnTopics = authProvider.learnTopics
-        .where((topic) => _tutorInfo?.specialties?.split(',').contains(topic.key) ?? false)
+        .where((topic) =>
+            _tutorInfo?.specialties?.split(',').contains(topic.key) ?? false)
         .map((e) => e.name ?? 'null');
     final testPreparations = authProvider.testPreparations
-        .where((test) => _tutorInfo?.specialties?.split(',').contains(test.key) ?? false)
+        .where((test) =>
+            _tutorInfo?.specialties?.split(',').contains(test.key) ?? false)
         .map((e) => e.name ?? 'null');
     _specialties = [...learnTopics, ...testPreparations];
 
@@ -121,7 +125,9 @@ class _TutorCardState extends State<TutorCard> {
                           child: Text(widget.tutor.name ?? 'null name',
                               style: Theme.of(context).textTheme.headline3),
                         ),
-                        Text(countryList[widget.tutor.country ?? 'null'] ?? 'unknown country',
+                        Text(
+                            //countryList[widget.tutor.country ?? 'null'] ??
+                            'unknown country',
                             style: const TextStyle(fontSize: 16)),
                         widget.tutor.rating == null
                             ? const Text(
@@ -134,7 +140,8 @@ class _TutorCardState extends State<TutorCard> {
                             : Row(
                                 children: List<Widget>.generate(
                                   widget.tutor.rating!.round(),
-                                  (index) => const Icon(Icons.star, color: Colors.amber),
+                                  (index) => const Icon(Icons.star,
+                                      color: Colors.amber),
                                 ),
                               )
                       ],
@@ -144,7 +151,8 @@ class _TutorCardState extends State<TutorCard> {
                 IconButton(
                   onPressed: () async {
                     if (authProvider.token != null) {
-                      final String accessToken = authProvider.token?.access?.token as String;
+                      final String accessToken =
+                          authProvider.token?.access?.token as String;
                       await TutorService.addTutorToFavorite(
                         token: accessToken,
                         userId: widget.tutor.userId ?? '',
