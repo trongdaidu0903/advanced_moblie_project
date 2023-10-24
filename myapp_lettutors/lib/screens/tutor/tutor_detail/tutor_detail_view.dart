@@ -291,17 +291,20 @@ class _TutorDetailViewState extends State<TutorDetailView> {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 10),
                     child: Wrap(
-                      spacing: 8,
-                      runSpacing: -4,
+                      spacing: 5,
                       children: List<Widget>.generate(
                         languages.length,
-                        (index) => Chip(
-                          label: Text(
-                            languageList[languages[index]]?['name'] ??
-                                'unknown language',
-                            style: const TextStyle(color: Colors.blue),
+                        (index) => Padding(
+                          padding: const EdgeInsets.all(5.0),
+                          child: Chip(
+                            side: const BorderSide(color: Colors.transparent),
+                            label: Text(
+                              languageList[languages[index]]?['name'] ??
+                                  'unknown language',
+                              style: const TextStyle(color: Colors.blue),
+                            ),
+                            backgroundColor: Colors.blue[50],
                           ),
-                          backgroundColor: Colors.blue[50],
                         ),
                       ),
                     ),
@@ -312,16 +315,19 @@ class _TutorDetailViewState extends State<TutorDetailView> {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 10),
                     child: Wrap(
-                      spacing: 8,
-                      runSpacing: -4,
+                      spacing: 5,
                       children: List<Widget>.generate(
                         _specialties.length,
-                        (index) => Chip(
-                          backgroundColor: Colors.lightBlue[50],
-                          label: Text(
-                            _specialties[index],
-                            style: const TextStyle(
-                                fontSize: 14, color: Colors.blue),
+                        (index) => Padding(
+                          padding: const EdgeInsets.all(5.0),
+                          child: Chip(
+                            side: const BorderSide(color: Colors.transparent),
+                            backgroundColor: Colors.lightBlue[50],
+                            label: Text(
+                              _specialties[index],
+                              style: const TextStyle(
+                                  fontSize: 14, color: Colors.blue),
+                            ),
                           ),
                         ),
                       ),
@@ -363,29 +369,33 @@ class _TutorDetailViewState extends State<TutorDetailView> {
                   ),
                   Padding(
                       padding: const EdgeInsets.only(top: 24, bottom: 12),
-                      child: OutlinedButton(
-                        style: TextButton.styleFrom(
-                            minimumSize: const Size.fromHeight(0),
-                            padding: const EdgeInsets.all(8),
-                            side: const BorderSide(
-                                color: Colors.blue, width: 1.5)),
-                        onPressed: () async {
-                          // await showModalBottomSheet(
-                          //   context: context,
-                          //   isScrollControlled: true,
-                          //   elevation: 5,
-                          //   clipBehavior: Clip.hardEdge,
-                          //   shape: const RoundedRectangleBorder(
-                          //     borderRadius: BorderRadius.vertical(
-                          //       top: Radius.circular(16),
-                          //     ),
-                          //   ),
-                          //   builder: (context) => TutorSchedule(userId: userId),
-                          // );
-                        },
-                        child: const Text(
-                          'Book This Tutor',
-                          style: TextStyle(fontSize: 18, color: Colors.blue),
+                      child: Container(
+                        height: 50,
+                        child: OutlinedButton(
+                          style: TextButton.styleFrom(
+                              backgroundColor: Colors.blue,
+                              minimumSize: const Size.fromHeight(0),
+                              padding: const EdgeInsets.all(8),
+                              side:
+                                  const BorderSide(color: Colors.transparent)),
+                          onPressed: () async {
+                            // await showModalBottomSheet(
+                            //   context: context,
+                            //   isScrollControlled: true,
+                            //   elevation: 5,
+                            //   clipBehavior: Clip.hardEdge,
+                            //   shape: const RoundedRectangleBorder(
+                            //     borderRadius: BorderRadius.vertical(
+                            //       top: Radius.circular(16),
+                            //     ),
+                            //   ),
+                            //   builder: (context) => TutorSchedule(userId: userId),
+                            // );
+                          },
+                          child: const Text(
+                            'Book This Tutor',
+                            style: TextStyle(fontSize: 18, color: Colors.white),
+                          ),
                         ),
                       ))
                 ],

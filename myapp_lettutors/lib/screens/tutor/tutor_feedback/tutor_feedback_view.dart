@@ -29,8 +29,8 @@ class _TutorFeedbackViewState extends State<TutorFeedbackView> {
           style: Theme.of(context).textTheme.headline2,
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16),
+      body: const Padding(
+        padding: EdgeInsets.all(16),
         // child: ListView.builder(
         //   itemCount: feedbacks.length,
         //   shrinkWrap: true,
@@ -41,25 +41,3 @@ class _TutorFeedbackViewState extends State<TutorFeedbackView> {
     );
   }
 }
-
-// Center(
-//   child: TextButton(
-//     style: TextButton.styleFrom(padding: const EdgeInsets.all(12)),
-//     onPressed: () {
-//       Navigator.pushNamed(context, Routes.writeReview);
-//     },
-//     child: Row(
-//       mainAxisSize: MainAxisSize.min,
-//       crossAxisAlignment: CrossAxisAlignment.center,
-//       children: const [
-//         Icon(Icons.edit, size: 24),
-//         SizedBox(width: 8),
-//         Text(
-//           'Write Review',
-//           textAlign: TextAlign.center,
-//           style: TextStyle(fontSize: 18),
-//         ),
-//       ],
-//     ),
-//   ),
-// ),

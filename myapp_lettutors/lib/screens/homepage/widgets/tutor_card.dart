@@ -99,9 +99,9 @@ class _TutorCardState extends State<TutorCard> {
                       imageUrl: widget.tutor.avatar ?? '',
                       fit: BoxFit.cover,
                       errorWidget: (context, error, stackTrace) => const Icon(
-                        Icons.error_outline_rounded,
-                        color: Colors.orange,
-                        size: 32,
+                        Icons.account_circle_rounded,
+                        color: Colors.grey,
+                        size: 75,
                       ),
                     ),
                   ),
@@ -123,7 +123,7 @@ class _TutorCardState extends State<TutorCard> {
                             countryList[widget.tutor.country] ??
                                 "Unknow country",
                             style: const TextStyle(
-                                fontSize: 17, color: Colors.blue)),
+                                fontSize: 17, color: Colors.grey)),
                         widget.tutor.rating == null
                             ? const Text(
                                 'No reviews yet',
@@ -162,7 +162,7 @@ class _TutorCardState extends State<TutorCard> {
                         )
                       : const Icon(
                           Icons.favorite_border_rounded,
-                          color: Colors.green,
+                          color: Colors.blue,
                         ),
                 )
               ],
@@ -170,23 +170,21 @@ class _TutorCardState extends State<TutorCard> {
             const SizedBox(height: 8),
             Wrap(
               spacing: 5,
-              runSpacing: 0,
               children: List<Widget>.generate(
                 _specialties.length,
-                (index) => Chip(
-                  backgroundColor: Colors.blue[100],
-                  label: Text(
-                    _specialties[index],
-                    style: const TextStyle(
-                      fontSize: 16,
-                      color: Colors.blue,
-                      fontWeight: FontWeight.bold, // Make the text bold
+                (index) => Padding(
+                  padding: const EdgeInsets.all(5),
+                  child: Chip(
+                    side: const BorderSide(color: Colors.transparent),
+                    backgroundColor: Colors.white,
+                    label: Text(
+                      _specialties[index],
+                      style: const TextStyle(
+                        fontSize: 14,
+                        color: Colors.blue,
+                      ),
                     ),
                   ),
-                  elevation: 2, // Add a subtle shadow to the chip
-                  shadowColor: Colors.blue[200], // Set the shadow color
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 8), // Add some padding to the chip
                 ),
               ),
             ),

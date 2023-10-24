@@ -62,7 +62,7 @@ class _TutorSearchCardState extends State<TutorSearchCard> {
     //         ['no specs at all'];
 
     return Card(
-      surfaceTintColor: Colors.white,
+      surfaceTintColor: Colors.lightBlueAccent,
       elevation: 3.0,
       margin: const EdgeInsets.symmetric(vertical: 12),
       child: Padding(
@@ -83,9 +83,9 @@ class _TutorSearchCardState extends State<TutorSearchCard> {
                     widget.tutor.avatar ?? '',
                     fit: BoxFit.cover,
                     errorBuilder: (context, error, stackTrace) => const Icon(
-                      Icons.error_outline_rounded,
-                      color: Colors.red,
-                      size: 32,
+                      Icons.account_circle,
+                      color: Colors.grey,
+                      size: 75,
                     ),
                   ),
                 ),
@@ -147,15 +147,18 @@ class _TutorSearchCardState extends State<TutorSearchCard> {
             ),
             const SizedBox(height: 8),
             Wrap(
-              spacing: 8,
-              runSpacing: -4,
+              spacing: 5,
               children: List<Widget>.generate(
                 _specialties.length,
-                (index) => Chip(
-                  backgroundColor: Colors.lightBlue[50],
-                  label: Text(
-                    _specialties[index],
-                    style: const TextStyle(fontSize: 14, color: Colors.blue),
+                (index) => Padding(
+                  padding: const EdgeInsets.all(5),
+                  child: Chip(
+                    side: const BorderSide(color: Colors.transparent),
+                    backgroundColor: Colors.white,
+                    label: Text(
+                      _specialties[index],
+                      style: const TextStyle(fontSize: 14, color: Colors.blue),
+                    ),
                   ),
                 ),
               ),

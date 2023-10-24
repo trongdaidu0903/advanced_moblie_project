@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:myapp_lettutors/constants/country_list.dart';
 import 'package:myapp_lettutors/constants/datatype.dart';
@@ -79,18 +80,6 @@ class _TutorSearchPageState extends State<TutorSearchPage> {
                   borderRadius: BorderRadius.all(Radius.circular(10))),
             ),
           ),
-          // const SizedBox(height: 8),
-          // TextField(
-          //   controller: _countryController,
-          //   decoration: InputDecoration(
-          //     // contentPadding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
-          //     hintStyle: TextStyle(color: Colors.grey[500]),
-          //     hintText: "search by country",
-          //     border: const OutlineInputBorder(
-          //         borderSide: BorderSide(color: Colors.grey, width: 2),
-          //         borderRadius: BorderRadius.all(Radius.circular(10))),
-          //   ),
-          // ),
           const SizedBox(height: 16),
           Text('Nationality',
               style: Theme.of(context).textTheme.headlineMedium),
@@ -123,22 +112,6 @@ class _TutorSearchPageState extends State<TutorSearchPage> {
               const Text('Foreign Tutors'),
             ],
           ),
-          const SizedBox(height: 8),
-          // DropdownButtonFormField(
-          //   decoration: InputDecoration(
-          //     contentPadding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
-          //     hintText: 'select nationality',
-          //     hintStyle: TextStyle(color: Colors.grey[400]),
-          //     border: const OutlineInputBorder(
-          //       borderSide: BorderSide(color: Colors.grey, width: 2),
-          //       borderRadius: BorderRadius.all(Radius.circular(10)),
-          //     ),
-          //   ),
-          //   items: nationalities
-          //       .map((e) => DropdownMenuItem(value: e, child: Text(e)))
-          //       .toList(),
-          //   onChanged: (value) {},
-          // ),
           const SizedBox(height: 16),
           Text('Specialties',
               style: Theme.of(context).textTheme.headlineMedium),
@@ -148,24 +121,32 @@ class _TutorSearchPageState extends State<TutorSearchPage> {
             runSpacing: -4,
             children: List<Widget>.generate(
               _specialties.length,
-              (index) => ChoiceChip(
-                backgroundColor: Colors.grey[100],
-                selectedColor: Colors.lightBlue[100],
-                selected: _chosenSpecialtiesIndex == index,
-                label: Text(
-                  _specialties[index],
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: _chosenSpecialtiesIndex == index
-                        ? Colors.blue[700]
-                        : Colors.black54,
+              (index) => Padding(
+                padding: const EdgeInsets.all(5),
+                child: ChoiceChip(
+                  side: const BorderSide(color: Colors.transparent),
+                  backgroundColor: Colors.grey[400],
+                  selectedColor: Colors.lightBlue[100],
+                  selected: _chosenSpecialtiesIndex == index,
+                  label: Text(
+                    _specialties[index],
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: _chosenSpecialtiesIndex == index
+                          ? Colors.blue[700]
+                          : Colors.black54,
+                    ),
                   ),
+                  shape: RoundedRectangleBorder(
+                    // Set transparent border when not selected
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  onSelected: (bool selected) {
+                    setState(() {
+                      _chosenSpecialtiesIndex = index;
+                    });
+                  },
                 ),
-                onSelected: (bool selected) {
-                  setState(() {
-                    _chosenSpecialtiesIndex = index;
-                  });
-                },
               ),
             ),
           ),
@@ -182,7 +163,7 @@ class _TutorSearchPageState extends State<TutorSearchPage> {
                 },
                 child: const Padding(
                   padding: EdgeInsets.symmetric(horizontal: 6),
-                  child: Text('Reset Filters', style: TextStyle(fontSize: 16)),
+                  child: Text('Reset', style: TextStyle(fontSize: 16)),
                 ),
               ),
               const SizedBox(width: 10),
