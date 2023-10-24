@@ -38,8 +38,6 @@ class TutorService {
     }
 
     final List<dynamic> tutors = jsonDecode['tutors']['rows'];
-    // print(tutors);
-    // return [];
     return tutors.map((tutor) => Tutor.fromJson(tutor)).toList();
   }
 

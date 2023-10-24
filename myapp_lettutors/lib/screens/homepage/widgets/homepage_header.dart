@@ -26,10 +26,10 @@ class _HomepageHeaderState extends State<HomepageHeader> {
   Future<void> _fetchTotalLessonTime(String token) async {
     try {
       final total = await UserService.getTotalLessonTime(token);
-      // final upcoming = await UserService.getUpcomingLesson(token);
+      final upcoming = await UserService.getUpcomingLesson(token);
       if (mounted) {}
       totalLessonTime = Duration(minutes: total);
-      // upcomingClass = upcoming;
+      upcomingClass = upcoming;
       _isLoading = false;
     } catch (e) {
       log("👌[Error] ${e.toString()}");

@@ -8,8 +8,8 @@ import 'package:myapp_lettutors/providers/auth_provider.dart';
 import 'package:myapp_lettutors/services/tutor_service.dart';
 import 'package:provider/provider.dart';
 
-class TutorCard extends StatefulWidget {
-  const TutorCard({
+class TutorSearchCard extends StatefulWidget {
+  const TutorSearchCard({
     Key? key,
     required this.tutor,
   }) : super(key: key);
@@ -17,23 +17,12 @@ class TutorCard extends StatefulWidget {
   final Tutor tutor;
 
   @override
-  State<TutorCard> createState() => _TutorCardState();
+  State<TutorSearchCard> createState() => _TutorSearchCardState();
 }
 
-class _TutorCardState extends State<TutorCard> {
+class _TutorSearchCardState extends State<TutorSearchCard> {
   TutorInfo? _tutorInfo;
   List<String> _specialties = [];
-
-  void _handleTutorDetailView() {
-    Navigator.pushNamed(
-      context,
-      Routes.teacherDetail,
-      arguments: {
-        'userId': widget.tutor.userId,
-        'tutor': widget.tutor,
-      },
-    );
-  }
 
   Future<void> _fetchTutorInfo(AuthProvider authProvider) async {
     final String token = authProvider.token?.access?.token as String;
@@ -61,11 +50,6 @@ class _TutorCardState extends State<TutorCard> {
   }
 
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     final authProvider = context.watch<AuthProvider>();
 
@@ -73,10 +57,14 @@ class _TutorCardState extends State<TutorCard> {
       _fetchTutorInfo(authProvider);
     }
 
+    // final specialties =
+    //     widget.tutor.specialties?.split(',').map((e) => e.replaceAll('-', ' ')).toList() ??
+    //         ['no specs at all'];
+
     return Card(
-      surfaceTintColor: Colors.lightBlueAccent,
+      surfaceTintColor: Colors.white,
       elevation: 3.0,
-      margin: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+      margin: const EdgeInsets.symmetric(vertical: 12),
       child: Padding(
         padding: const EdgeInsets.all(12),
         child: Column(
@@ -84,25 +72,20 @@ class _TutorCardState extends State<TutorCard> {
           children: [
             Row(
               children: [
-                InkWell(
-                  onTap: () {
-                    _handleTutorDetailView();
-                  },
-                  child: Container(
-                    width: 72,
-                    height: 72,
-                    clipBehavior: Clip.hardEdge,
-                    decoration: const BoxDecoration(
-                      shape: BoxShape.circle,
-                    ),
-                    child: CachedNetworkImage(
-                      imageUrl: widget.tutor.avatar ?? '',
-                      fit: BoxFit.cover,
-                      errorWidget: (context, error, stackTrace) => const Icon(
-                        Icons.error_outline_rounded,
-                        color: Colors.orange,
-                        size: 32,
-                      ),
+                Container(
+                  width: 72,
+                  height: 72,
+                  clipBehavior: Clip.hardEdge,
+                  decoration: const BoxDecoration(
+                    shape: BoxShape.circle,
+                  ),
+                  child: Image.network(
+                    widget.tutor.avatar ?? '',
+                    fit: BoxFit.cover,
+                    errorBuilder: (context, error, stackTrace) => const Icon(
+                      Icons.error_outline_rounded,
+                      color: Colors.red,
+                      size: 32,
                     ),
                   ),
                 ),
@@ -112,18 +95,12 @@ class _TutorCardState extends State<TutorCard> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        InkWell(
-                          onTap: () {
-                            _handleTutorDetailView();
-                          },
-                          child: Text(widget.tutor.name ?? 'Unknow name',
-                              style: Theme.of(context).textTheme.displaySmall),
-                        ),
+                        Text(widget.tutor.name ?? 'null name',
+                            style: Theme.of(context).textTheme.displaySmall),
                         Text(
-                            countryList[widget.tutor.country] ??
-                                "Unknow country",
-                            style: const TextStyle(
-                                fontSize: 17, color: Colors.blue)),
+                            countryList[widget.tutor.country ?? 'null'] ??
+                                'unknown country',
+                            style: const TextStyle(fontSize: 16)),
                         widget.tutor.rating == null
                             ? const Text(
                                 'No reviews yet',
@@ -154,6 +131,7 @@ class _TutorCardState extends State<TutorCard> {
                       );
                       _fetchTutorInfo(authProvider);
                     }
+                    // print('IS FAVORITE (CARD): ${_tutorInfo.isFavorite}');
                   },
                   icon: _tutorInfo?.isFavorite ?? false
                       ? const Icon(
@@ -162,31 +140,23 @@ class _TutorCardState extends State<TutorCard> {
                         )
                       : const Icon(
                           Icons.favorite_border_rounded,
-                          color: Colors.green,
+                          color: Colors.blue,
                         ),
                 )
               ],
             ),
             const SizedBox(height: 8),
             Wrap(
-              spacing: 5,
-              runSpacing: 0,
+              spacing: 8,
+              runSpacing: -4,
               children: List<Widget>.generate(
                 _specialties.length,
                 (index) => Chip(
-                  backgroundColor: Colors.blue[100],
+                  backgroundColor: Colors.lightBlue[50],
                   label: Text(
                     _specialties[index],
-                    style: const TextStyle(
-                      fontSize: 16,
-                      color: Colors.blue,
-                      fontWeight: FontWeight.bold, // Make the text bold
-                    ),
+                    style: const TextStyle(fontSize: 14, color: Colors.blue),
                   ),
-                  elevation: 2, // Add a subtle shadow to the chip
-                  shadowColor: Colors.blue[200], // Set the shadow color
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 8), // Add some padding to the chip
                 ),
               ),
             ),
@@ -196,25 +166,6 @@ class _TutorCardState extends State<TutorCard> {
               maxLines: 5,
               overflow: TextOverflow.ellipsis,
             ),
-            Align(
-              alignment: Alignment.centerRight,
-              child: OutlinedButton.icon(
-                onPressed: () {
-                  _handleTutorDetailView();
-                },
-                icon: Icon(
-                  Icons.bookmark_add,
-                  color: Colors.cyanAccent[800],
-                ),
-                label: Text(
-                  'Book',
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: Colors.cyanAccent[800],
-                  ),
-                ),
-              ),
-            )
           ],
         ),
       ),

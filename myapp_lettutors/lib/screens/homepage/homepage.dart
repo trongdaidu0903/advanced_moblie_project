@@ -33,7 +33,7 @@ class _HomePageState extends State<HomePage> {
 
       _tutors = await TutorService.getListTutorWithPagination(
         page: 1,
-        perPage: 8,
+        perPage: 9,
         token: token,
       );
 
@@ -75,7 +75,7 @@ class _HomePageState extends State<HomePage> {
             padding: const EdgeInsets.all(12),
             child: Text(
               'Recommended Tutors',
-              style: Theme.of(context).textTheme.headline3,
+              style: Theme.of(context).textTheme.displaySmall,
             ),
           ),
           _isLoading
