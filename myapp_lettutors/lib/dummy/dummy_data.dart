@@ -1,5 +1,3 @@
-import 'package:myapp_lettutors/dummy/course.dart';
-import 'package:myapp_lettutors/dummy/ebook.dart';
 import 'package:myapp_lettutors/dummy/review.dart';
 import 'package:myapp_lettutors/dummy/teacher.dart';
 

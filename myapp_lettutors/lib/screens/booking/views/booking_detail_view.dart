@@ -56,7 +56,10 @@ class _BookingDetailViewState extends State<BookingDetailView> {
         ),
         title: Text(
           'Booking Details',
-          style: Theme.of(context).textTheme.headline2,
+          style: Theme.of(context)
+              .textTheme
+              .titleMedium!
+              .copyWith(fontWeight: FontWeight.bold),
         ),
       ),
       body: SingleChildScrollView(
@@ -64,7 +67,11 @@ class _BookingDetailViewState extends State<BookingDetailView> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Booking Time', style: Theme.of(context).textTheme.headline3),
+            Text('Booking Time',
+                style: Theme.of(context)
+                    .textTheme
+                    .titleLarge!
+                    .copyWith(fontWeight: FontWeight.bold)),
             const SizedBox(height: 8),
             // Center(
             //   child: Text(
@@ -79,7 +86,7 @@ class _BookingDetailViewState extends State<BookingDetailView> {
             //     Expanded(
             //       child: Text(
             //         'Balance',
-            //         style: Theme.of(context).textTheme.headline3,
+            //         style: Theme.of(context).textTheme.titleLarge!.copyWith(fontWeight: FontWeight.bold),
             //       ),
             //     ),
             //     const Text(
@@ -94,7 +101,7 @@ class _BookingDetailViewState extends State<BookingDetailView> {
             //     Expanded(
             //       child: Text(
             //         'Price',
-            //         style: Theme.of(context).textTheme.headline3,
+            //         style: Theme.of(context).textTheme.titleLarge!.copyWith(fontWeight: FontWeight.bold),
             //       ),
             //     ),
             //     const Text(
@@ -104,7 +111,11 @@ class _BookingDetailViewState extends State<BookingDetailView> {
             //   ],
             // ),
             const SizedBox(height: 16),
-            Text('Notes', style: Theme.of(context).textTheme.headline3),
+            Text('Notes',
+                style: Theme.of(context)
+                    .textTheme
+                    .titleLarge!
+                    .copyWith(fontWeight: FontWeight.bold)),
             const SizedBox(height: 12),
             TextField(
               minLines: 3,

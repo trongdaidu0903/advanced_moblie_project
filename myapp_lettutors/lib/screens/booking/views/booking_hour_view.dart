@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:myapp_lettutors/constants/routes.dart';
 import 'package:myapp_lettutors/screens/booking/widgets/booking_dialog.dart';
 import 'package:myapp_lettutors/models/schedule/schedule.dart';
 
@@ -42,7 +41,10 @@ class BookingHourView extends StatelessWidget {
         ),
         title: Text(
           'Choose learning time',
-          style: Theme.of(context).textTheme.headline2,
+          style: Theme.of(context)
+              .textTheme
+              .titleMedium!
+              .copyWith(fontWeight: FontWeight.bold),
         ),
       ),
       body: Column(

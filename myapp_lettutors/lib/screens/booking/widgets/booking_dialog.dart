@@ -44,7 +44,10 @@ class _BookingConfirmDialogState extends State<BookingConfirmDialog> {
         children: [
           Text(
             'Booking time',
-            style: Theme.of(context).textTheme.headline3,
+            style: Theme.of(context)
+                .textTheme
+                .titleLarge!
+                .copyWith(fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 4),
           Text(
@@ -58,7 +61,10 @@ class _BookingConfirmDialogState extends State<BookingConfirmDialog> {
           const SizedBox(height: 8),
           Text(
             'Note',
-            style: Theme.of(context).textTheme.headline3,
+            style: Theme.of(context)
+                .textTheme
+                .titleLarge!
+                .copyWith(fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 4),
           SizedBox(
