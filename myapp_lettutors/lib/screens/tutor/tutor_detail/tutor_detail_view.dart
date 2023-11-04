@@ -240,7 +240,7 @@ class _TutorDetailViewState extends State<TutorDetailView> {
                     ),
                   ),
                   const SizedBox(height: 8),
-                  // Text('Suggested Courses', style: Theme.of(context).textTheme.headline3),
+                  // Text('Suggested Courses', style: Theme.of(context).textTheme.titleLarge!.copyWith(fontWeight: FontWeight.bold)),
                   // ...courses.map((course) => Padding(
                   //       padding: const EdgeInsets.symmetric(horizontal: 12),
                   //       child: Row(

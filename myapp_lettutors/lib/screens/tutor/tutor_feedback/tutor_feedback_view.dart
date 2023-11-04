@@ -1,8 +1,4 @@
 import 'package:flutter/material.dart';
-// import 'package:myapp_lettutors/dummy/dummy_data.dart';
-import 'package:myapp_lettutors/constants/routes.dart';
-import 'package:myapp_lettutors/models/tutor/tutor_feedback.dart';
-// import 'package:myapp_lettutors/widgets/feedback_card.dart';
 
 class TutorFeedbackView extends StatefulWidget {
   const TutorFeedbackView({Key? key}) : super(key: key);
@@ -14,9 +10,6 @@ class TutorFeedbackView extends StatefulWidget {
 class _TutorFeedbackViewState extends State<TutorFeedbackView> {
   @override
   Widget build(BuildContext context) {
-    final feedbacks =
-        ModalRoute.of(context)?.settings.arguments as List<TutorFeedback>;
-
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -26,17 +19,14 @@ class _TutorFeedbackViewState extends State<TutorFeedbackView> {
         ),
         title: Text(
           'Reviews',
-          style: Theme.of(context).textTheme.headline2,
+          style: Theme.of(context)
+              .textTheme
+              .titleMedium!
+              .copyWith(fontWeight: FontWeight.bold),
         ),
       ),
       body: const Padding(
         padding: EdgeInsets.all(16),
-        // child: ListView.builder(
-        //   itemCount: feedbacks.length,
-        //   shrinkWrap: true,
-        //   itemBuilder: (context, index) =>
-        //       FeedbackCard(feedback: feedbacks[feedbacks.length - index - 1]),
-        // ),
       ),
     );
   }

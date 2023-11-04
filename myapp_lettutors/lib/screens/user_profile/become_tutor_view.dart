@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:myapp_lettutors/widgets/select_date.dart';
 
 class BecomeTutorView extends StatefulWidget {
   const BecomeTutorView({Key? key}) : super(key: key);
@@ -20,7 +19,10 @@ class _BecomeTutorViewState extends State<BecomeTutorView> {
         ),
         title: Text(
           'Become Tutor',
-          style: Theme.of(context).textTheme.headline2,
+          style: Theme.of(context)
+              .textTheme
+              .titleMedium!
+              .copyWith(fontWeight: FontWeight.bold),
         ),
       ),
       body: SingleChildScrollView(
@@ -30,7 +32,10 @@ class _BecomeTutorViewState extends State<BecomeTutorView> {
           children: [
             Text(
               'Basic Info',
-              style: Theme.of(context).textTheme.headline3,
+              style: Theme.of(context)
+                  .textTheme
+                  .titleLarge!
+                  .copyWith(fontWeight: FontWeight.bold),
             ),
             Row(
               children: [
@@ -107,7 +112,10 @@ class _BecomeTutorViewState extends State<BecomeTutorView> {
             const SizedBox(height: 16),
             Text(
               'CV',
-              style: Theme.of(context).textTheme.headline3,
+              style: Theme.of(context)
+                  .textTheme
+                  .titleLarge!
+                  .copyWith(fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 8),
             Text(
@@ -193,7 +201,10 @@ class _BecomeTutorViewState extends State<BecomeTutorView> {
             const SizedBox(height: 16),
             Text(
               'Languages I speak',
-              style: Theme.of(context).textTheme.headline3,
+              style: Theme.of(context)
+                  .textTheme
+                  .titleLarge!
+                  .copyWith(fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 8),
             Text(
@@ -216,7 +227,10 @@ class _BecomeTutorViewState extends State<BecomeTutorView> {
             const SizedBox(height: 16),
             Text(
               'Who I teach',
-              style: Theme.of(context).textTheme.headline3,
+              style: Theme.of(context)
+                  .textTheme
+                  .titleLarge!
+                  .copyWith(fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 8),
             Text(
@@ -275,7 +289,10 @@ class _BecomeTutorViewState extends State<BecomeTutorView> {
             const SizedBox(height: 16),
             Text(
               'Introduction Video',
-              style: Theme.of(context).textTheme.headline3,
+              style: Theme.of(context)
+                  .textTheme
+                  .titleLarge!
+                  .copyWith(fontWeight: FontWeight.bold),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 8),

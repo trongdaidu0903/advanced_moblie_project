@@ -21,7 +21,10 @@ class _WriteReviewViewState extends State<WriteReviewView> {
         ),
         title: Text(
           'Review',
-          style: Theme.of(context).textTheme.headline2,
+          style: Theme.of(context)
+              .textTheme
+              .titleMedium!
+              .copyWith(fontWeight: FontWeight.bold),
         ),
       ),
       body: Padding(
@@ -31,7 +34,10 @@ class _WriteReviewViewState extends State<WriteReviewView> {
           children: [
             Text(
               'Rating',
-              style: Theme.of(context).textTheme.headline3,
+              style: Theme.of(context)
+                  .textTheme
+                  .titleLarge!
+                  .copyWith(fontWeight: FontWeight.bold),
             ),
             const SizedBox(
               height: 8,
@@ -59,7 +65,10 @@ class _WriteReviewViewState extends State<WriteReviewView> {
             const SizedBox(height: 24),
             Text(
               'Description',
-              style: Theme.of(context).textTheme.headline3,
+              style: Theme.of(context)
+                  .textTheme
+                  .titleLarge!
+                  .copyWith(fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 8),
             TextField(
@@ -76,7 +85,8 @@ class _WriteReviewViewState extends State<WriteReviewView> {
               alignment: Alignment.centerRight,
               child: TextButton(
                 style: TextButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 24),
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 8, horizontal: 24),
                     backgroundColor: Colors.blue),
                 onPressed: () async {
                   final dialogResult = await showDialog<bool>(
@@ -103,7 +113,10 @@ class _WriteReviewViewState extends State<WriteReviewView> {
                       style: TextStyle(fontSize: 20, color: Colors.white),
                     ),
                     SizedBox(width: 12),
-                    Icon(Icons.send, color: Colors.white, size: 24,
+                    Icon(
+                      Icons.send,
+                      color: Colors.white,
+                      size: 24,
                     ),
                   ],
                 ),
