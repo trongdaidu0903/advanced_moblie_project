@@ -14,25 +14,32 @@ class TopicCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 16),
-      child: Card(
-        elevation: 1.5,
-        surfaceTintColor: Colors.white,
-        child: ListTile(
-          title: Text('${index + 1}. ${topic.name}'),
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => TopicView(
-                  title: topic.name ?? 'null name',
-                  url: topic.nameFile ?? 'null file',
-                ),
+    return Container(
+      margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 16),
+      padding: const EdgeInsets.all(7.0),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10.0),
+        color: Theme.of(context).cardColor,
+        boxShadow: [
+          BoxShadow(
+            blurRadius: 5.0,
+            color: Theme.of(context).shadowColor.withOpacity(0.1),
+          )
+        ],
+      ),
+      child: ListTile(
+        title: Text('${index + 1}. ${topic.name}'),
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => TopicView(
+                title: topic.name ?? 'null name',
+                url: topic.nameFile ?? 'null file',
               ),
-            );
-          },
-        ),
+            ),
+          );
+        },
       ),
     );
   }

@@ -22,7 +22,10 @@ class TopicView extends StatelessWidget {
         ),
         title: Text(
           title,
-          style: Theme.of(context).textTheme.headline2,
+          style: Theme.of(context)
+              .textTheme
+              .titleMedium!
+              .copyWith(fontWeight: FontWeight.bold),
         ),
       ),
       body: SfPdfViewer.network(url),
