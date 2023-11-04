@@ -8,7 +8,7 @@ class SchedulePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: DefaultTabController(
         length: 2,
         child: Column(
@@ -18,7 +18,7 @@ class SchedulePage extends StatelessWidget {
                 Tab(
                   icon: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
+                    children: [
                       Icon(
                         Icons.timer_outlined,
                         color: Colors.blue,
@@ -34,7 +34,7 @@ class SchedulePage extends StatelessWidget {
                 Tab(
                   icon: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
+                    children: [
                       Icon(
                         Icons.history_outlined,
                         color: Colors.blue,
@@ -49,7 +49,7 @@ class SchedulePage extends StatelessWidget {
                 ),
               ],
             ),
-            const Expanded(
+            Expanded(
               child: TabBarView(
                 children: [
                   UpcomingView(),

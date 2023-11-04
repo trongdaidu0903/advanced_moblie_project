@@ -11,7 +11,7 @@ import 'package:myapp_lettutors/constants/routes.dart';
 // import 'package:myapp_lettutors/features/video_call/video_call_view.dart';
 import 'package:myapp_lettutors/models/schedule/booking_info.dart';
 import 'package:myapp_lettutors/providers/auth_provider.dart';
-// import 'package:myapp_lettutors/services/booking_service.dart';
+import 'package:myapp_lettutors/services/booking_service.dart';
 import 'package:provider/provider.dart';
 
 class UpcomingClassCard extends StatelessWidget {
@@ -32,14 +32,14 @@ class UpcomingClassCard extends StatelessWidget {
     return result;
   }
 
-  // Future<String> _handleCancelClass(AuthProvider authProvider) async {
-  //   final String token = authProvider.token?.access?.token as String;
-  //   final result = await BookingService.cancelBookedClass(
-  //     scheduleDetailIds: [bookingInfo.id ?? ''],
-  //     token: token,
-  //   );
-  //   return result;
-  // }
+  Future<String> _handleCancelClass(AuthProvider authProvider) async {
+    final String token = authProvider.token?.access?.token as String;
+    final result = await BookingService.cancelBookedClass(
+      scheduleDetailIds: [bookingInfo.id ?? ''],
+      token: token,
+    );
+    return result;
+  }
 
   bool _isTimeToJoin() {
     final startTimestamp =
@@ -183,25 +183,26 @@ class UpcomingClassCard extends StatelessWidget {
                         ),
                       );
                       if (dialogResult) {
-                        // final result = await _handleCancelClass(authProvider);
-                        // showDialog(
-                        //   context: context,
-                        //   builder: (context) => AlertDialog(
-                        //     content: Text(result),
-                        //     actions: [
-                        //       TextButton(
-                        //         onPressed: () {
-                        //           if (result ==
-                        //               "Class Cancelled Successfully") {
-                        //             onCancel(true);
-                        //           }
-                        //           Navigator.pop(context, false);
-                        //         },
-                        //         child: const Text('OK'),
-                        //       ),
-                        //     ],
-                        //   ),
-                        // );
+                        final result = await _handleCancelClass(authProvider);
+                        // ignore: use_build_context_synchronously
+                        showDialog(
+                          context: context,
+                          builder: (context) => AlertDialog(
+                            content: Text(result),
+                            actions: [
+                              TextButton(
+                                onPressed: () {
+                                  if (result ==
+                                      "Class Cancelled Successfully") {
+                                    onCancel(true);
+                                  }
+                                  Navigator.pop(context, false);
+                                },
+                                child: const Text('OK'),
+                              ),
+                            ],
+                          ),
+                        );
                       }
                     },
                     child: const Text(
@@ -223,6 +224,7 @@ class UpcomingClassCard extends StatelessWidget {
                       //     },
                       //   ),
                       // );
+
                       // if (_isTimeToJoin()) {
                       //   _joinMeeting(room, meetingToken);
                       // } else {

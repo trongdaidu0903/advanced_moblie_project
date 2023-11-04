@@ -3,7 +3,7 @@ import 'package:myapp_lettutors/constants/routes.dart';
 import 'package:myapp_lettutors/providers/auth_provider.dart';
 import 'package:myapp_lettutors/screens/courses/courses_page.dart';
 import 'package:myapp_lettutors/screens/homepage/homepage.dart';
-import 'package:myapp_lettutors/screens/schedule/schedule_page.dart';
+import 'package:myapp_lettutors/screens/schedules/schedule_page.dart';
 import 'package:myapp_lettutors/screens/setting/settings_page.dart';
 import 'package:myapp_lettutors/screens/tutor/search_tutor/views/tutor_search_page.dart';
 import 'package:provider/provider.dart';

@@ -62,7 +62,7 @@ class _UpcomingClassViewState extends State<UpcomingView> {
                   children: [
                     Text(
                       'You have $_count upcoming classes',
-                      style: Theme.of(context).textTheme.headline4,
+                      style: Theme.of(context).textTheme.headlineMedium,
                     ),
                     const SizedBox(height: 16),
                     Row(

@@ -7,6 +7,7 @@ import 'package:myapp_lettutors/constants/routes.dart';
 import 'package:myapp_lettutors/models/tutor/tutor_feedback.dart';
 import 'package:myapp_lettutors/models/tutor/tutor_info.dart';
 import 'package:myapp_lettutors/providers/auth_provider.dart';
+import 'package:myapp_lettutors/screens/booking/widgets/tutor_schedule.dart';
 import 'package:myapp_lettutors/screens/tutor/tutor_detail/tutor_report_dialog.dart';
 import 'package:myapp_lettutors/services/tutor_service.dart';
 import 'package:provider/provider.dart';
@@ -106,6 +107,26 @@ class _TutorDetailViewState extends State<TutorDetailView> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  Container(
+                    margin: const EdgeInsets.symmetric(vertical: 8),
+                    height: 300,
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                        border: Border.all(color: Colors.blue, width: 2),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(10))),
+                    child: _chewieController == null
+                        ? Text(
+                            'No Introduction Video',
+                            style: TextStyle(
+                              fontSize: 22,
+                              fontWeight: FontWeight.w500,
+                              color: Colors.blue[700],
+                            ),
+                          )
+                        : Chewie(controller: _chewieController!),
+                  ),
+
                   Row(
                     children: [
                       Container(
@@ -119,9 +140,9 @@ class _TutorDetailViewState extends State<TutorDetailView> {
                           imageUrl: _tutorInfo.user?.avatar ?? '',
                           fit: BoxFit.cover,
                           errorWidget: (context, url, error) => const Icon(
-                            Icons.error_outline_rounded,
-                            size: 32,
-                            color: Colors.redAccent,
+                            Icons.account_circle,
+                            size: 72,
+                            color: Colors.grey,
                           ),
                         ),
                       ),
@@ -168,6 +189,92 @@ class _TutorDetailViewState extends State<TutorDetailView> {
                       _tutorInfo.bio ?? 'null bio',
                       style: const TextStyle(fontSize: 16),
                     ),
+                  ),
+
+                  const SizedBox(height: 8),
+                  Text('Languages',
+                      style: Theme.of(context).textTheme.displaySmall),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: Wrap(
+                      spacing: 5,
+                      children: List<Widget>.generate(
+                        languages.length,
+                        (index) => Padding(
+                          padding: const EdgeInsets.all(5.0),
+                          child: Chip(
+                            side: const BorderSide(color: Colors.transparent),
+                            label: Text(
+                              languageList[languages[index]]?['name'] ??
+                                  'unknown language',
+                              style: const TextStyle(color: Colors.blue),
+                            ),
+                            backgroundColor: Colors.blue[50],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  Text('Specialties',
+                      style: Theme.of(context).textTheme.displaySmall),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: Wrap(
+                      spacing: 5,
+                      children: List<Widget>.generate(
+                        _specialties.length,
+                        (index) => Padding(
+                          padding: const EdgeInsets.all(5.0),
+                          child: Chip(
+                            side: const BorderSide(color: Colors.transparent),
+                            backgroundColor: Colors.lightBlue[50],
+                            label: Text(
+                              _specialties[index],
+                              style: const TextStyle(
+                                  fontSize: 14, color: Colors.blue),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  // Text('Suggested Courses', style: Theme.of(context).textTheme.headline3),
+                  // ...courses.map((course) => Padding(
+                  //       padding: const EdgeInsets.symmetric(horizontal: 12),
+                  //       child: Row(
+                  //         children: [
+                  //           Text(
+                  //             course.name,
+                  //             style: Theme.of(context).textTheme.headline4,
+                  //           ),s
+                  //           const SizedBox(width: 16),
+                  //           TextButton(
+                  //               onPressed: () {
+                  //                 Navigator.pushNamed(context, Routes.courseDetail);
+                  //               },
+                  //               child: const Text('View'))
+                  //         ],
+                  //       ),
+                  //     )),
+                  const SizedBox(height: 12),
+                  Text('Interests',
+                      style: Theme.of(context).textTheme.displaySmall),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 10, right: 8),
+                    child: Text(_tutorInfo.interests ?? 'No interests'),
+                  ),
+                  const SizedBox(height: 12),
+                  Text('Teaching Experiences',
+                      style: Theme.of(context).textTheme.displaySmall),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 10, right: 8),
+                    child: Text(
+                        _tutorInfo.experience ?? 'No teaching experiences'),
+                  ),
+                  const SizedBox(
+                    height: 16,
                   ),
                   Row(
                     children: [
@@ -266,107 +373,7 @@ class _TutorDetailViewState extends State<TutorDetailView> {
                       ),
                     ],
                   ),
-                  Container(
-                    margin: const EdgeInsets.symmetric(vertical: 8),
-                    height: 300,
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                        border: Border.all(color: Colors.blue, width: 2),
-                        borderRadius:
-                            const BorderRadius.all(Radius.circular(10))),
-                    child: _chewieController == null
-                        ? Text(
-                            'No Introduction Video',
-                            style: TextStyle(
-                              fontSize: 22,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.blue[700],
-                            ),
-                          )
-                        : Chewie(controller: _chewieController!),
-                  ),
-                  const SizedBox(height: 8),
-                  Text('Languages',
-                      style: Theme.of(context).textTheme.displaySmall),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
-                    child: Wrap(
-                      spacing: 5,
-                      children: List<Widget>.generate(
-                        languages.length,
-                        (index) => Padding(
-                          padding: const EdgeInsets.all(5.0),
-                          child: Chip(
-                            side: const BorderSide(color: Colors.transparent),
-                            label: Text(
-                              languageList[languages[index]]?['name'] ??
-                                  'unknown language',
-                              style: const TextStyle(color: Colors.blue),
-                            ),
-                            backgroundColor: Colors.blue[50],
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                  Text('Specialties',
-                      style: Theme.of(context).textTheme.displaySmall),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
-                    child: Wrap(
-                      spacing: 5,
-                      children: List<Widget>.generate(
-                        _specialties.length,
-                        (index) => Padding(
-                          padding: const EdgeInsets.all(5.0),
-                          child: Chip(
-                            side: const BorderSide(color: Colors.transparent),
-                            backgroundColor: Colors.lightBlue[50],
-                            label: Text(
-                              _specialties[index],
-                              style: const TextStyle(
-                                  fontSize: 14, color: Colors.blue),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                  // Text('Suggested Courses', style: Theme.of(context).textTheme.headline3),
-                  // ...courses.map((course) => Padding(
-                  //       padding: const EdgeInsets.symmetric(horizontal: 12),
-                  //       child: Row(
-                  //         children: [
-                  //           Text(
-                  //             course.name,
-                  //             style: Theme.of(context).textTheme.headline4,
-                  //           ),s
-                  //           const SizedBox(width: 16),
-                  //           TextButton(
-                  //               onPressed: () {
-                  //                 Navigator.pushNamed(context, Routes.courseDetail);
-                  //               },
-                  //               child: const Text('View'))
-                  //         ],
-                  //       ),
-                  //     )),
-                  const SizedBox(height: 12),
-                  Text('Interests',
-                      style: Theme.of(context).textTheme.displaySmall),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 10, right: 8),
-                    child: Text(_tutorInfo.interests ?? 'No interests'),
-                  ),
-                  const SizedBox(height: 12),
-                  Text('Teaching Experiences',
-                      style: Theme.of(context).textTheme.displaySmall),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 10, right: 8),
-                    child: Text(
-                        _tutorInfo.experience ?? 'No teaching experiences'),
-                  ),
+
                   Padding(
                       padding: const EdgeInsets.only(top: 24, bottom: 12),
                       child: Container(
@@ -379,18 +386,19 @@ class _TutorDetailViewState extends State<TutorDetailView> {
                               side:
                                   const BorderSide(color: Colors.transparent)),
                           onPressed: () async {
-                            // await showModalBottomSheet(
-                            //   context: context,
-                            //   isScrollControlled: true,
-                            //   elevation: 5,
-                            //   clipBehavior: Clip.hardEdge,
-                            //   shape: const RoundedRectangleBorder(
-                            //     borderRadius: BorderRadius.vertical(
-                            //       top: Radius.circular(16),
-                            //     ),
-                            //   ),
-                            //   builder: (context) => TutorSchedule(userId: userId),
-                            // );
+                            await showModalBottomSheet(
+                              context: context,
+                              isScrollControlled: true,
+                              elevation: 5,
+                              clipBehavior: Clip.hardEdge,
+                              shape: const RoundedRectangleBorder(
+                                borderRadius: BorderRadius.vertical(
+                                  top: Radius.circular(16),
+                                ),
+                              ),
+                              builder: (context) =>
+                                  TutorSchedule(userId: userId),
+                            );
                           },
                           child: const Text(
                             'Book This Tutor',
