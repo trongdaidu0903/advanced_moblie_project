@@ -50,7 +50,10 @@ class CourseCard extends StatelessWidget {
                 children: [
                   Text(
                     course.name ?? 'null course name',
-                    style: Theme.of(context).textTheme.headline3,
+                    style: Theme.of(context)
+                        .textTheme
+                        .titleLarge!
+                        .copyWith(fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(
                     height: 8,

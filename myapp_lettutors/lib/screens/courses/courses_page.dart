@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:myapp_lettutors/screens/courses/courses/views/courses_view.dart';
 
 class CoursesPage extends StatefulWidget {
   const CoursesPage({Key? key}) : super(key: key);
@@ -50,9 +51,7 @@ class _CoursesPageState extends State<CoursesPage> {
             ]),
             Expanded(
               child: TabBarView(children: [
-                // Here goes the first tab
-                //CoursesView(),
-                // Here goes the second tab
+                const CoursesView(),
                 Padding(
                   padding: const EdgeInsets.all(16),
                   child: Column(
@@ -70,16 +69,6 @@ class _CoursesPageState extends State<CoursesPage> {
                                   BorderRadius.all(Radius.circular(10))),
                         ),
                       ),
-                      // Expanded(
-                      //   child: ListView.separated(
-                      //     itemCount: ebooks.length,
-                      //     itemBuilder: (context, index) => EbookCard(
-                      //       ebook: ebooks[index],
-                      //     ),
-                      //     separatorBuilder: (BuildContext context, int index) =>
-                      //     const SizedBox(height: 8),
-                      //   ),
-                      // ),
                     ],
                   ),
                 ),

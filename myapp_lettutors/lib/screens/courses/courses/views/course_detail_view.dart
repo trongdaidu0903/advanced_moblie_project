@@ -218,7 +218,7 @@ class _CourseDetailState extends State<CourseDetailView> {
                   //   padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
                   //   child: Text(
                   //     'Suggested Tutors',
-                  //     style: Theme.of(context).textTheme.headline3,
+                  //     style: Theme.of(context).textTheme.titleLarge!.copyWith(fontWeight: FontWeight.bold),
                   //   ),
                   // ),
                   // Padding(
