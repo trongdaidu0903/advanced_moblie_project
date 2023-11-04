@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:myapp_lettutors/constants/items_per_page.dart';
 import 'package:myapp_lettutors/models/tutor/tutor.dart';
-import 'package:myapp_lettutors/providers/auth_provider.dart';
 import 'package:myapp_lettutors/services/tutor_service.dart';
-import 'package:provider/provider.dart';
 
 import '../widgets/tutor_search_card.dart';
 
@@ -58,7 +56,6 @@ class _TutorSearchResultState extends State<TutorSearchResult> {
 
   @override
   Widget build(BuildContext context) {
-    final authProvider = context.watch<AuthProvider>();
     final data = ModalRoute.of(context)?.settings.arguments as Map;
 
     if (_isLoading) {

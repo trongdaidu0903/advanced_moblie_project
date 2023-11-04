@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:myapp_lettutors/constants/routes.dart';
 import 'package:myapp_lettutors/dummy/dummy_data.dart';
 import 'package:myapp_lettutors/screens/booking/views/booking_hour_view.dart';
 import 'package:myapp_lettutors/models/schedule/schedule.dart';
 import 'package:myapp_lettutors/providers/auth_provider.dart';
 import 'package:myapp_lettutors/services/booking_service.dart';
-import 'package:myapp_lettutors/services/tutor_service.dart';
 import 'package:provider/provider.dart';
 
 class TutorSchedule extends StatefulWidget {
@@ -30,19 +28,15 @@ class _TutorScheduleState extends State<TutorSchedule> {
       userId: widget.userId,
     );
 
-    // Remove all learning dates before today
     result = result.where((schedule) {
       if (schedule.startTimestamp == null) return false;
 
-      final now = DateTime.now();
       final start =
           DateTime.fromMillisecondsSinceEpoch(schedule.startTimestamp!);
 
-      // bool isTheSameDate = now.day == start.day && now.month == start.month && now.year == start.year;
       return start.isAfter(DateTime.now());
     }).toList();
 
-    // Sort learning DateTime increasingly
     result.sort((s1, s2) {
       if (s1.startTimestamp == null || s2.startTimestamp == null) return 0;
       return s1.startTimestamp!.compareTo(s2.startTimestamp!);
@@ -54,7 +48,6 @@ class _TutorScheduleState extends State<TutorSchedule> {
         schedules.map((schedule) => schedule.startTimestamp ?? 0).toList();
 
     for (var timestamp in timestamps) {
-      bool isExisted = false;
       if (!scheduleStartTimestamps.any((element) {
         final date1 = DateTime.fromMillisecondsSinceEpoch(timestamp);
         final date2 = DateTime.fromMillisecondsSinceEpoch(element);
@@ -174,7 +167,10 @@ Future<void> _bookLearningHour(
                 padding: const EdgeInsets.only(top: 32, bottom: 8),
                 child: Text(
                   'Choose Your Time',
-                  style: Theme.of(context).textTheme.headline3,
+                  style: Theme.of(context)
+                      .textTheme
+                      .titleLarge!
+                      .copyWith(fontWeight: FontWeight.bold),
                 ),
               ),
               Expanded(

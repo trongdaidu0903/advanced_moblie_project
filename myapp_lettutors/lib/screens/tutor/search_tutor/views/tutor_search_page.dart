@@ -1,15 +1,8 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:myapp_lettutors/constants/country_list.dart';
 import 'package:myapp_lettutors/constants/datatype.dart';
 import 'package:myapp_lettutors/constants/routes.dart';
-// import 'package:myapp_lettutors/dummy/dummy_data.dart';
-import 'package:myapp_lettutors/models/tutor/tutor.dart';
 import 'package:myapp_lettutors/providers/auth_provider.dart';
-import 'package:myapp_lettutors/services/tutor_service.dart';
 import 'package:provider/provider.dart';
-
-import 'tutor_search_result.dart';
 
 class TutorSearchPage extends StatefulWidget {
   const TutorSearchPage({Key? key}) : super(key: key);
@@ -22,18 +15,12 @@ class _TutorSearchPageState extends State<TutorSearchPage> {
   final _nameController = TextEditingController();
   List<String> _specialties = [];
 
-  // final _countryController = TextEditingController();
-
   Nationality? _nationality = Nationality.foreign;
   int _chosenSpecialtiesIndex = 0;
 
   Map<String, dynamic> _encapsulateSearchParams(AuthProvider authProvider) {
     final name = _nameController.text;
     final accessToken = authProvider.token?.access?.token as String;
-    // final List<String> filterSpecialties = [];
-    // if (_chosenSpecialtiesIndex != 0) {
-    //   filterSpecialties.add(specialties[_chosenSpecialtiesIndex].toLowerCase().replaceAll(' ', '-'));
-    // }
 
     return {
       'token': accessToken,
@@ -72,7 +59,6 @@ class _TutorSearchPageState extends State<TutorSearchPage> {
           TextField(
             controller: _nameController,
             decoration: InputDecoration(
-              // contentPadding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
               hintStyle: TextStyle(color: Colors.grey[500]),
               hintText: "search by name",
               border: const OutlineInputBorder(

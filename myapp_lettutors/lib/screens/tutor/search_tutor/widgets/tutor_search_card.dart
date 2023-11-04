@@ -1,7 +1,5 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:myapp_lettutors/constants/country_list.dart';
-import 'package:myapp_lettutors/constants/routes.dart';
 import 'package:myapp_lettutors/models/tutor/tutor.dart';
 import 'package:myapp_lettutors/models/tutor/tutor_info.dart';
 import 'package:myapp_lettutors/providers/auth_provider.dart';
