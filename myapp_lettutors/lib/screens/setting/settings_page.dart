@@ -37,10 +37,6 @@ class _SettingsPageState extends State<SettingsPage> {
                     const Icon(Icons.person_rounded),
               ),
             ),
-            // child: CircleAvatar(
-            //   radius: 60,
-            //   backgroundImage: AssetImage('assets/user/user-avatar-01.png'),
-            // ),
           ),
           const SizedBox(height: 12),
           Align(
@@ -49,14 +45,6 @@ class _SettingsPageState extends State<SettingsPage> {
                 authProvider.currentUser?.name ?? 'null',
                 style: Theme.of(context).textTheme.displaySmall,
               )),
-          //const SizedBox(height: 12),
-          // TextButton(
-          //   onPressed: () {
-          //     Navigator.pushNamed(context, Routes.userProfile);
-          //   },
-          //   child: const Text('Edit Profile'),
-          // ),
-          // Functions Starts Here
           const SizedBox(height: 4),
           InkWell(
             onTap: () => {Navigator.pushNamed(context, Routes.userProfile)},
