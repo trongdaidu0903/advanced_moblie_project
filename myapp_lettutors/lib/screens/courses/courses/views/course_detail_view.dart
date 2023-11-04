@@ -48,12 +48,13 @@ class _CourseDetailState extends State<CourseDetailView> {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.white,
-        leading: BackButton(
-          color: Colors.blue[600],
-        ),
+        leading: const BackButton(),
         title: Text(
           'Course Detail',
-          style: Theme.of(context).textTheme.headline2,
+          style: Theme.of(context)
+              .textTheme
+              .titleLarge!
+              .copyWith(fontWeight: FontWeight.bold),
         ),
       ),
       body: _isLoading
@@ -80,7 +81,8 @@ class _CourseDetailState extends State<CourseDetailView> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
                     child: Text(
                       courseDetail.name ?? 'null. You name it',
                       style: const TextStyle(
@@ -93,112 +95,116 @@ class _CourseDetailState extends State<CourseDetailView> {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16),
                     child: Text(
-                      courseDetail.description ?? 'null. No one knows what this is about',
+                      courseDetail.description ??
+                          'null. No one knows what this is about',
                       style: const TextStyle(fontSize: 16),
                     ),
                   ),
-                  // Padding(
-                  //   padding: const EdgeInsets.all(16),
-                  //   child: TextButton(
-                  //     onPressed: () {},
-                  //     style: TextButton.styleFrom(
-                  //       minimumSize: const Size.fromHeight(44),
-                  //       backgroundColor: Colors.blue,
-                  //     ),
-                  //     child: const Text(
-                  //       'Discover',
-                  //       style: TextStyle(fontSize: 18, color: Colors.white),
-                  //     ),
-                  //   ),
-                  // ),
+
                   const SizedBox(height: 16),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16),
                     child: Text(
                       'Overview',
-                      style: Theme.of(context).textTheme.headline3,
+                      style: Theme.of(context)
+                          .textTheme
+                          .titleLarge!
+                          .copyWith(fontWeight: FontWeight.bold),
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
                     child: Row(
                       children: [
                         const Icon(Icons.help_outline, color: Colors.blue),
                         const SizedBox(width: 8),
                         Text(
                           'Why Take This Course?',
-                          style: Theme.of(context).textTheme.headline4,
+                          style: Theme.of(context)
+                              .textTheme
+                              .titleMedium!
+                              .copyWith(fontWeight: FontWeight.w500),
                         ),
                       ],
                     ),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(left: 48, right: 16),
-                    child: Text(
-                        courseDetail.reason ?? 'null. There is no reason to study this course'),
+                    child: Text(courseDetail.reason ??
+                        'null. There is no reason to study this course'),
                   ),
                   Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
                     child: Row(
                       children: [
                         const Icon(Icons.help_outline, color: Colors.blue),
                         const SizedBox(width: 8),
                         Text(
                           'What will you be able to do?',
-                          style: Theme.of(context).textTheme.headline4,
+                          style: Theme.of(context)
+                              .textTheme
+                              .titleMedium!
+                              .copyWith(fontWeight: FontWeight.w500),
                         ),
                       ],
                     ),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(left: 48, right: 16),
-                    child: Text(courseDetail.purpose ?? 'null. This course is useless apparently'),
+                    child: Text(courseDetail.purpose ??
+                        'null. This course is useless apparently'),
                   ),
                   Padding(
                     padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
                     child: Text(
                       'Experience Level',
-                      style: Theme.of(context).textTheme.headline3,
+                      style: Theme.of(context)
+                          .textTheme
+                          .titleLarge!
+                          .copyWith(fontWeight: FontWeight.bold),
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
                     child: Row(
                       children: [
-                        const Icon(Icons.group_add_outlined, color: Colors.blue),
+                        const Icon(Icons.group_add_outlined,
+                            color: Colors.blue),
                         const SizedBox(width: 8),
                         Text(
-                          courseLevels[courseDetail.level ?? '0'] ?? 'null. Possibly for gods only',
-                          style: Theme.of(context).textTheme.headline4,
+                          courseLevels[courseDetail.level ?? '0'] ??
+                              'null. Possibly for gods only',
+                          style: Theme.of(context)
+                              .textTheme
+                              .titleMedium!
+                              .copyWith(fontWeight: FontWeight.w500),
                         ),
                       ],
                     ),
                   ),
+
                   Padding(
-                    padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
-                    child: Text(
-                      'Course Length',
-                      style: Theme.of(context).textTheme.headline3,
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0)
+                        .copyWith(top: 10.0),
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        const Icon(Icons.book_outlined, color: Colors.blue),
-                        const SizedBox(width: 8),
                         Text(
-                          '${courseDetail.topics!.length} Topics',
-                          style: Theme.of(context).textTheme.headline4,
+                          'List Of Topics',
+                          style: Theme.of(context)
+                              .textTheme
+                              .titleLarge!
+                              .copyWith(fontWeight: FontWeight.bold),
+                        ),
+                        Text(
+                          '${courseDetail.topics?.length ?? 0} Topics',
+                          style: Theme.of(context).textTheme.titleSmall,
                         ),
                       ],
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
-                    child: Text(
-                      'List Of Topics',
-                      style: Theme.of(context).textTheme.headline3,
                     ),
                   ),
                   ...List<Widget>.generate(
