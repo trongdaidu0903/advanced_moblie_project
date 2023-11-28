@@ -61,6 +61,7 @@ class _HomepageHeaderState extends State<HomepageHeader> {
         upcomingClass?.studentMeetingLink?.split('token=')[1] ?? '';
     Map<String, dynamic> jwtDecoded = JwtDecoder.decode(meetingToken);
     final String room = jwtDecoded['room'];
+    log(room);
   }
 
   @override

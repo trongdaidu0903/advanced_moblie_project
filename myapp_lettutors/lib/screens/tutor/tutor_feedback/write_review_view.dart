@@ -103,10 +103,10 @@ class _WriteReviewViewState extends State<WriteReviewView> {
                   ).then((value) => value ?? false);
                   if (dialogResult && mounted) Navigator.pop(context);
                 },
-                child: Row(
+                child: const Row(
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.center,
-                  children: const [
+                  children: [
                     Text(
                       'Send',
                       textAlign: TextAlign.center,

@@ -64,7 +64,7 @@ class HistoryCard extends StatelessWidget {
                         bookingInfo.scheduleDetailInfo!.scheduleInfo!.tutorInfo!
                                 .name ??
                             'null name',
-                        style: Theme.of(context).textTheme.headline4,
+                        style: Theme.of(context).textTheme.headlineMedium,
                       ),
                       const SizedBox(height: 8),
                       Text(
@@ -101,7 +101,7 @@ class HistoryCard extends StatelessWidget {
                   child: TextButton(
                     style: TextButton.styleFrom(foregroundColor: Colors.red),
                     onPressed: () async {
-                      final dialogResult = await showReportDialog(context);
+                      await showReportDialog(context);
                     },
                     child: const Text(
                       'Report',
@@ -155,7 +155,7 @@ Future<bool> showReportDialog(BuildContext context) {
                       children: [
                         Text(
                           'Keegan',
-                          style: Theme.of(context).textTheme.headline4,
+                          style: Theme.of(context).textTheme.headlineMedium,
                         ),
                         const SizedBox(height: 4),
                         const Text('2022-10-20    10:00 - 10:55')
@@ -167,7 +167,7 @@ Future<bool> showReportDialog(BuildContext context) {
               const SizedBox(height: 12),
               Text(
                 'Please tell us what went wrong',
-                style: Theme.of(context).textTheme.headline4,
+                style: Theme.of(context).textTheme.headlineMedium,
               ),
               const SizedBox(height: 8),
               TextField(

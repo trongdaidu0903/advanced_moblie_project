@@ -247,7 +247,7 @@ class _TutorDetailViewState extends State<TutorDetailView> {
                   //         children: [
                   //           Text(
                   //             course.name,
-                  //             style: Theme.of(context).textTheme.headline4,
+                  //             style: Theme.of(context).textTheme.headlineMedium,
                   //           ),s
                   //           const SizedBox(width: 16),
                   //           TextButton(
@@ -376,7 +376,7 @@ class _TutorDetailViewState extends State<TutorDetailView> {
 
                   Padding(
                       padding: const EdgeInsets.only(top: 24, bottom: 12),
-                      child: Container(
+                      child: SizedBox(
                         height: 50,
                         child: OutlinedButton(
                           style: TextButton.styleFrom(

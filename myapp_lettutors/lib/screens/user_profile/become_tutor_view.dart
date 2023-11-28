@@ -59,7 +59,7 @@ class _BecomeTutorViewState extends State<BecomeTutorView> {
                     children: [
                       Text(
                         'Tutoring Name',
-                        style: Theme.of(context).textTheme.headline4,
+                        style: Theme.of(context).textTheme.headlineMedium,
                       ),
                       const SizedBox(height: 2),
                       const TextField(
@@ -78,7 +78,7 @@ class _BecomeTutorViewState extends State<BecomeTutorView> {
                       const SizedBox(height: 8),
                       Text(
                         'I am from',
-                        style: Theme.of(context).textTheme.headline4,
+                        style: Theme.of(context).textTheme.headlineMedium,
                       ),
                       const SizedBox(height: 2),
                       const TextField(
@@ -97,7 +97,7 @@ class _BecomeTutorViewState extends State<BecomeTutorView> {
                       const SizedBox(height: 8),
                       Text(
                         'Date of Birth',
-                        style: Theme.of(context).textTheme.headline4,
+                        style: Theme.of(context).textTheme.headlineMedium,
                       ),
                       const SizedBox(height: 2),
                       // SelectDate(
@@ -120,7 +120,7 @@ class _BecomeTutorViewState extends State<BecomeTutorView> {
             const SizedBox(height: 8),
             Text(
               'Interests',
-              style: Theme.of(context).textTheme.headline4,
+              style: Theme.of(context).textTheme.headlineMedium,
             ),
             const SizedBox(height: 2),
             const TextField(
@@ -138,7 +138,7 @@ class _BecomeTutorViewState extends State<BecomeTutorView> {
             const SizedBox(height: 8),
             Text(
               'Education',
-              style: Theme.of(context).textTheme.headline4,
+              style: Theme.of(context).textTheme.headlineMedium,
             ),
             const SizedBox(height: 2),
             const TextField(
@@ -156,7 +156,7 @@ class _BecomeTutorViewState extends State<BecomeTutorView> {
             const SizedBox(height: 8),
             Text(
               'Experience',
-              style: Theme.of(context).textTheme.headline4,
+              style: Theme.of(context).textTheme.headlineMedium,
             ),
             const SizedBox(height: 2),
             const TextField(
@@ -174,7 +174,7 @@ class _BecomeTutorViewState extends State<BecomeTutorView> {
             const SizedBox(height: 8),
             Text(
               'Current or Previous Profession',
-              style: Theme.of(context).textTheme.headline4,
+              style: Theme.of(context).textTheme.headlineMedium,
             ),
             const SizedBox(height: 2),
             const TextField(
@@ -192,7 +192,7 @@ class _BecomeTutorViewState extends State<BecomeTutorView> {
             const SizedBox(height: 8),
             Text(
               'Certificate',
-              style: Theme.of(context).textTheme.headline4,
+              style: Theme.of(context).textTheme.headlineMedium,
             ),
             TextButton(
               onPressed: () {},
@@ -209,7 +209,7 @@ class _BecomeTutorViewState extends State<BecomeTutorView> {
             const SizedBox(height: 8),
             Text(
               'Languages',
-              style: Theme.of(context).textTheme.headline4,
+              style: Theme.of(context).textTheme.headlineMedium,
             ),
             const SizedBox(height: 2),
             const TextField(
@@ -235,7 +235,7 @@ class _BecomeTutorViewState extends State<BecomeTutorView> {
             const SizedBox(height: 8),
             Text(
               'Introduction',
-              style: Theme.of(context).textTheme.headline4,
+              style: Theme.of(context).textTheme.headlineMedium,
             ),
             const SizedBox(height: 2),
             const TextField(
@@ -253,7 +253,7 @@ class _BecomeTutorViewState extends State<BecomeTutorView> {
             const SizedBox(height: 8),
             Text(
               'I am best at teaching students who are',
-              style: Theme.of(context).textTheme.headline4,
+              style: Theme.of(context).textTheme.headlineMedium,
             ),
             const SizedBox(height: 2),
             const TextField(
@@ -271,7 +271,7 @@ class _BecomeTutorViewState extends State<BecomeTutorView> {
             const SizedBox(height: 8),
             Text(
               'My specialties are',
-              style: Theme.of(context).textTheme.headline4,
+              style: Theme.of(context).textTheme.headlineMedium,
             ),
             const SizedBox(height: 2),
             const TextField(

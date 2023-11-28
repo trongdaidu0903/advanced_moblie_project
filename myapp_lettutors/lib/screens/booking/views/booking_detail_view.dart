@@ -134,19 +134,24 @@ class _BookingDetailViewState extends State<BookingDetailView> {
                   backgroundColor: Colors.blue,
                 ),
                 onPressed: () async {
-                  // Navigator.popUntil(
-                  //   context,
-                  //   (route) => ModalRoute.withName(Routes.teacherDetail) as bool,
-                  // );
-                  final dialogResult = await showBookingResultDialog(context);
-                  if (dialogResult) {
-                    Navigator.pop(context);
+                  final currentContext = context;
+                  // Create an asynchronous function to handle the dialog and navigation
+                  Future<void> handleDialogAndNavigation() async {
+                    final dialogResult =
+                        await showBookingResultDialog(currentContext);
+                    if (dialogResult) {
+                      // ignore: use_build_context_synchronously
+                      Navigator.pop(currentContext);
+                    }
                   }
+
+                  // Call the asynchronous function
+                  await handleDialogAndNavigation();
                 },
-                child: Row(
+                child: const Row(
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.center,
-                  children: const [
+                  children: [
                     Icon(
                       Icons.keyboard_double_arrow_right_rounded,
                       color: Colors.white,

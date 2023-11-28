@@ -227,7 +227,7 @@ class _CourseDetailState extends State<CourseDetailView> {
                   //     children: [
                   //       Text(
                   //         'Keegan',
-                  //         style: Theme.of(context).textTheme.headline4,
+                  //         style: Theme.of(context).textTheme.headlineMedium,
                   //       ),
                   //       const SizedBox(width: 16),
                   //       TextButton(

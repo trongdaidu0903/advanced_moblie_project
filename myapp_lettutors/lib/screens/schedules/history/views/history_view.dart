@@ -59,7 +59,7 @@ class _HistoryViewState extends State<HistoryView> {
                   children: [
                     Text(
                       'You have booked $_count classes',
-                      style: Theme.of(context).textTheme.headline4,
+                      style: Theme.of(context).textTheme.headlineMedium,
                     ),
                     const SizedBox(height: 16),
                     Row(

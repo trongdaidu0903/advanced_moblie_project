@@ -47,8 +47,9 @@ class UserService {
 
     // Sort lessons by timestamp increasingly
     lessons.sort((a, b) {
-      if (a.scheduleDetailInfo == null || b.scheduleDetailInfo == null)
+      if (a.scheduleDetailInfo == null || b.scheduleDetailInfo == null) {
         return 0;
+      }
       if (a.scheduleDetailInfo!.startPeriodTimestamp == null ||
           b.scheduleDetailInfo!.startPeriodTimestamp == null) return 0;
 
@@ -60,8 +61,9 @@ class UserService {
 
     lessons = lessons.where((element) {
       if (element.scheduleDetailInfo == null) return false;
-      if (element.scheduleDetailInfo!.startPeriodTimestamp == null)
+      if (element.scheduleDetailInfo!.startPeriodTimestamp == null) {
         return false;
+      }
 
       final int startTimestamp =
           element.scheduleDetailInfo!.startPeriodTimestamp!;

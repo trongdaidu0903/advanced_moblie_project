@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:myapp_lettutors/dummy/dummy_data.dart';
 import 'package:myapp_lettutors/screens/booking/views/booking_hour_view.dart';
 import 'package:myapp_lettutors/models/schedule/schedule.dart';
 import 'package:myapp_lettutors/providers/auth_provider.dart';
@@ -135,114 +134,114 @@ class _TutorScheduleState extends State<TutorSchedule> {
   }
 }
 
-Future<DateTime?> _bookLearningDate(BuildContext context) async {
-  DateTime? selectedDate = await showDatePicker(
-    context: context,
-    initialDate: DateTime.now(),
-    firstDate: DateTime.now(),
-    lastDate: DateTime(2030),
-  );
-  return selectedDate ?? DateTime.now();
-}
+// Future<DateTime?> _bookLearningDate(BuildContext context) async {
+//   DateTime? selectedDate = await showDatePicker(
+//     context: context,
+//     initialDate: DateTime.now(),
+//     firstDate: DateTime.now(),
+//     lastDate: DateTime(2030),
+//   );
+//   return selectedDate ?? DateTime.now();
+// }
 
-Future<void> _bookLearningHour(
-    BuildContext context, DateTime selectedDate) async {
-  await showModalBottomSheet(
-    context: context,
-    isScrollControlled: true,
-    elevation: 5,
-    clipBehavior: Clip.hardEdge,
-    shape: const RoundedRectangleBorder(
-      borderRadius: BorderRadius.vertical(
-        top: Radius.circular(16),
-      ),
-    ),
-    builder: (context) {
-      return SafeArea(
-        child: SizedBox(
-          height: MediaQuery.of(context).size.height * 0.75,
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 32, bottom: 8),
-                child: Text(
-                  'Choose Your Time',
-                  style: Theme.of(context)
-                      .textTheme
-                      .titleLarge!
-                      .copyWith(fontWeight: FontWeight.bold),
-                ),
-              ),
-              Expanded(
-                child: GridView.count(
-                  padding: const EdgeInsets.all(24),
-                  crossAxisCount: 2,
-                  mainAxisSpacing: 24,
-                  crossAxisSpacing: 32,
-                  childAspectRatio: 3,
-                  children: List<Widget>.generate(
-                    courseHours.length,
-                    (index) => ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.blue,
-                      ),
-                      onPressed: () async {
-                        // final dialogResult = await _showBookingConfirmDialog(context);
-                        // if (dialogResult) {
-                        //   Navigator.of(context).pushNamed(
-                        //     Routes.bookingDetail,
-                        //     arguments: {
-                        //       'selectedDate': selectedDate,
-                        //       'selectedHour': courseHours[index],
-                        //       'weekday': selectedDate.weekday
-                        //     },
-                        //   );
-                        // }
-                      },
-                      child: Text(
-                        courseHours[index],
-                        style:
-                            const TextStyle(fontSize: 16, color: Colors.white),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      );
-    },
-  );
-}
+// Future<void> _bookLearningHour(
+//     BuildContext context, DateTime selectedDate) async {
+//   await showModalBottomSheet(
+//     context: context,
+//     isScrollControlled: true,
+//     elevation: 5,
+//     clipBehavior: Clip.hardEdge,
+//     shape: const RoundedRectangleBorder(
+//       borderRadius: BorderRadius.vertical(
+//         top: Radius.circular(16),
+//       ),
+//     ),
+//     builder: (context) {
+//       return SafeArea(
+//         child: SizedBox(
+//           height: MediaQuery.of(context).size.height * 0.75,
+//           child: Column(
+//             children: [
+//               Padding(
+//                 padding: const EdgeInsets.only(top: 32, bottom: 8),
+//                 child: Text(
+//                   'Choose Your Time',
+//                   style: Theme.of(context)
+//                       .textTheme
+//                       .titleLarge!
+//                       .copyWith(fontWeight: FontWeight.bold),
+//                 ),
+//               ),
+//               Expanded(
+//                 child: GridView.count(
+//                   padding: const EdgeInsets.all(24),
+//                   crossAxisCount: 2,
+//                   mainAxisSpacing: 24,
+//                   crossAxisSpacing: 32,
+//                   childAspectRatio: 3,
+//                   children: List<Widget>.generate(
+//                     courseHours.length,
+//                     (index) => ElevatedButton(
+//                       style: ElevatedButton.styleFrom(
+//                         backgroundColor: Colors.blue,
+//                       ),
+//                       onPressed: () async {
+//                         // final dialogResult = await _showBookingConfirmDialog(context);
+//                         // if (dialogResult) {
+//                         //   Navigator.of(context).pushNamed(
+//                         //     Routes.bookingDetail,
+//                         //     arguments: {
+//                         //       'selectedDate': selectedDate,
+//                         //       'selectedHour': courseHours[index],
+//                         //       'weekday': selectedDate.weekday
+//                         //     },
+//                         //   );
+//                         // }
+//                       },
+//                       child: Text(
+//                         courseHours[index],
+//                         style:
+//                             const TextStyle(fontSize: 16, color: Colors.white),
+//                       ),
+//                     ),
+//                   ),
+//                 ),
+//               ),
+//             ],
+//           ),
+//         ),
+//       );
+//     },
+//   );
+// }
 
-Future<bool> _showBookingConfirmDialog(
-    BuildContext context, Schedule schedule) {
-  return showDialog<bool>(
-    context: context,
-    builder: (context) {
-      return AlertDialog(
-        title: const Text('Book This Tutor'),
-        content: Column(
-          children: [
-            const Text('Booking time'),
-            Text(DateFormat.yMMMMEEEEd().format(
-                DateTime.fromMillisecondsSinceEpoch(schedule.startTimestamp!))),
-          ],
-        ),
-        actions: [
-          TextButton(
-              onPressed: () {
-                Navigator.pop(context, false);
-              },
-              child: const Text('CANCEL')),
-          TextButton(
-              onPressed: () {
-                Navigator.pop(context, true);
-              },
-              child: const Text('YES')),
-        ],
-      );
-    },
-  ).then((value) => value ?? false);
-}
+// Future<bool> _showBookingConfirmDialog(
+//     BuildContext context, Schedule schedule) {
+//   return showDialog<bool>(
+//     context: context,
+//     builder: (context) {
+//       return AlertDialog(
+//         title: const Text('Book This Tutor'),
+//         content: Column(
+//           children: [
+//             const Text('Booking time'),
+//             Text(DateFormat.yMMMMEEEEd().format(
+//                 DateTime.fromMillisecondsSinceEpoch(schedule.startTimestamp!))),
+//           ],
+//         ),
+//         actions: [
+//           TextButton(
+//               onPressed: () {
+//                 Navigator.pop(context, false);
+//               },
+//               child: const Text('CANCEL')),
+//           TextButton(
+//               onPressed: () {
+//                 Navigator.pop(context, true);
+//               },
+//               child: const Text('YES')),
+//         ],
+//       );
+//     },
+//   ).then((value) => value ?? false);
+// }
