@@ -74,19 +74,19 @@ class _RegisterViewState extends State<RegisterView> {
 
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(backgroundColor: Colors.blue[400]),
+      //appBar: AppBar(backgroundColor: Colors.blue[400]),
       body: ListView(
         children: <Widget>[
           const SizedBox(height: 20.0),
           Image.asset(
             "assets/logo/lettutor.png",
-            height: 150,
+            height: 100,
             width: double.infinity,
           ),
-          const Text(
+          Text(
             "Register Account",
             textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 30),
+            style: Theme.of(context).textTheme.displayMedium,
           ),
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
@@ -170,7 +170,19 @@ class _RegisterViewState extends State<RegisterView> {
                 style: TextStyle(fontSize: 20, color: Colors.white),
               ),
             ),
-          )
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+            child: TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: Text(
+                lang.backToLogin,
+                style: const TextStyle(fontSize: 16),
+              ),
+            ),
+          ),
         ],
       ),
     );
