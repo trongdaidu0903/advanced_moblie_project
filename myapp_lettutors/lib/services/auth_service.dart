@@ -111,6 +111,15 @@ class AuthService {
       },
     );
 
+    // String refreshToken = " ";
+    // final tokenResponse = await post(
+    //   Uri.parse("$baseUrl/auth/refresh-token"),
+    //   body: {
+    //     'refreshToken': refreshToken,
+    //     'timezone': "7",
+    //   },
+    // );
+
     final jsonDecode = json.decode(response.body);
     if (response.statusCode != 201) {
       throw Exception(jsonDecode['message']);
