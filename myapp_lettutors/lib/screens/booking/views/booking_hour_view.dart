@@ -15,7 +15,6 @@ class BookingHourView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(schedules.length);
     final pickedDate = DateTime.fromMillisecondsSinceEpoch(timestamp);
 
     final validSchedules = schedules.where((schedule) {
@@ -99,51 +98,51 @@ class BookingHourView extends StatelessWidget {
   }
 }
 
-Future<bool> _showBookingConfirmDialog(
-    BuildContext context, Schedule schedule) {
-  final start = schedule.startTime;
-  final end = schedule.endTime;
-  final date = DateFormat.yMMMMEEEEd()
-      .format(DateTime.fromMillisecondsSinceEpoch(schedule.startTimestamp!));
+// Future<bool> _showBookingConfirmDialog(
+//     BuildContext context, Schedule schedule) {
+//   final start = schedule.startTime;
+//   final end = schedule.endTime;
+//   final date = DateFormat.yMMMMEEEEd()
+//       .format(DateTime.fromMillisecondsSinceEpoch(schedule.startTimestamp!));
 
-  return showDialog<bool>(
-    context: context,
-    builder: (context) {
-      return AlertDialog(
-        title: const Text('Book This Tutor'),
-        content: Column(
-          children: [
-            const Text('Booking time'),
-            Text('$start - $end, $date'),
-            TextField(
-              minLines: 4,
-              maxLines: 5,
-              onChanged: (value) {},
-              decoration: const InputDecoration(
-                hintText: 'Please let us know details about your problems',
-                hintStyle:
-                    TextStyle(fontWeight: FontWeight.w300, color: Colors.grey),
-                contentPadding: EdgeInsets.all(12),
-                border: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.grey),
-                    borderRadius: BorderRadius.all(Radius.circular(16))),
-              ),
-            ),
-          ],
-        ),
-        actions: [
-          TextButton(
-              onPressed: () {
-                Navigator.pop(context, false);
-              },
-              child: const Text('CANCEL')),
-          TextButton(
-              onPressed: () {
-                Navigator.pop(context, true);
-              },
-              child: const Text('YES')),
-        ],
-      );
-    },
-  ).then((value) => value ?? false);
-}
+//   return showDialog<bool>(
+//     context: context,
+//     builder: (context) {
+//       return AlertDialog(
+//         title: const Text('Book This Tutor'),
+//         content: Column(
+//           children: [
+//             const Text('Booking time'),
+//             Text('$start - $end, $date'),
+//             TextField(
+//               minLines: 4,
+//               maxLines: 5,
+//               onChanged: (value) {},
+//               decoration: const InputDecoration(
+//                 hintText: 'Please let us know details about your problems',
+//                 hintStyle:
+//                     TextStyle(fontWeight: FontWeight.w300, color: Colors.grey),
+//                 contentPadding: EdgeInsets.all(12),
+//                 border: OutlineInputBorder(
+//                     borderSide: BorderSide(color: Colors.grey),
+//                     borderRadius: BorderRadius.all(Radius.circular(16))),
+//               ),
+//             ),
+//           ],
+//         ),
+//         actions: [
+//           TextButton(
+//               onPressed: () {
+//                 Navigator.pop(context, false);
+//               },
+//               child: const Text('CANCEL')),
+//           TextButton(
+//               onPressed: () {
+//                 Navigator.pop(context, true);
+//               },
+//               child: const Text('YES')),
+//         ],
+//       );
+//     },
+//   ).then((value) => value ?? false);
+// }

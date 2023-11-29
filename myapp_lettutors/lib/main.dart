@@ -5,6 +5,7 @@ import 'package:myapp_lettutors/constants/routes.dart';
 import 'package:myapp_lettutors/providers/app_provider.dart';
 import 'package:myapp_lettutors/providers/auth_provider.dart';
 import 'package:myapp_lettutors/screens/authentication/login_screen.dart';
+import 'package:myapp_lettutors/screens/authentication/register_screen.dart';
 import 'package:myapp_lettutors/screens/courses/courses/views/course_detail_view.dart';
 import 'package:myapp_lettutors/screens/navigation/navigation_page.dart';
 import 'package:myapp_lettutors/screens/tutor/search_tutor/views/tutor_search_result.dart';
@@ -77,6 +78,7 @@ class LetTutor extends StatelessWidget {
           home: const LoginView(),
           routes: {
             Routes.login: (context) => const LoginView(),
+            Routes.register: (context) => const RegisterView(),
             Routes.main: (context) => const NavigationPage(),
             Routes.userProfile: (context) => const UserProfileView(),
             Routes.courseDetail: (context) => const CourseDetailView(),

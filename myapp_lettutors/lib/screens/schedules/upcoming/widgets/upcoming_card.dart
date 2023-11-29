@@ -30,7 +30,6 @@ class UpcomingClassCard extends StatelessWidget {
 
       await JitsiMeetWrapper.joinMeeting(options: options);
     } catch (e) {
-      print('Error: $e');
       // }
     }
   }
@@ -72,7 +71,7 @@ class UpcomingClassCard extends StatelessWidget {
                     children: [
                       Text(
                         'null name',
-                        style: Theme.of(context).textTheme.headline4,
+                        style: Theme.of(context).textTheme.headlineMedium,
                       ),
                       const SizedBox(height: 8),
                       Text(
@@ -92,7 +91,7 @@ class UpcomingClassCard extends StatelessWidget {
                 ),
                 IconButton(
                   onPressed: () async {
-                    final dialogResult = await showEditRequestDialog(context);
+                    await showEditRequestDialog(context);
                   },
                   icon: Icon(
                     Icons.edit_note_outlined,
@@ -111,7 +110,7 @@ class UpcomingClassCard extends StatelessWidget {
                   child: TextButton(
                     style: TextButton.styleFrom(foregroundColor: Colors.red),
                     onPressed: () async {
-                      final dialogResult = await showDialog(
+                      await showDialog(
                         context: context,
                         builder: (context) => AlertDialog(
                           title: const Text('Cancel class'),

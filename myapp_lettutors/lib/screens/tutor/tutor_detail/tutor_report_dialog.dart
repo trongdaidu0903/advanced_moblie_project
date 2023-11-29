@@ -33,7 +33,7 @@ class _TutorReportDialogState extends State<TutorReportDialog> {
         children: [
           Text(
             "Help us understand what's happening",
-            style: Theme.of(context).textTheme.headline4,
+            style: Theme.of(context).textTheme.headlineMedium,
           ),
           ...List<Widget>.generate(_choices.length, (index) {
             return Row(
