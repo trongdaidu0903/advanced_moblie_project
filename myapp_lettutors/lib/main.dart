@@ -4,12 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:myapp_lettutors/constants/routes.dart';
 import 'package:myapp_lettutors/providers/app_provider.dart';
 import 'package:myapp_lettutors/providers/auth_provider.dart';
+import 'package:myapp_lettutors/screens/authentication/forgot_password_view.dart';
 import 'package:myapp_lettutors/screens/authentication/login_screen.dart';
 import 'package:myapp_lettutors/screens/authentication/register_screen.dart';
 import 'package:myapp_lettutors/screens/courses/courses/views/course_detail_view.dart';
 import 'package:myapp_lettutors/screens/navigation/navigation_page.dart';
 import 'package:myapp_lettutors/screens/tutor/search_tutor/views/tutor_search_result.dart';
 import 'package:myapp_lettutors/screens/tutor/tutor_detail/tutor_detail_view.dart';
+import 'package:myapp_lettutors/screens/user_profile/become_teacher_view.dart';
 import 'package:myapp_lettutors/screens/user_profile/user_profile_view.dart';
 import 'package:provider/provider.dart';
 
@@ -78,9 +80,11 @@ class LetTutor extends StatelessWidget {
           home: const LoginView(),
           routes: {
             Routes.login: (context) => const LoginView(),
+            Routes.forgotPassword: (context) => const ForgotPasswordView(),
             Routes.register: (context) => const RegisterView(),
             Routes.main: (context) => const NavigationPage(),
             Routes.userProfile: (context) => const UserProfileView(),
+            Routes.becomeTutor: (context) => const BecomeTeacherView(),
             Routes.courseDetail: (context) => const CourseDetailView(),
             Routes.teacherDetail: (context) => const TutorDetailView(),
             Routes.tutorSearchResult: (context) => const TutorSearchResult(),
