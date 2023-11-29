@@ -308,7 +308,7 @@ class _LoginViewState extends State<LoginView> {
                             ),
                             Text(
                               ' LetTutor ',
-                              style: Theme.of(context).textTheme.headlineLarge,
+                              style: Theme.of(context).textTheme.displayLarge,
                             ),
                           ],
                         ),

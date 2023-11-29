@@ -11,6 +11,8 @@ import 'package:myapp_lettutors/screens/courses/courses/views/course_detail_view
 import 'package:myapp_lettutors/screens/navigation/navigation_page.dart';
 import 'package:myapp_lettutors/screens/tutor/search_tutor/views/tutor_search_result.dart';
 import 'package:myapp_lettutors/screens/tutor/tutor_detail/tutor_detail_view.dart';
+import 'package:myapp_lettutors/screens/tutor/tutor_feedback/tutor_feedback_view.dart';
+import 'package:myapp_lettutors/screens/tutor/tutor_feedback/write_review_view.dart';
 import 'package:myapp_lettutors/screens/user_profile/become_teacher_view.dart';
 import 'package:myapp_lettutors/screens/user_profile/user_profile_view.dart';
 import 'package:provider/provider.dart';
@@ -87,6 +89,8 @@ class LetTutor extends StatelessWidget {
             Routes.becomeTutor: (context) => const BecomeTeacherView(),
             Routes.courseDetail: (context) => const CourseDetailView(),
             Routes.teacherDetail: (context) => const TutorDetailView(),
+            Routes.review: (context) => const TutorFeedbackView(),
+            Routes.writeReview: (context) => const WriteReviewView(),
             Routes.tutorSearchResult: (context) => const TutorSearchResult(),
           }),
     );
