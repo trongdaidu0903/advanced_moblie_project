@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:myapp_lettutors/models/languages/language.dart';
+import 'package:myapp_lettutors/providers/app_provider.dart';
+import 'package:myapp_lettutors/services/auth_service.dart';
+import 'package:provider/provider.dart';
 
 class RegisterView extends StatefulWidget {
   const RegisterView({Key? key}) : super(key: key);
@@ -8,38 +12,81 @@ class RegisterView extends StatefulWidget {
 }
 
 class _RegisterViewState extends State<RegisterView> {
-  final String _emailErrorText = '';
-  final String _passwordErrorText = '';
-  late TextEditingController _emailController;
+  final _emailController = TextEditingController(text: "phhai.fit@gmail.com");
+  final _passwordController = TextEditingController(text: "123456");
+  final _confirmPasswordController = TextEditingController();
 
-  late TextEditingController _passwordController;
+  String _emailErrorText = '';
+  String _passwordErrorText = '';
+  String chosenLanguage = 'English';
 
-  final _passwordFocusNode = FocusNode();
+  void _handleValidation(Language language) {
+    final emailRegExp = RegExp(
+        r'^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$');
+    if (_emailController.text.isEmpty) {
+      _emailErrorText = language.emptyEmail;
+    } else if (!emailRegExp.hasMatch(_emailController.text)) {
+      _emailErrorText = language.invalidEmail;
+    } else {
+      _emailErrorText = '';
+    }
 
-  @override
-  void initState() {
-    super.initState();
-    _emailController = TextEditingController(text: '');
-    _passwordController = TextEditingController(text: '');
+    if (_passwordController.text.isEmpty) {
+      _passwordErrorText = language.emptyPassword;
+    } else if (_passwordController.text.length < 6) {
+      _passwordErrorText = language.passwordTooShort;
+    } else {
+      _passwordErrorText = '';
+    }
+
+    if (_confirmPasswordController.text.isEmpty) {
+    } else if (_confirmPasswordController.text.length < 6) {
+    } else if (_confirmPasswordController.text != _passwordController.text) {
+    } else {}
+    setState(() {});
+  }
+
+  void _handleRegister(Language language) async {
+    try {
+      await AuthService.registerWithEmailAndPassword(
+        email: _emailController.text,
+        password: _passwordController.text,
+      );
+
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(language.registerSuccess)),
+        );
+        Navigator.pop(context);
+      }
+    } catch (e) {
+      // ignore: use_build_context_synchronously
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error Register: ${e.toString()}')),
+      );
+    }
   }
 
   @override
   Widget build(BuildContext context) {
+    final appProvider = context.watch<AppProvider>();
+    final lang = appProvider.language;
+
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(backgroundColor: Colors.blue[400]),
+      //appBar: AppBar(backgroundColor: Colors.blue[400]),
       body: ListView(
         children: <Widget>[
           const SizedBox(height: 20.0),
           Image.asset(
             "assets/logo/lettutor.png",
-            height: 250,
+            height: 100,
             width: double.infinity,
           ),
-          const Text(
-            "Register Let Tutor",
+          Text(
+            "Register Account",
             textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 30),
+            style: Theme.of(context).textTheme.displayMedium,
           ),
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
@@ -56,7 +103,7 @@ class _RegisterViewState extends State<RegisterView> {
               keyboardType: TextInputType.emailAddress,
               autocorrect: false,
               onChanged: (value) {
-                //_handleValidation(lang);
+                _handleValidation(lang);
               },
               decoration: InputDecoration(
                 hintStyle: TextStyle(color: Colors.grey[400]),
@@ -88,7 +135,7 @@ class _RegisterViewState extends State<RegisterView> {
               obscureText: true,
               autocorrect: false,
               onChanged: (value) {
-                //_handleValidation(lang);
+                _handleValidation(lang);
               },
               decoration: InputDecoration(
                 hintStyle: TextStyle(color: Colors.grey[400]),
@@ -109,8 +156,33 @@ class _RegisterViewState extends State<RegisterView> {
           ),
           const SizedBox(height: 10.0),
           Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 15, vertical: 10)),
+            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+            child: TextButton(
+              onPressed: () {
+                _handleRegister(lang);
+              },
+              style: TextButton.styleFrom(
+                minimumSize: const Size.fromHeight(56),
+                backgroundColor: Colors.blue,
+              ),
+              child: const Text(
+                "Sign Up",
+                style: TextStyle(fontSize: 20, color: Colors.white),
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+            child: TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: Text(
+                lang.backToLogin,
+                style: const TextStyle(fontSize: 16),
+              ),
+            ),
+          ),
         ],
       ),
     );

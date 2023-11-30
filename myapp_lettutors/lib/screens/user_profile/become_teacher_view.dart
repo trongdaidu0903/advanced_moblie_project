@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class BecomeTutorView extends StatefulWidget {
-  const BecomeTutorView({Key? key}) : super(key: key);
+class BecomeTeacherView extends StatefulWidget {
+  const BecomeTeacherView({Key? key}) : super(key: key);
 
   @override
-  State<BecomeTutorView> createState() => _BecomeTutorViewState();
+  State<BecomeTeacherView> createState() => _BecomeTeacherViewState();
 }
 
-class _BecomeTutorViewState extends State<BecomeTutorView> {
+class _BecomeTeacherViewState extends State<BecomeTeacherView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

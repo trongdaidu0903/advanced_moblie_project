@@ -100,7 +100,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     Icon(Icons.assignment, size: 30),
                     SizedBox(width: 12),
                     Text(
-                      'Become A Tutor',
+                      'Become a Teacher',
                       style: TextStyle(fontSize: 16),
                     )
                   ],

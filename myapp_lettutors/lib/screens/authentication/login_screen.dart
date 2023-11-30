@@ -308,7 +308,7 @@ class _LoginViewState extends State<LoginView> {
                             ),
                             Text(
                               ' LetTutor ',
-                              style: Theme.of(context).textTheme.headlineLarge,
+                              style: Theme.of(context).textTheme.displayLarge,
                             ),
                           ],
                         ),
@@ -399,7 +399,7 @@ class _LoginViewState extends State<LoginView> {
                       const SizedBox(height: 16),
                       TextButton(
                         onPressed: () {
-                          // Navigator.pushNamed(context, Routes.forgotPassword);
+                          Navigator.pushNamed(context, Routes.forgotPassword);
                         },
                         child: Text(
                           lang.forgotPassword,

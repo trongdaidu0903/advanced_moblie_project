@@ -58,9 +58,9 @@ class UpcomingClassCard extends StatelessWidget {
                         'https://sm.ign.com/ign_nordic/cover/a/avatar-gen/avatar-generations_prsz.jpg',
                     fit: BoxFit.cover,
                     errorWidget: (context, url, error) => const Icon(
-                      Icons.error_outline_rounded,
+                      Icons.access_alarms_sharp,
                       size: 32,
-                      color: Colors.redAccent,
+                      color: Colors.blueAccent,
                     ),
                   ),
                 ),
@@ -70,7 +70,7 @@ class UpcomingClassCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'null name',
+                        'Upcoming Tutor Name',
                         style: Theme.of(context).textTheme.headlineMedium,
                       ),
                       const SizedBox(height: 8),

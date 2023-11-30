@@ -107,8 +107,10 @@ class _CoursesViewState extends State<CoursesView> {
                                   child: DropdownButtonFormField<int>(
                                     value: _perPage,
                                     items: itemsPerPage
-                                        .map((itemPerPage) => DropdownMenuItem<int>(
-                                        value: itemPerPage, child: Text('$itemPerPage')))
+                                        .map((itemPerPage) =>
+                                            DropdownMenuItem<int>(
+                                                value: itemPerPage,
+                                                child: Text('$itemPerPage')))
                                         .toList(),
                                     onChanged: (value) {
                                       setState(() {
@@ -122,16 +124,22 @@ class _CoursesViewState extends State<CoursesView> {
                                       color: Colors.blue,
                                     ),
                                     decoration: InputDecoration(
-                                      contentPadding: const EdgeInsets.symmetric(vertical: 4, horizontal: 16),
+                                      contentPadding:
+                                          const EdgeInsets.symmetric(
+                                              vertical: 4, horizontal: 16),
                                       filled: true,
                                       fillColor: Colors.blue[50],
                                       enabledBorder: const OutlineInputBorder(
-                                        borderSide: BorderSide(color: Colors.transparent),
-                                        borderRadius: BorderRadius.all(Radius.circular(24)),
+                                        borderSide: BorderSide(
+                                            color: Colors.transparent),
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(24)),
                                       ),
                                       focusedBorder: const OutlineInputBorder(
-                                        borderSide: BorderSide(color: Colors.transparent),
-                                        borderRadius: BorderRadius.all(Radius.circular(24)),
+                                        borderSide: BorderSide(
+                                            color: Colors.transparent),
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(24)),
                                       ),
                                     ),
                                   ),
@@ -150,16 +158,18 @@ class _CoursesViewState extends State<CoursesView> {
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(10),
                                     ),
-                                    backgroundColor: _page == 1 ? Colors.grey : Colors.blue[300],
+                                    backgroundColor: _page == 1
+                                        ? Colors.grey
+                                        : Colors.blue[300],
                                   ),
                                   onPressed: _page == 1
                                       ? null
                                       : () {
-                                    setState(() {
-                                      _isLoading = true;
-                                      _page--;
-                                    });
-                                  },
+                                          setState(() {
+                                            _isLoading = true;
+                                            _page--;
+                                          });
+                                        },
                                   icon: const Icon(
                                     Icons.navigate_before_rounded,
                                     size: 28,
@@ -177,16 +187,18 @@ class _CoursesViewState extends State<CoursesView> {
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(10),
                                     ),
-                                    backgroundColor: _page == _count ? Colors.grey : Colors.blue[300],
+                                    backgroundColor: _page == _count
+                                        ? Colors.grey
+                                        : Colors.blue[300],
                                   ),
                                   onPressed: _page == (_count / _perPage).ceil()
                                       ? null
                                       : () {
-                                    setState(() {
-                                      _isLoading = true;
-                                      _page++;
-                                    });
-                                  },
+                                          setState(() {
+                                            _isLoading = true;
+                                            _page++;
+                                          });
+                                        },
                                   icon: const Icon(
                                     Icons.navigate_next_rounded,
                                     size: 28,
