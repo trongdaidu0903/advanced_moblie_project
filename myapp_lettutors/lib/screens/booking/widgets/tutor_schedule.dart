@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:myapp_lettutors/constants/routes.dart';
 import 'package:myapp_lettutors/dummy/dummy_data.dart';
 import 'package:myapp_lettutors/screens/booking/views/booking_hour_view.dart';
 import 'package:myapp_lettutors/models/schedule/schedule.dart';
@@ -114,7 +113,7 @@ class _TutorScheduleState extends State<TutorSchedule> {
                     padding: const EdgeInsets.only(top: 16, bottom: 0),
                     child: Text(
                       'Choose Learning Date',
-                      style: Theme.of(context).textTheme.headline3,
+                      style: Theme.of(context).textTheme.bodyLarge,
                     ),
                   ),
                   Expanded(
@@ -190,7 +189,7 @@ Future<void> _bookLearningHour(
                 padding: const EdgeInsets.only(top: 32, bottom: 8),
                 child: Text(
                   'Choose Your Time',
-                  style: Theme.of(context).textTheme.headline3,
+                  style: Theme.of(context).textTheme.bodyLarge,
                 ),
               ),
               Expanded(
