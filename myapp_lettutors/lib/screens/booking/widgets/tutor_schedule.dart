@@ -32,7 +32,7 @@ class _TutorScheduleState extends State<TutorSchedule> {
     result = result.where((schedule) {
       if (schedule.startTimestamp == null) return false;
 
-      final now = DateTime.now();
+      //final now = DateTime.now();
       final start =
           DateTime.fromMillisecondsSinceEpoch(schedule.startTimestamp!);
 
@@ -52,7 +52,7 @@ class _TutorScheduleState extends State<TutorSchedule> {
         schedules.map((schedule) => schedule.startTimestamp ?? 0).toList();
 
     for (var timestamp in timestamps) {
-      bool isExisted = false;
+      //bool isExisted = false;
       if (!scheduleStartTimestamps.any((element) {
         final date1 = DateTime.fromMillisecondsSinceEpoch(timestamp);
         final date2 = DateTime.fromMillisecondsSinceEpoch(element);

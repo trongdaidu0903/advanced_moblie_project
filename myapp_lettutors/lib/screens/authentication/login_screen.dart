@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -30,7 +32,10 @@ class _LoginViewState extends State<LoginView> {
   String _passwordErrorText = '';
   bool _isValidToLogin = false;
 
-  final _googleSignIn = GoogleSignIn();
+  final _googleSignIn = GoogleSignIn(
+    clientId:
+        "115846485776-8m4bi84vvk9loc68asdqjo3hr3g36c7a.apps.googleusercontent.com",
+  );
 
   void _handleValidation(Language language) {
     final emailRegExp = RegExp(
@@ -135,6 +140,37 @@ class _LoginViewState extends State<LoginView> {
   }
 
   void _handleGoogleLogin(AuthProvider authProvider) async {
+    GoogleSignIn _googleSignIn = GoogleSignIn(
+      scopes: ['email'],
+    );
+
+    try {
+      await _googleSignIn.signIn();
+      // Đăng nhập thành công, thực hiện các hành động sau đây
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setString(
+        'refresh_token',
+        authProvider.token!.refresh!.token!,
+      );
+
+      setState(() {
+        _isAuthenticating = false;
+        _isAuthenticated = true;
+      });
+
+      Future.delayed(const Duration(seconds: 1), () {
+        Navigator.pushNamedAndRemoveUntil(
+          context,
+          Routes.main,
+          (route) => false,
+        );
+      });
+    } catch (error) {
+      // Xử lý lỗi khi đăng nhập
+      debugPrint('Sign in errors: $error');
+    }
+    return;
+
     try {
       final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
       final GoogleSignInAuthentication? googleAuth =
@@ -183,6 +219,7 @@ class _LoginViewState extends State<LoginView> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Error Login with Google: ${e.toString()}')),
       );
+      debugPrint(e.toString());
     }
   }
 
