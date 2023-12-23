@@ -140,37 +140,6 @@ class _LoginViewState extends State<LoginView> {
   }
 
   void _handleGoogleLogin(AuthProvider authProvider) async {
-    GoogleSignIn _googleSignIn = GoogleSignIn(
-      scopes: ['email'],
-    );
-
-    try {
-      await _googleSignIn.signIn();
-      // Đăng nhập thành công, thực hiện các hành động sau đây
-      final prefs = await SharedPreferences.getInstance();
-      await prefs.setString(
-        'refresh_token',
-        authProvider.token!.refresh!.token!,
-      );
-
-      setState(() {
-        _isAuthenticating = false;
-        _isAuthenticated = true;
-      });
-
-      Future.delayed(const Duration(seconds: 1), () {
-        Navigator.pushNamedAndRemoveUntil(
-          context,
-          Routes.main,
-          (route) => false,
-        );
-      });
-    } catch (error) {
-      // Xử lý lỗi khi đăng nhập
-      debugPrint('Sign in errors: $error');
-    }
-    return;
-
     try {
       final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
       final GoogleSignInAuthentication? googleAuth =

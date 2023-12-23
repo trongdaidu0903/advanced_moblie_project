@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:myapp_lettutors/dummy/dummy_data.dart';
 
 import 'package:myapp_lettutors/models/tutor/tutor.dart';
 import 'package:myapp_lettutors/models/tutor/tutor_info.dart';
+import 'package:myapp_lettutors/models/user/learn_topic.dart';
 import 'package:myapp_lettutors/providers/auth_provider.dart';
+import 'package:myapp_lettutors/screens/homepage/widgets/homepage_header.dart';
 import 'package:myapp_lettutors/screens/homepage/widgets/tutor_card.dart';
 import 'package:myapp_lettutors/services/tutor_service.dart';
 import 'package:myapp_lettutors/services/user_service.dart';
@@ -32,7 +35,7 @@ class _HomePageState extends State<HomePage> {
 
       _tutors = await TutorService.getListTutorWithPagination(
         page: 1,
-        perPage: 9,
+        perPage: 10,
         token: token,
       );
 
@@ -60,6 +63,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     _fetchRecommendedTutors(_auth);
+    ThemeData.dark();
     super.initState();
   }
 
@@ -69,7 +73,7 @@ class _HomePageState extends State<HomePage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          //const HomepageHeader(),
+          const HomepageHeader(),
           Padding(
             padding: const EdgeInsets.all(12),
             child: Text(

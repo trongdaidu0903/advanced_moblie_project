@@ -95,15 +95,22 @@ class _TutorCardState extends State<TutorCard> {
                     decoration: const BoxDecoration(
                       shape: BoxShape.circle,
                     ),
-                    child: CachedNetworkImage(
-                      imageUrl: widget.tutor.avatar ?? '',
-                      fit: BoxFit.cover,
-                      errorWidget: (context, error, stackTrace) => const Icon(
-                        Icons.account_circle_rounded,
-                        color: Colors.grey,
-                        size: 75,
-                      ),
-                    ),
+                    child: widget.tutor.avatar == null
+                        ? const Icon(
+                            Icons.account_circle_rounded,
+                            color: Colors.grey,
+                            size: 75,
+                          )
+                        : Image.network(
+                            widget.tutor.avatar ?? '',
+                            fit: BoxFit.cover,
+                            errorBuilder: (context, error, stackTrace) =>
+                                const Icon(
+                              Icons.account_circle_rounded,
+                              color: Colors.grey,
+                              size: 75,
+                            ),
+                          ),
                   ),
                 ),
                 Expanded(

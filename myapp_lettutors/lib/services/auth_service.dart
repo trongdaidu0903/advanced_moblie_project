@@ -121,6 +121,7 @@ class AuthService {
     // );
 
     final jsonDecode = json.decode(response.body);
+    
     if (response.statusCode != 201) {
       throw Exception(jsonDecode['message']);
     }

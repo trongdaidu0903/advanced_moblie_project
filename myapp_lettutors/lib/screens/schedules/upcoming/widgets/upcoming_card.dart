@@ -16,7 +16,7 @@ class UpcomingClassCard extends StatelessWidget {
     Map<String, Object> featureFlags = {};
     try {
       var options = JitsiMeetingOptions(
-        roomNameOrUrl: "learningRoom",
+        roomNameOrUrl: "Learning Room",
         serverUrl: "https://meet.lettutor.com",
         isAudioMuted: false,
         isAudioOnly: false,
@@ -27,7 +27,6 @@ class UpcomingClassCard extends StatelessWidget {
             'https://sm.ign.com/ign_nordic/cover/a/avatar-gen/avatar-generations_prsz.jpg',
         featureFlags: featureFlags,
       );
-
       await JitsiMeetWrapper.joinMeeting(options: options);
     } catch (e) {
       // }
@@ -70,7 +69,9 @@ class UpcomingClassCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Upcoming Tutor Name',
+                        bookingInfo.scheduleDetailInfo!.scheduleInfo!.tutorInfo!
+                                .name ??
+                            "null name",
                         style: Theme.of(context).textTheme.headlineMedium,
                       ),
                       const SizedBox(height: 8),
@@ -82,10 +83,10 @@ class UpcomingClassCard extends StatelessWidget {
                         style: const TextStyle(
                             fontSize: 15, fontWeight: FontWeight.bold),
                       ),
-                      Text(
-                        DateFormat().add_yMEd().format(DateTime.now()),
-                        style: const TextStyle(fontSize: 15),
-                      ),
+                      // Text(
+                      //   DateFormat().add_yMEd().format(DateTime.now()),
+                      //   style: const TextStyle(fontSize: 15),
+                      // ),
                     ],
                   ),
                 ),

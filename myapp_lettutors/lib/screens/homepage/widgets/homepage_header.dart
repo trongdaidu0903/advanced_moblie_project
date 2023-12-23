@@ -24,10 +24,13 @@ class _HomepageHeaderState extends State<HomepageHeader> {
     try {
       final total = await UserService.getTotalLessonTime(token);
       final upcoming = await UserService.getUpcomingLesson(token);
-      if (mounted) {}
-      totalLessonTime = Duration(minutes: total);
-      upcomingClass = upcoming;
-      _isLoading = false;
+      if (mounted) {
+        setState(() {
+          totalLessonTime = Duration(minutes: total);
+          upcomingClass = upcoming;
+          _isLoading = false;
+        });
+      }
     } catch (e) {
       log("👌[Error] ${e.toString()}");
     }

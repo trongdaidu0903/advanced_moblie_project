@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart';
+import 'package:myapp_lettutors/dummy/dummy_data.dart';
 import 'package:myapp_lettutors/models/schedule/booking_info.dart';
 import 'package:myapp_lettutors/models/user/learn_topic.dart';
 import 'package:myapp_lettutors/models/user/test_preparation.dart';
@@ -167,6 +168,8 @@ class UserService {
     }
     return jsonDecode.map((e) => TestPreparation.fromJson(e)).toList();
   }
+
+  static Future<void> updateAvatar(String token) async {}
 
   static Future<User?> getUserInfo(String token) async {
     final response = await get(
