@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:jitsi_meet_wrapper/jitsi_meet_wrapper.dart';
+import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:myapp_lettutors/models/schedule/booking_info.dart';
 
 class UpcomingClassCard extends StatelessWidget {
@@ -14,17 +15,22 @@ class UpcomingClassCard extends StatelessWidget {
 
   void _joinMeeting() async {
     Map<String, Object> featureFlags = {};
+    final String meetingToken =
+        bookingInfo?.studentMeetingLink?.split('token=')[1] ?? '';
+    Map<String, dynamic> jwtDecoded = JwtDecoder.decode(meetingToken);
+    final String roomUrl = jwtDecoded['room'];
     try {
       var options = JitsiMeetingOptions(
-        roomNameOrUrl: "Learning Room",
+        roomNameOrUrl: roomUrl,
         serverUrl: "https://meet.lettutor.com",
-        isAudioMuted: false,
-        isAudioOnly: false,
-        isVideoMuted: false,
-        userDisplayName: "Test name",
-        userEmail: "trongdaidu@gmail.com",
+        subject:
+            "Meeting with ${bookingInfo.scheduleDetailInfo?.scheduleInfo?.tutorInfo?.name}",
+        userDisplayName: "Enter Display Name",
         userAvatarUrl:
             'https://sm.ign.com/ign_nordic/cover/a/avatar-gen/avatar-generations_prsz.jpg',
+        isAudioOnly: false,
+        isAudioMuted: false,
+        isVideoMuted: false,
         featureFlags: featureFlags,
       );
       await JitsiMeetWrapper.joinMeeting(options: options);
