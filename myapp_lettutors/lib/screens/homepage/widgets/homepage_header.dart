@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:jitsi_meet_wrapper/jitsi_meet_wrapper.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:myapp_lettutors/models/schedule/booking_info.dart';
 import 'package:myapp_lettutors/providers/auth_provider.dart';
@@ -85,7 +86,25 @@ class _HomepageHeaderState extends State<HomepageHeader> {
 
     Map<String, dynamic> jwtDecoded = JwtDecoder.decode(meetingToken);
     final String room = jwtDecoded['room'];
-    log(room);
+    Map<String, Object> featureFlags = {};
+    try {
+      var options = JitsiMeetingOptions(
+        roomNameOrUrl: room,
+        serverUrl: "https://meet.lettutor.com",
+        subject:
+            "Meeting with ${upcomingClass?.scheduleDetailInfo?.scheduleInfo?.tutorInfo?.name}",
+        userDisplayName: "Enter Display Name",
+        userAvatarUrl:
+            'https://sm.ign.com/ign_nordic/cover/a/avatar-gen/avatar-generations_prsz.jpg',
+        isAudioOnly: false,
+        isAudioMuted: false,
+        isVideoMuted: false,
+        featureFlags: featureFlags,
+      );
+      await JitsiMeetWrapper.joinMeeting(options: options);
+    } catch (e) {
+      // }
+    }
   }
 
   @override
