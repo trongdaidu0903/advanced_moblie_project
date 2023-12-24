@@ -30,7 +30,7 @@ class CourseCard extends StatelessWidget {
         child: Column(
           children: [
             CachedNetworkImage(
-              imageUrl: 'assets/course/course-01.png',
+              imageUrl: course.imageUrl ?? '',
               fit: BoxFit.cover,
               height: 250,
               placeholder: (context, url) => const Icon(
