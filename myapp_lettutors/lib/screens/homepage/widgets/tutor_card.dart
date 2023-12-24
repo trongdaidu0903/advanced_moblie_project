@@ -73,154 +73,146 @@ class _TutorCardState extends State<TutorCard> {
       _fetchTutorInfo(authProvider);
     }
 
-    return Card(
-      surfaceTintColor: Colors.lightBlueAccent,
-      elevation: 3.0,
-      margin: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-      child: Padding(
-        padding: const EdgeInsets.all(12),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                InkWell(
-                  onTap: () {
-                    _handleTutorDetailView();
-                  },
-                  child: Container(
+    return GestureDetector(
+      onTap: () => _handleTutorDetailView(),
+      child: Card(
+        surfaceTintColor: Colors.lightBlueAccent,
+        elevation: 3.0,
+        margin: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+        child: Padding(
+          padding: const EdgeInsets.all(12),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Container(
                     width: 72,
                     height: 72,
                     clipBehavior: Clip.hardEdge,
                     decoration: const BoxDecoration(
                       shape: BoxShape.circle,
                     ),
-                    child: widget.tutor.avatar == null
-                        ? const Icon(
-                            Icons.account_circle_rounded,
-                            color: Colors.grey,
-                            size: 75,
-                          )
-                        : Image.network(
-                            widget.tutor.avatar ?? '',
-                            fit: BoxFit.cover,
-                            errorBuilder: (context, error, stackTrace) =>
-                                const Icon(
-                              Icons.account_circle_rounded,
-                              color: Colors.grey,
-                              size: 75,
-                            ),
-                          ),
-                  ),
-                ),
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        InkWell(
-                          onTap: () {
-                            _handleTutorDetailView();
-                          },
-                          child: Text(widget.tutor.name ?? 'Unknow name',
-                              style: Theme.of(context).textTheme.displaySmall),
-                        ),
-                        Text(
-                            countryList[widget.tutor.country] ??
-                                "Unknow country",
-                            style: const TextStyle(
-                                fontSize: 17, color: Colors.grey)),
-                        widget.tutor.rating == null
-                            ? const Text(
-                                'No reviews yet',
-                                style: TextStyle(
-                                  fontStyle: FontStyle.italic,
-                                  color: Colors.grey,
-                                ),
-                              )
-                            : Row(
-                                children: List<Widget>.generate(
-                                  widget.tutor.rating!.round(),
-                                  (index) => const Icon(Icons.star,
-                                      color: Colors.amber),
-                                ),
-                              )
-                      ],
+                    child: CachedNetworkImage(
+                      imageUrl: widget.tutor.avatar ?? '',
+                      fit: BoxFit.cover,
+                      errorWidget: (context, error, stackTrace) => const Icon(
+                        Icons.account_circle_rounded,
+                        color: Colors.grey,
+                        size: 75,
+                      ),
                     ),
                   ),
-                ),
-                IconButton(
-                  onPressed: () async {
-                    if (authProvider.token != null) {
-                      final String accessToken =
-                          authProvider.token?.access?.token as String;
-                      await TutorService.addTutorToFavorite(
-                        token: accessToken,
-                        userId: widget.tutor.userId ?? '',
-                      );
-                      _fetchTutorInfo(authProvider);
-                    }
-                  },
-                  icon: _tutorInfo?.isFavorite ?? false
-                      ? const Icon(
-                          Icons.favorite_rounded,
-                          color: Colors.red,
-                        )
-                      : const Icon(
-                          Icons.favorite_border_rounded,
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          InkWell(
+                            onTap: () {
+                              _handleTutorDetailView();
+                            },
+                            child: Text(widget.tutor.name ?? 'Unknow name',
+                                style:
+                                    Theme.of(context).textTheme.displaySmall),
+                          ),
+                          Text(
+                              countryList[widget.tutor.country] ??
+                                  "Unknow country",
+                              style: const TextStyle(
+                                  fontSize: 17, color: Colors.grey)),
+                          widget.tutor.rating == null
+                              ? const Text(
+                                  'No reviews yet',
+                                  style: TextStyle(
+                                    fontStyle: FontStyle.italic,
+                                    color: Colors.grey,
+                                  ),
+                                )
+                              : Row(
+                                  children: List<Widget>.generate(
+                                    widget.tutor.rating!.round(),
+                                    (index) => const Icon(Icons.star,
+                                        color: Colors.amber),
+                                  ),
+                                )
+                        ],
+                      ),
+                    ),
+                  ),
+                  IconButton(
+                    onPressed: () async {
+                      if (authProvider.token != null) {
+                        final String accessToken =
+                            authProvider.token?.access?.token as String;
+                        await TutorService.addTutorToFavorite(
+                          token: accessToken,
+                          userId: widget.tutor.userId ?? '',
+                        );
+                        _fetchTutorInfo(authProvider);
+                      }
+                    },
+                    icon: _tutorInfo?.isFavorite ?? false
+                        ? const Icon(
+                            Icons.favorite_rounded,
+                            color: Colors.red,
+                          )
+                        : const Icon(
+                            Icons.favorite_border_rounded,
+                            color: Colors.blue,
+                          ),
+                  )
+                ],
+              ),
+              const SizedBox(height: 8),
+              Wrap(
+                spacing: 5,
+                children: List<Widget>.generate(
+                  _specialties.length,
+                  (index) => Padding(
+                    padding: const EdgeInsets.all(5),
+                    child: Chip(
+                      side: const BorderSide(color: Colors.transparent),
+                      backgroundColor: Colors.white,
+                      label: Text(
+                        _specialties[index],
+                        style: const TextStyle(
+                          fontSize: 14,
                           color: Colors.blue,
                         ),
-                )
-              ],
-            ),
-            const SizedBox(height: 8),
-            Wrap(
-              spacing: 5,
-              children: List<Widget>.generate(
-                _specialties.length,
-                (index) => Padding(
-                  padding: const EdgeInsets.all(5),
-                  child: Chip(
-                    side: const BorderSide(color: Colors.transparent),
-                    backgroundColor: Colors.white,
-                    label: Text(
-                      _specialties[index],
-                      style: const TextStyle(
-                        fontSize: 14,
-                        color: Colors.blue,
                       ),
                     ),
                   ),
                 ),
               ),
-            ),
-            const SizedBox(height: 8),
-            Text(
-              widget.tutor.bio ?? 'null',
-              maxLines: 5,
-              overflow: TextOverflow.ellipsis,
-            ),
-            Align(
-              alignment: Alignment.centerRight,
-              child: OutlinedButton.icon(
-                onPressed: () {
-                  _handleTutorDetailView();
-                },
-                icon: Icon(
-                  Icons.bookmark_add,
-                  color: Colors.cyanAccent[800],
-                ),
-                label: Text(
-                  'Book',
-                  style: TextStyle(
-                    fontSize: 16,
+              const SizedBox(height: 8),
+              Text(
+                widget.tutor.bio ?? 'null',
+                maxLines: 5,
+                overflow: TextOverflow.ellipsis,
+              ),
+              Align(
+                alignment: Alignment.centerRight,
+                child: OutlinedButton.icon(
+                  onPressed: () {
+                    _handleTutorDetailView();
+                  },
+                  icon: Icon(
+                    Icons.bookmark_add,
                     color: Colors.cyanAccent[800],
                   ),
+                  label: Text(
+                    'Book',
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.cyanAccent[800],
+                    ),
+                  ),
                 ),
-              ),
-            )
-          ],
+              )
+            ],
+          ),
         ),
       ),
     );

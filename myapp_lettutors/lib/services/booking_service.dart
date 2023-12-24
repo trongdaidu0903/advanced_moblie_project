@@ -9,20 +9,22 @@ class BookingService {
   static Future<List<Schedule>> getTutorScheduleById({
     required String token,
     required String userId,
+    required int startDate,
+    required int endDate,
   }) async {
-    final response = await post(Uri.parse('$baseUrl/schedule'), headers: {
-      'Authorization': 'Bearer $token',
-    }, body: {
-      'tutorId': userId,
-    });
+    final response = await get(
+        Uri.parse(
+            '$baseUrl/schedule?tutorId=$userId&startTimestamp=$startDate&endTimestamp=$endDate'),
+        headers: {'Authorization': 'Bearer $token'});
 
     final jsonDecode = json.decode(response.body);
 
     if (response.statusCode != 200) {
       throw Exception(jsonDecode(['message']));
     }
+    print(response.body);
 
-    final schedules = jsonDecode['data'] as List;
+    final schedules = jsonDecode['scheduleOfTutor'] as List;
     return schedules.map((schedule) => Schedule.fromJson(schedule)).toList();
   }
 

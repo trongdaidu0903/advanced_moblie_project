@@ -17,15 +17,64 @@ class TutorSchedule extends StatefulWidget {
 }
 
 class _TutorScheduleState extends State<TutorSchedule> {
+  AuthProvider get _authProvider => context.read<AuthProvider>();
+
   List<Schedule> schedules = [];
   List<int> scheduleStartTimestamps = [];
+  DateTime _selectedStartDate = DateTime.now();
+  DateTime _selectedEndDate = DateTime.now().add(const Duration(days: 10));
+  bool _isLoading = false;
+  void onDateRangePickerTap() {
+    final year = DateTime.now().year;
 
-  bool _isLoading = true;
+    showDateRangePicker(
+      initialEntryMode: DatePickerEntryMode.calendarOnly,
+      context: context,
+      firstDate: DateTime(year - 5),
+      lastDate: DateTime(year + 5),
+      initialDateRange: DateTimeRange(
+        start: _selectedStartDate,
+        end: _selectedEndDate,
+      ),
+      builder: (_, child) {
+        return DatePickerTheme(
+          data: DatePickerThemeData(
+            dayBackgroundColor:
+                MaterialStateProperty.all(Theme.of(context).primaryColor),
+          ),
+          child: Center(
+            child: ConstrainedBox(
+              constraints: BoxConstraints(
+                maxWidth: MediaQuery.of(context).size.width * 0.9,
+                maxHeight: MediaQuery.of(context).size.height * 0.7,
+              ),
+              child: child,
+            ),
+          ),
+        );
+      },
+    ).then((selectedRangeDate) {
+      setState(() {
+        _selectedStartDate = selectedRangeDate?.start ?? _selectedStartDate;
+        _selectedEndDate = selectedRangeDate?.end ?? _selectedEndDate;
+        if (_authProvider.token?.access?.token?.isNotEmpty ?? false) {
+          Future.delayed(Duration.zero, () async {
+            await _fetchTutorSchedule(_authProvider.token!.access!.token!);
+          });
+        }
+      });
+    });
+  }
 
   Future<void> _fetchTutorSchedule(String token) async {
+    setState(() {
+      _isLoading = true;
+    });
     List<Schedule> result = await BookingService.getTutorScheduleById(
       token: token,
       userId: widget.userId,
+      startDate: _selectedStartDate.millisecondsSinceEpoch,
+      endDate: _selectedEndDate.millisecondsSinceEpoch,
     );
 
     // Remove all learning dates before today
@@ -70,33 +119,25 @@ class _TutorScheduleState extends State<TutorSchedule> {
     }
     scheduleStartTimestamps.sort();
 
-    // Remove duplicates learning dates
-    // schedules.clear();
-    // for (var schedule in result) {
-    //   if (!schedules.any((element) {
-    //     final date1 = DateTime.fromMillisecondsSinceEpoch(schedule.startTimestamp!);
-    //     final date2 = DateTime.fromMillisecondsSinceEpoch(element.startTimestamp!);
-    //     bool isTheSameDate = date1.day == date2.day && date1.month == date2.month && date1.year == date2.year;
-    //     if (isTheSameDate) {
-    //       return true;
-    //     }
-    //     return false;
-    //   })) {
-    //     schedules.add(schedule);
-    //   }
-    // }
-
     setState(() {
       _isLoading = false;
     });
   }
 
   @override
-  Widget build(BuildContext context) {
-    final authProvider = context.watch<AuthProvider>();
+  void initState() {
+    if (_authProvider.token?.access?.token?.isNotEmpty ?? false) {
+      Future.delayed(Duration.zero, () async {
+        await _fetchTutorSchedule(_authProvider.token!.access!.token!);
+      });
+    }
+    super.initState();
+  }
 
-    if (_isLoading && authProvider.token != null) {
-      final String accessToken = authProvider.token?.access?.token as String;
+  @override
+  Widget build(BuildContext context) {
+    if (_isLoading && _authProvider.token != null) {
+      final String accessToken = _authProvider.token?.access?.token as String;
       _fetchTutorSchedule(accessToken);
     }
 
@@ -108,14 +149,19 @@ class _TutorScheduleState extends State<TutorSchedule> {
                 child: CircularProgressIndicator(),
               )
             : Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Padding(
                     padding: const EdgeInsets.only(top: 16, bottom: 0),
                     child: Text(
                       'Choose Learning Date',
                       style: Theme.of(context).textTheme.bodyLarge,
-                    ),
+                    ),  
                   ),
+                  TextButton(
+                      onPressed: onDateRangePickerTap,
+                      child: Text(
+                          "${DateFormat().add_yMEd().format(_selectedStartDate)} -  ${DateFormat().add_yMEd().format(_selectedEndDate)}")),
                   Expanded(
                     child: GridView.count(
                       padding: const EdgeInsets.all(24),
@@ -129,8 +175,8 @@ class _TutorScheduleState extends State<TutorSchedule> {
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.blue[300],
                           ),
-                          onPressed: () {
-                            Navigator.push(context, MaterialPageRoute(
+                          onPressed: () async {
+                            await Navigator.push(context, MaterialPageRoute(
                               builder: (context) {
                                 return BookingHourView(
                                   schedules: schedules,
@@ -138,6 +184,8 @@ class _TutorScheduleState extends State<TutorSchedule> {
                                 );
                               },
                             ));
+                            _fetchTutorSchedule(
+                                _authProvider.token!.access!.token!);
                           },
                           child: Text(
                             DateFormat.MMMEd().format(
