@@ -16,7 +16,7 @@ class UpcomingClassCard extends StatelessWidget {
   void _joinMeeting() async {
     Map<String, Object> featureFlags = {};
     final String meetingToken =
-        bookingInfo?.studentMeetingLink?.split('token=')[1] ?? '';
+        bookingInfo.studentMeetingLink?.split('token=')[1] ?? '';
     Map<String, dynamic> jwtDecoded = JwtDecoder.decode(meetingToken);
     final String roomUrl = jwtDecoded['room'];
     try {

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:myapp_lettutors/constants/items_per_page.dart';
 import 'package:myapp_lettutors/models/schedule/booking_info.dart';
 import 'package:myapp_lettutors/providers/auth_provider.dart';

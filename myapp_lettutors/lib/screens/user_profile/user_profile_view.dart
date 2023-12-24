@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:myapp_lettutors/constants/country_list.dart';
 import 'package:myapp_lettutors/constants/user_level.dart';
 import 'package:myapp_lettutors/models/user/learn_topic.dart';
 import 'package:myapp_lettutors/models/user/test_preparation.dart';
 import 'package:myapp_lettutors/models/user/user.dart';
 import 'package:myapp_lettutors/providers/auth_provider.dart';
+import 'package:myapp_lettutors/services/image_service.dart';
 import 'package:myapp_lettutors/services/user_service.dart';
 import 'package:myapp_lettutors/widgets/select_date.dart';
 import 'package:provider/provider.dart';
@@ -18,6 +20,7 @@ class UserProfileView extends StatefulWidget {
 
 class _UserProfileViewState extends State<UserProfileView> {
   User? user;
+  AuthProvider get authProvider => context.read<AuthProvider>();
 
   final _nameController = TextEditingController();
   final _studyScheduleController = TextEditingController();
@@ -28,6 +31,8 @@ class _UserProfileViewState extends State<UserProfileView> {
   String level = '';
   List<LearnTopic> chosenTopics = [];
   List<TestPreparation> chosenTestPreparations = [];
+
+  BothImageData? image;
 
   bool _isInitiated = false;
   bool _isLoading = true;
@@ -76,6 +81,17 @@ class _UserProfileViewState extends State<UserProfileView> {
     });
   }
 
+  Future<void> uploadAvatar(BothImageData? image) async {
+    if (image == null) return;
+    if (image.path?.isNotEmpty ?? false) {
+      final call = await ImagePicService.uploadAvatar(
+          path: image.path!, token: authProvider.token!.access!.token!);
+      if (call) {
+        _updateUserProfile(authProvider);
+      }
+    }
+  }
+
   Future<void> _updateUserProfile(AuthProvider authProvider) async {
     final String token = authProvider.token?.access?.token as String;
     final learnTopics =
@@ -83,8 +99,7 @@ class _UserProfileViewState extends State<UserProfileView> {
     final testPreparations =
         chosenTestPreparations.map((test) => test.id.toString()).toList();
 
-    // final result =
-    await UserService.updateInfo(
+    final result = await UserService.updateInfo(
       token: token,
       name: _nameController.text,
       country: country,
@@ -94,6 +109,9 @@ class _UserProfileViewState extends State<UserProfileView> {
       testPreparations: testPreparations,
       studySchedule: _studyScheduleController.text,
     );
+    if (result != null) {
+      authProvider.setUser(result);
+    }
 
     setState(() {
       _isLoading = true;
@@ -109,8 +127,6 @@ class _UserProfileViewState extends State<UserProfileView> {
 
   @override
   Widget build(BuildContext context) {
-    final authProvider = context.watch<AuthProvider>();
-
     if (!_isInitiated) {
       _initiateUserProfile(authProvider);
     }
@@ -158,7 +174,11 @@ class _UserProfileViewState extends State<UserProfileView> {
                           bottom: 0,
                           right: 0,
                           child: GestureDetector(
-                            onTap: () {},
+                            onTap: () async {
+                              await ImagePicService.selectedImage(
+                                      ImageSource.gallery)
+                                  .then((value) => uploadAvatar(value));
+                            },
                             child: CircleAvatar(
                               backgroundColor: Colors.grey[300],
                               radius: 18,

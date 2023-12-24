@@ -51,6 +51,9 @@ dependencies:
   flutter_launcher_icons: ^0.11.0
   flutter_native_splash: ^2.2.15
   jitsi_meet_wrapper: ^0.2.0+1
+  dio: ^5.4.0
+  file_picker: ^6.1.1
+  image_picker: ^1.0.5
   #jitsi_meet: ^4.0.0
 
 dev_dependencies:

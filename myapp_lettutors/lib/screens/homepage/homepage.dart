@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:myapp_lettutors/dummy/dummy_data.dart';
-
 import 'package:myapp_lettutors/models/tutor/tutor.dart';
 import 'package:myapp_lettutors/models/tutor/tutor_info.dart';
-import 'package:myapp_lettutors/models/user/learn_topic.dart';
 import 'package:myapp_lettutors/providers/auth_provider.dart';
 import 'package:myapp_lettutors/screens/homepage/widgets/homepage_header.dart';
 import 'package:myapp_lettutors/screens/homepage/widgets/tutor_card.dart';

@@ -114,9 +114,6 @@ class AuthService {
 
     final jsonDecode = json.decode(response.body);
 
-    final user = User.fromJson(jsonDecode['user']);
-    final token = Token.fromJson(jsonDecode['tokens']);
-
     if (response.statusCode != 201) {
       throw Exception(jsonDecode['message']);
     }

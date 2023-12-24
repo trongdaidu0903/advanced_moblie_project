@@ -158,8 +158,6 @@ class UserService {
     return jsonDecode.map((e) => TestPreparation.fromJson(e)).toList();
   }
 
-  static Future<void> updateAvatar(String token) async {}
-
   static Future<User?> getUserInfo(String token) async {
     final response = await get(
       Uri.parse('$baseUrl/user/info'),
