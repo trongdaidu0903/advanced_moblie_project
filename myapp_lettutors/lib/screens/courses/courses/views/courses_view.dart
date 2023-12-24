@@ -38,6 +38,21 @@ class _CoursesViewState extends State<CoursesView> {
     });
   }
 
+  Future<void> _searchCourses(String token, String search) async {
+    final result = await CourseService.searchCourse(
+      token: token,
+      search: search,
+      page: _page,
+      size: _perPage,
+    );
+
+    setState(() {
+      courses = result['courses'];
+      _count = result['count'];
+      _isLoading = false;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final authProvider = context.watch<AuthProvider>();
@@ -54,6 +69,9 @@ class _CoursesViewState extends State<CoursesView> {
           TextField(
             controller: _searchController,
             onSubmitted: (value) {
+              final String accessToken =
+                  authProvider.token?.access?.token as String;
+              _searchCourses(accessToken, value);
               setState(() {
                 _isLoading = true;
               });
