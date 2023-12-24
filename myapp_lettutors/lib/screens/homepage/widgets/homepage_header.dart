@@ -22,8 +22,10 @@ class _HomepageHeaderState extends State<HomepageHeader> {
 
   Future<void> _fetchTotalLessonTime(String token) async {
     try {
+      log("👌[Info] Fetching total lesson time");
       final total = await UserService.getTotalLessonTime(token);
       final upcoming = await UserService.getUpcomingLesson(token);
+
       if (mounted) {
         setState(() {
           totalLessonTime = Duration(minutes: total);
@@ -32,7 +34,7 @@ class _HomepageHeaderState extends State<HomepageHeader> {
         });
       }
     } catch (e) {
-      log("👌[Error] ${e.toString()}");
+      log("😡[Error] ${e.toString()}");
     }
   }
 
@@ -51,17 +53,36 @@ class _HomepageHeaderState extends State<HomepageHeader> {
     return result;
   }
 
+  void showSnackBar(String title) {
+    final snackBar = SnackBar(
+      content: Text(
+        title,
+        style: const TextStyle(fontSize: 16),
+      ),
+      backgroundColor: const Color.fromARGB(255, 249, 110, 100),
+    );
+
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+  }
+
   bool _isTimeToJoin() {
     final startTimestamp =
         upcomingClass?.scheduleDetailInfo?.startPeriodTimestamp ?? 0;
     final startTime = DateTime.fromMillisecondsSinceEpoch(startTimestamp);
     final now = DateTime.now();
-    return now.isAfter(startTime) || now.isAtSameMomentAs(startTime);
+
+    if (now.isBefore(startTime)) {
+      showSnackBar('This lesson has not started yet');
+      return true;
+    }
+
+    return true;
   }
 
   void _joinMeeting() async {
     final String meetingToken =
         upcomingClass?.studentMeetingLink?.split('token=')[1] ?? '';
+
     Map<String, dynamic> jwtDecoded = JwtDecoder.decode(meetingToken);
     final String room = jwtDecoded['room'];
     log(room);
@@ -73,6 +94,7 @@ class _HomepageHeaderState extends State<HomepageHeader> {
 
     if (_isLoading && authProvider.token != null) {
       final String accessToken = authProvider.token?.access?.token as String;
+      log(accessToken);
       _fetchTotalLessonTime(accessToken);
     }
 

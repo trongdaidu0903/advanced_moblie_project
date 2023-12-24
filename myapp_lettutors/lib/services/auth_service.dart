@@ -52,6 +52,7 @@ class AuthService {
 
     final user = User.fromJson(jsonDecode['user']);
     final tokens = Token.fromJson(jsonDecode['tokens']);
+
     await onSuccess(user, tokens);
   }
 
@@ -111,17 +112,11 @@ class AuthService {
       },
     );
 
-    // String refreshToken = " ";
-    // final tokenResponse = await post(
-    //   Uri.parse("$baseUrl/auth/refresh-token"),
-    //   body: {
-    //     'refreshToken': refreshToken,
-    //     'timezone': "7",
-    //   },
-    // );
-
     final jsonDecode = json.decode(response.body);
-    
+
+    final user = User.fromJson(jsonDecode['user']);
+    final token = Token.fromJson(jsonDecode['tokens']);
+
     if (response.statusCode != 201) {
       throw Exception(jsonDecode['message']);
     }

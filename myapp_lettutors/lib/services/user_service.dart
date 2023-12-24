@@ -1,7 +1,5 @@
 import 'dart:convert';
-
 import 'package:http/http.dart';
-import 'package:myapp_lettutors/dummy/dummy_data.dart';
 import 'package:myapp_lettutors/models/schedule/booking_info.dart';
 import 'package:myapp_lettutors/models/user/learn_topic.dart';
 import 'package:myapp_lettutors/models/user/test_preparation.dart';
@@ -11,6 +9,8 @@ class UserService {
   static const baseUrl = 'https://sandbox.api.lettutor.com';
 
   static getTotalLessonTime(String token) async {
+    print("aaaaaaaaaaa");
+
     final response = await get(
       Uri.parse('$baseUrl/call/total'),
       headers: {
@@ -28,9 +28,8 @@ class UserService {
   }
 
   static Future<BookingInfo> getUpcomingLesson(String token) async {
-    final now = DateTime.now().microsecondsSinceEpoch;
     final response = await get(
-      Uri.parse('$baseUrl/booking/next?dateTime=$now'),
+      Uri.parse('$baseUrl/booking/next'),
       headers: {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer $token',
@@ -43,6 +42,7 @@ class UserService {
     }
 
     final List<dynamic> data = jsonDecode['data'];
+
     List<BookingInfo> lessons =
         data.map((e) => BookingInfo.fromJson(e)).toList();
 
@@ -59,17 +59,6 @@ class UserService {
 
       return timestamp1.compareTo(timestamp2);
     });
-
-    lessons = lessons.where((element) {
-      if (element.scheduleDetailInfo == null) return false;
-      if (element.scheduleDetailInfo!.startPeriodTimestamp == null) {
-        return false;
-      }
-
-      final int startTimestamp =
-          element.scheduleDetailInfo!.startPeriodTimestamp!;
-      return startTimestamp > now;
-    }).toList();
 
     if (lessons.isNotEmpty) {
       return lessons.first;
@@ -220,5 +209,11 @@ class UserService {
       return null;
     }
     return User.fromJson(jsonDecode['user']);
+  }
+
+  Future<bool> becomeTutor({required User requestUser}) async {
+    final response =
+        await post(Uri.parse('$baseUrl/tutor'), body: requestUser.toJson());
+    return true;
   }
 }

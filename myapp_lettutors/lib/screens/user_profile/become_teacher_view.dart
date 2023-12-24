@@ -47,7 +47,9 @@ class _BecomeTeacherViewState extends State<BecomeTeacherView> {
                       height: 100,
                     ),
                     TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        
+                      },
                       child: const Text('Upload'),
                     ),
                   ],

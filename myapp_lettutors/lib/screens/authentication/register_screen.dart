@@ -3,6 +3,7 @@ import 'package:myapp_lettutors/models/languages/language.dart';
 import 'package:myapp_lettutors/providers/app_provider.dart';
 import 'package:myapp_lettutors/services/auth_service.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class RegisterView extends StatefulWidget {
   const RegisterView({Key? key}) : super(key: key);
@@ -52,7 +53,7 @@ class _RegisterViewState extends State<RegisterView> {
         email: _emailController.text,
         password: _passwordController.text,
       );
-
+      
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text(language.registerSuccess)),
