@@ -1,9 +1,12 @@
 import 'dart:convert';
+
+import 'package:dio/dio.dart';
 import 'package:http/http.dart';
 import 'package:myapp_lettutors/models/schedule/booking_info.dart';
 import 'package:myapp_lettutors/models/user/learn_topic.dart';
 import 'package:myapp_lettutors/models/user/test_preparation.dart';
 import 'package:myapp_lettutors/models/user/user.dart';
+import 'package:myapp_lettutors/screens/user_profile/become_teacher_view.dart';
 
 class UserService {
   static const baseUrl = 'https://sandbox.api.lettutor.com';
@@ -175,6 +178,37 @@ class UserService {
     }
   }
 
+  static Future<String?> becomeTutor(BecomeTutorRequest request,
+      {String? token}) async {
+    if (!(token?.isNotEmpty ?? false)) {
+      return "Error";
+    }
+    try {
+      final response = await Dio().post(
+        "$baseUrl/tutor/register",
+        data: FormData()
+          ..fields.addAll(request.toDataMapFields())
+          ..files.addAll(request.toDataMapFils()),
+        options: Options(
+          followRedirects: false,
+          validateStatus: (status) => true,
+          headers: {
+            'Authorization': 'Bearer ${token!}',
+            "content-type": "multipart/form-data",
+            "Accept": "*/*",
+          },
+        ),
+      );
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        return "Success";
+      }
+
+      return response.data["message"];
+    } catch (error) {
+      return error.toString();
+    }
+  }
+
   static Future<User?> updateInfo({
     required String token,
     required String name,
@@ -207,11 +241,5 @@ class UserService {
       return null;
     }
     return User.fromJson(jsonDecode['user']);
-  }
-
-  Future<bool> becomeTutor({required User requestUser}) async {
-    final response =
-        await post(Uri.parse('$baseUrl/tutor'), body: requestUser.toJson());
-    return true;
   }
 }
