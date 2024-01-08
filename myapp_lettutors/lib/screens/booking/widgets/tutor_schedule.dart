@@ -156,7 +156,7 @@ class _TutorScheduleState extends State<TutorSchedule> {
                     child: Text(
                       'Choose Learning Date',
                       style: Theme.of(context).textTheme.bodyLarge,
-                    ),  
+                    ),
                   ),
                   TextButton(
                       onPressed: onDateRangePickerTap,
@@ -215,75 +215,75 @@ Future<DateTime?> _bookLearningDate(BuildContext context) async {
   return selectedDate ?? DateTime.now();
 }
 
-Future<void> _bookLearningHour(
-    BuildContext context, DateTime selectedDate) async {
-  await showModalBottomSheet(
-    context: context,
-    isScrollControlled: true,
-    elevation: 5,
-    clipBehavior: Clip.hardEdge,
-    shape: const RoundedRectangleBorder(
-      borderRadius: BorderRadius.vertical(
-        top: Radius.circular(16),
-      ),
-    ),
-    builder: (context) {
-      return SafeArea(
-        child: SizedBox(
-          height: MediaQuery.of(context).size.height * 0.75,
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 32, bottom: 8),
-                child: Text(
-                  'Choose Your Time',
-                  style: Theme.of(context).textTheme.bodyLarge,
-                ),
-              ),
-              Expanded(
-                child: GridView.count(
-                  padding: const EdgeInsets.all(24),
-                  crossAxisCount: 2,
-                  mainAxisSpacing: 24,
-                  crossAxisSpacing: 32,
-                  childAspectRatio: 3,
-                  children: List<Widget>.generate(
-                    courseHours.length,
-                    (index) => ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.blue,
-                      ),
-                      onPressed: () async {
-                        // final dialogResult =
-                        //     await _showBookingConfirmDialog(context);
-                        // if (dialogResult) {
-                        //   // ignore: use_build_context_synchronously
-                        //   Navigator.of(context).pushNamed(
-                        //     Routes.bookingDetail,
-                        //     arguments: {
-                        //       'selectedDate': selectedDate,
-                        //       'selectedHour': courseHours[index],
-                        //       'weekday': selectedDate.weekday
-                        //     },
-                        //   );
-                        // }
-                      },
-                      child: Text(
-                        courseHours[index],
-                        style:
-                            const TextStyle(fontSize: 16, color: Colors.white),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      );
-    },
-  );
-}
+// Future<void> _bookLearningHour(
+//     BuildContext context, DateTime selectedDate) async {
+//   await showModalBottomSheet(
+//     context: context,
+//     isScrollControlled: true,
+//     elevation: 5,
+//     clipBehavior: Clip.hardEdge,
+//     shape: const RoundedRectangleBorder(
+//       borderRadius: BorderRadius.vertical(
+//         top: Radius.circular(16),
+//       ),
+//     ),
+//     builder: (context) {
+//       return SafeArea(
+//         child: SizedBox(
+//           height: MediaQuery.of(context).size.height * 0.75,
+//           child: Column(
+//             children: [
+//               Padding(
+//                 padding: const EdgeInsets.only(top: 32, bottom: 8),
+//                 child: Text(
+//                   'Choose Your Time',
+//                   style: Theme.of(context).textTheme.bodyLarge,
+//                 ),
+//               ),
+//               Expanded(
+//                 child: GridView.count(
+//                   padding: const EdgeInsets.all(24),
+//                   crossAxisCount: 2,
+//                   mainAxisSpacing: 24,
+//                   crossAxisSpacing: 32,
+//                   childAspectRatio: 3,
+//                   children: List<Widget>.generate(
+//                     courseHours.length,
+//                     (index) => ElevatedButton(
+//                       style: ElevatedButton.styleFrom(
+//                         backgroundColor: Colors.blue,
+//                       ),
+//                       onPressed: () async {
+//                         // final dialogResult =
+//                         //     await _showBookingConfirmDialog(context);
+//                         // if (dialogResult) {
+//                         //   // ignore: use_build_context_synchronously
+//                         //   Navigator.of(context).pushNamed(
+//                         //     Routes.bookingDetail,
+//                         //     arguments: {
+//                         //       'selectedDate': selectedDate,
+//                         //       'selectedHour': courseHours[index],
+//                         //       'weekday': selectedDate.weekday
+//                         //     },
+//                         //   );
+//                         // }
+//                       },
+//                       child: Text(
+//                         courseHours[index],
+//                         style:
+//                             const TextStyle(fontSize: 16, color: Colors.white),
+//                       ),
+//                     ),
+//                   ),
+//                 ),
+//               ),
+//             ],
+//           ),
+//         ),
+//       );
+//     },
+//   );
+// }
 
 Future<bool> _showBookingConfirmDialog(
     BuildContext context, Schedule schedule) {
