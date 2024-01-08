@@ -301,18 +301,14 @@ class _LoginViewState extends State<LoginView> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 36),
+                        padding: const EdgeInsets.symmetric(vertical: 0),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Image.asset(
-                              'assets/logo/lettutor.png',
-                              width: 100,
-                              height: 100,
-                            ),
-                            Text(
-                              ' LetTutor ',
-                              style: Theme.of(context).textTheme.displayLarge,
+                              'assets/logo/login-banner.png',
+                              width: 400,
+                              height: 400,
                             ),
                           ],
                         ),

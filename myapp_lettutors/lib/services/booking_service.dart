@@ -22,7 +22,6 @@ class BookingService {
     if (response.statusCode != 200) {
       throw Exception(jsonDecode(['message']));
     }
-    print(response.body);
 
     final schedules = jsonDecode['scheduleOfTutor'] as List;
     return schedules.map((schedule) => Schedule.fromJson(schedule)).toList();

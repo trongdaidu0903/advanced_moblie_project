@@ -79,11 +79,9 @@ class ImagePicService {
           },
         ),
       );
-      print(response.data);
 
       return response.statusCode == 200;
     } catch (error) {
-      print(error.toString());
       return false;
     }
   }
