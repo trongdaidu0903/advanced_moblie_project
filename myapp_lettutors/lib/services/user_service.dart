@@ -12,8 +12,6 @@ class UserService {
   static const baseUrl = 'https://sandbox.api.lettutor.com';
 
   static getTotalLessonTime(String token) async {
-    print("aaaaaaaaaaa");
-
     final response = await get(
       Uri.parse('$baseUrl/call/total'),
       headers: {

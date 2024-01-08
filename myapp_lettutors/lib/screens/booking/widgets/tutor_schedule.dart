@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:myapp_lettutors/dummy/dummy_data.dart';
 import 'package:myapp_lettutors/screens/booking/views/booking_hour_view.dart';
 import 'package:myapp_lettutors/models/schedule/schedule.dart';
 import 'package:myapp_lettutors/providers/auth_provider.dart';
@@ -205,15 +204,15 @@ class _TutorScheduleState extends State<TutorSchedule> {
   }
 }
 
-Future<DateTime?> _bookLearningDate(BuildContext context) async {
-  DateTime? selectedDate = await showDatePicker(
-    context: context,
-    initialDate: DateTime.now(),
-    firstDate: DateTime.now(),
-    lastDate: DateTime(2030),
-  );
-  return selectedDate ?? DateTime.now();
-}
+// Future<DateTime?> _bookLearningDate(BuildContext context) async {
+//   DateTime? selectedDate = await showDatePicker(
+//     context: context,
+//     initialDate: DateTime.now(),
+//     firstDate: DateTime.now(),
+//     lastDate: DateTime(2030),
+//   );
+//   return selectedDate ?? DateTime.now();
+// }
 
 // Future<void> _bookLearningHour(
 //     BuildContext context, DateTime selectedDate) async {
@@ -285,33 +284,33 @@ Future<DateTime?> _bookLearningDate(BuildContext context) async {
 //   );
 // }
 
-Future<bool> _showBookingConfirmDialog(
-    BuildContext context, Schedule schedule) {
-  return showDialog<bool>(
-    context: context,
-    builder: (context) {
-      return AlertDialog(
-        title: const Text('Book This Tutor'),
-        content: Column(
-          children: [
-            const Text('Booking time'),
-            Text(DateFormat.yMMMMEEEEd().format(
-                DateTime.fromMillisecondsSinceEpoch(schedule.startTimestamp!))),
-          ],
-        ),
-        actions: [
-          TextButton(
-              onPressed: () {
-                Navigator.pop(context, false);
-              },
-              child: const Text('CANCEL')),
-          TextButton(
-              onPressed: () {
-                Navigator.pop(context, true);
-              },
-              child: const Text('YES')),
-        ],
-      );
-    },
-  ).then((value) => value ?? false);
-}
+// Future<bool> _showBookingConfirmDialog(
+//     BuildContext context, Schedule schedule) {
+//   return showDialog<bool>(
+//     context: context,
+//     builder: (context) {
+//       return AlertDialog(
+//         title: const Text('Book This Tutor'),
+//         content: Column(
+//           children: [
+//             const Text('Booking time'),
+//             Text(DateFormat.yMMMMEEEEd().format(
+//                 DateTime.fromMillisecondsSinceEpoch(schedule.startTimestamp!))),
+//           ],
+//         ),
+//         actions: [
+//           TextButton(
+//               onPressed: () {
+//                 Navigator.pop(context, false);
+//               },
+//               child: const Text('CANCEL')),
+//           TextButton(
+//               onPressed: () {
+//                 Navigator.pop(context, true);
+//               },
+//               child: const Text('YES')),
+//         ],
+//       );
+//     },
+//   ).then((value) => value ?? false);
+// }
