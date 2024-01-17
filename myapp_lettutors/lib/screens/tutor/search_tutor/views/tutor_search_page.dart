@@ -81,11 +81,7 @@ class _TutorSearchPageState extends State<TutorSearchPage> {
                   });
                 },
               ),
-              const Text('Vietnamese Tutors'),
-            ],
-          ),
-          Row(
-            children: [
+              const Text('Vietnamese'),
               Radio<Nationality>(
                 value: Nationality.foreign,
                 groupValue: _nationality,
@@ -95,7 +91,7 @@ class _TutorSearchPageState extends State<TutorSearchPage> {
                   });
                 },
               ),
-              const Text('Foreign Tutors'),
+              const Text('Foreign'),
             ],
           ),
           const SizedBox(height: 16),
@@ -108,7 +104,7 @@ class _TutorSearchPageState extends State<TutorSearchPage> {
             children: List<Widget>.generate(
               _specialties.length,
               (index) => Padding(
-                padding: const EdgeInsets.all(5),
+                padding: const EdgeInsets.all(2),
                 child: ChoiceChip(
                   side: const BorderSide(color: Colors.transparent),
                   backgroundColor: Colors.grey[400],

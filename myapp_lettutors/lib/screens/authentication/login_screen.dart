@@ -190,9 +190,28 @@ class _LoginViewState extends State<LoginView> {
     }
   }
 
+  Future<void> loginWithFacebook(AuthProvider authProvider) async {
+    try {
+      final LoginResult result = await FacebookAuth.instance.login();
+
+      if (result.status == LoginStatus.success) {
+        final AccessToken accessToken =
+            result.accessToken!.token as AccessToken;
+        final userData = await FacebookAuth.instance.getUserData();
+
+        // Xử lý dữ liệu người dùng
+        // ...
+
+        // Chuyển hướng đến màn hình chính hoặc thực hiện các tác vụ khác
+        // ...
+      }
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
   void _handleFacebookLogin(AuthProvider authProvider) async {
     final result = await FacebookAuth.instance.login();
-
     if (result.status == LoginStatus.success) {
       final accessToken = result.accessToken!.token;
       try {
@@ -384,7 +403,7 @@ class _LoginViewState extends State<LoginView> {
                           children: [
                             TextButton(
                               onPressed: () {
-                                _handleFacebookLogin(authProvider);
+                                loginWithFacebook(authProvider);
                               },
                               child: Image.asset(
                                 'assets/logo/facebook.png',
