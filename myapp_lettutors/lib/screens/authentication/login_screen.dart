@@ -243,16 +243,16 @@ class _LoginViewState extends State<LoginView> {
     }
   }
 
-  void _updateLanguage(AppProvider appProvider, String value) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    if (value == 'English') {
-      appProvider.language = English();
-      await prefs.setString('language', 'EN');
-    } else {
-      appProvider.language = Vietnamese();
-      await prefs.setString('language', 'VI');
-    }
-  }
+  // void _updateLanguage(AppProvider appProvider, String value) async {
+  //   SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   if (value == 'English') {
+  //     appProvider.language = English();
+  //     await prefs.setString('language', 'EN');
+  //   } else {
+  //     appProvider.language = Vietnamese();
+  //     await prefs.setString('language', 'VI');
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -276,30 +276,6 @@ class _LoginViewState extends State<LoginView> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      Align(
-                        alignment: Alignment.centerRight,
-                        child: DropdownButton<String>(
-                          value: chosenLanguage,
-                          items: const [
-                            DropdownMenuItem<String>(
-                              value: 'English',
-                              child: Text('English'),
-                            ),
-                            DropdownMenuItem<String>(
-                              value: 'Tiếng Việt',
-                              child: Text('Tiếng Việt'),
-                            ),
-                          ],
-                          onChanged: (String? language) {
-                            if (language != null) {
-                              _updateLanguage(appProvider, language);
-                            }
-                            setState(() {
-                              chosenLanguage = language!;
-                            });
-                          },
-                        ),
-                      ),
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 0),
                         child: Row(
@@ -307,19 +283,17 @@ class _LoginViewState extends State<LoginView> {
                           children: [
                             Image.asset(
                               'assets/logo/login-banner.png',
-                              width: 400,
-                              height: 400,
+                              width: 320,
+                              height: 320,
                             ),
                           ],
                         ),
                       ),
-                      const SizedBox(height: 16),
                       Text(
                         lang.email,
                         style:
                             const TextStyle(fontSize: 16, color: Colors.grey),
                       ),
-                      const SizedBox(height: 8),
                       TextField(
                         controller: _emailController,
                         keyboardType: TextInputType.emailAddress,
@@ -345,13 +319,11 @@ class _LoginViewState extends State<LoginView> {
                                   BorderRadius.all(Radius.circular(10))),
                         ),
                       ),
-                      const SizedBox(height: 24),
                       Text(
                         lang.password,
                         style:
                             const TextStyle(fontSize: 16, color: Colors.grey),
                       ),
-                      const SizedBox(height: 8),
                       TextField(
                         controller: _passwordController,
                         obscureText: true,
@@ -378,7 +350,7 @@ class _LoginViewState extends State<LoginView> {
                                   BorderRadius.all(Radius.circular(10))),
                         ),
                       ),
-                      const SizedBox(height: 24),
+                      const SizedBox(height: 12),
                       TextButton(
                         onPressed: _isValidToLogin
                             ? () {
@@ -396,7 +368,6 @@ class _LoginViewState extends State<LoginView> {
                               fontSize: 20, color: Colors.white),
                         ),
                       ),
-                      const SizedBox(height: 16),
                       TextButton(
                         onPressed: () {
                           Navigator.pushNamed(context, Routes.forgotPassword);
@@ -406,13 +377,8 @@ class _LoginViewState extends State<LoginView> {
                           style: const TextStyle(fontSize: 16),
                         ),
                       ),
-                      const SizedBox(height: 16),
-                      Text(
-                        lang.loginWith,
-                        textAlign: TextAlign.center,
-                      ),
                       Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 12),
+                        padding: const EdgeInsets.symmetric(vertical: 0),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
