@@ -1,12 +1,13 @@
 import 'dart:convert';
 
 import 'package:http/http.dart';
+import 'package:myapp_lettutors/envs/environment.dart';
 import 'package:myapp_lettutors/models/user/token.dart';
 import 'package:myapp_lettutors/models/user/user.dart';
 
 class AuthService {
-  static const baseUrl = 'https://sandbox.api.lettutor.com';
-
+  //static const baseUrl = 'https://sandbox.api.lettutor.com';
+  static var baseUrl = EnvironmentConfig.apiUrl;
   static User parseUser(String responseBody) =>
       User.fromJson(jsonDecode(responseBody));
 
@@ -22,7 +23,7 @@ class AuthService {
         'password': password,
       },
     );
-
+    print("🔗🔗🔗 API URL: " + baseUrl);
     final jsonDecode = json.decode(response.body);
 
     if (response.statusCode != 200) {

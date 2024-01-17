@@ -8,6 +8,26 @@
             "name": "Dart & Flutter",
             "request": "launch",
             "type": "dart"
-        }
+        },
+        {
+            "name": "Dev",
+            "request": "launch",
+            "type": "dart",
+            "program": "lib/main.dart",
+            "args": [
+                "--flavor",
+                "dev"
+            ]
+        },
+        {
+            "name": "Product",
+            "request": "launch",
+            "type": "dart",
+            "program": "lib/main.dart",
+            "args": [
+                "--flavor",
+                "product"
+            ]
+        },
     ]
 }

@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:http/http.dart';
+import 'package:myapp_lettutors/envs/environment.dart';
 import 'package:myapp_lettutors/models/schedule/booking_info.dart';
 import 'package:myapp_lettutors/models/user/learn_topic.dart';
 import 'package:myapp_lettutors/models/user/test_preparation.dart';
@@ -9,7 +10,8 @@ import 'package:myapp_lettutors/models/user/user.dart';
 import 'package:myapp_lettutors/screens/user_profile/become_teacher_view.dart';
 
 class UserService {
-  static const baseUrl = 'https://sandbox.api.lettutor.com';
+  //static const baseUrl = 'https://sandbox.api.lettutor.com';
+  static var baseUrl = EnvironmentConfig.apiUrl;
 
   static getTotalLessonTime(String token) async {
     final response = await get(

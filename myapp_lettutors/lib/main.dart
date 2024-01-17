@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:myapp_lettutors/constants/routes.dart';
+import 'package:myapp_lettutors/envs/environment.dart';
 import 'package:myapp_lettutors/providers/app_provider.dart';
 import 'package:myapp_lettutors/providers/auth_provider.dart';
 import 'package:myapp_lettutors/screens/authentication/forgot_password_view.dart';
@@ -27,6 +28,18 @@ class MyHttpOverrides extends HttpOverrides {
 }
 
 void main() {
+  //Build variant
+  final flavor = String.fromEnvironment('FLAVOR');
+  print("🎚️ 🎚️ 🎚️ FLAVOR: $flavor");
+
+  if (flavor == 'dev') {
+    EnvironmentConfig.setEnvironment(Environment.dev);
+  } else if (flavor == 'product') {
+    EnvironmentConfig.setEnvironment(Environment.product);
+  } else {
+    EnvironmentConfig.setEnvironment(Environment.dev);
+  }
+
   HttpOverrides.global = MyHttpOverrides();
   runApp(const LetTutor());
 }
