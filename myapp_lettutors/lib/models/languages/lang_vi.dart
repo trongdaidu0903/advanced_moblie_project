@@ -68,4 +68,31 @@ class Vietnamese extends Language {
 
   @override
   String get backToLogin => 'Quay về đăng nhập';
+
+  @override
+  String get account => "Tài khoản";
+
+  @override
+  String get language => "Ngôn ngữ";
+
+  @override
+  String get becomeTeacher => "Trở thành giáo viên";
+
+  @override
+  String get privatePolicy => "Chính sách bảo mật";
+
+  @override
+  String get contact => "Liên hệ";
+
+  @override
+  String get guide => "Hướng dẫn";
+
+  @override
+  String get sighOut => "Đăng xuất";
+
+  @override
+  String get termAndCondition => "Điều khoản và điều kiện";
+
+  @override
+  String get selectLanguage => "Chọn ngôn ngữ";
 }

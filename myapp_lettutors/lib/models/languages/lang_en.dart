@@ -68,4 +68,31 @@ class English extends Language {
 
   @override
   String get backToLogin => 'Go back to Login';
+
+  @override
+  String get account => "Account";
+
+  @override
+  String get becomeTeacher => "Become a Teacher";
+
+  @override
+  String get contact => "Contact";
+
+  @override
+  String get guide => "Guide";
+
+  @override
+  String get language => "Language";
+
+  @override
+  String get privatePolicy => "Private Policy";
+
+  @override
+  String get sighOut => "Sign Out";
+
+  @override
+  String get termAndCondition => "Term & Condition";
+
+  @override
+  String get selectLanguage => "Select Language";
 }

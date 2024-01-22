@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:myapp_lettutors/constants/routes.dart';
+import 'package:myapp_lettutors/models/languages/lang_en.dart';
+import 'package:myapp_lettutors/models/languages/lang_vi.dart';
+import 'package:myapp_lettutors/providers/app_provider.dart';
 import 'package:myapp_lettutors/providers/auth_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -12,54 +15,60 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
+  String chosenLanguage = 'English';
+
+  void _loadLanguage(AppProvider appProvider) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    final lang = prefs.getString('language') ?? 'EN';
+    if (lang == 'EN') {
+      chosenLanguage = 'English';
+      appProvider.setLanguage(English());
+    } else {
+      chosenLanguage = 'Tiếng Việt';
+      appProvider.setLanguage(Vietnamese());
+    }
+  }
+
+  void _updateLanguage(AppProvider appProvider, String value) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    if (value == 'English') {
+      appProvider.language = English();
+      await prefs.setString('language', 'EN');
+    } else {
+      appProvider.language = Vietnamese();
+      await prefs.setString('language', 'VI');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final authProvider = context.watch<AuthProvider>();
-
+    final appProvider = context.watch<AppProvider>();
+    final lang = appProvider.language;
+    _loadLanguage(appProvider);
     return SingleChildScrollView(
       padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Align(
-            alignment: Alignment.center,
-            child: Container(
-              width: 120,
-              height: 120,
-              clipBehavior: Clip.hardEdge,
-              decoration: const BoxDecoration(
-                shape: BoxShape.circle,
-              ),
-              child: Image.network(
-                authProvider.currentUser?.avatar ?? '',
-                fit: BoxFit.cover,
-                errorBuilder: (context, error, stackTrace) =>
-                    const Icon(Icons.person_rounded),
-              ),
-            ),
-          ),
-          const SizedBox(height: 12),
-          Align(
-              alignment: Alignment.center,
-              child: Text(
-                authProvider.currentUser?.name ?? 'null',
-                style: Theme.of(context).textTheme.displaySmall,
-              )),
-          const SizedBox(height: 4),
           InkWell(
             onTap: () => {Navigator.pushNamed(context, Routes.userProfile)},
-            child: const Card(
+            child: Card(
               surfaceTintColor: Colors.white,
               elevation: 2,
               child: Padding(
-                padding: EdgeInsets.all(12),
+                padding: const EdgeInsets.all(12),
                 child: Row(
                   children: [
-                    Icon(Icons.manage_accounts, size: 30),
-                    SizedBox(width: 12),
+                    Icon(
+                      Icons.manage_accounts,
+                      size: 30,
+                      color: Colors.blue[600],
+                    ),
+                    const SizedBox(width: 12),
                     Text(
-                      'Account',
-                      style: TextStyle(fontSize: 16),
+                      lang.account,
+                      style: const TextStyle(fontSize: 16),
                     )
                   ],
                 ),
@@ -68,19 +77,51 @@ class _SettingsPageState extends State<SettingsPage> {
           ),
           const SizedBox(height: 4),
           InkWell(
-            onTap: () {},
-            child: const Card(
+            onTap: () {
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    title: Text(lang.selectLanguage),
+                    content: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        ListTile(
+                          title: const Text('English'),
+                          onTap: () {
+                            _updateLanguage(appProvider, 'English');
+                            Navigator.pop(context); // Ẩn hộp thoại
+                          },
+                        ),
+                        ListTile(
+                          title: const Text('Tiếng Việt'),
+                          onTap: () {
+                            _updateLanguage(appProvider, 'Tiếng Việt');
+                            Navigator.pop(context); // Ẩn hộp thoại
+                          },
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              );
+            },
+            child: Card(
               surfaceTintColor: Colors.white,
               elevation: 2,
               child: Padding(
-                padding: EdgeInsets.all(12),
+                padding: const EdgeInsets.all(12),
                 child: Row(
                   children: [
-                    Icon(Icons.language, size: 30),
-                    SizedBox(width: 12),
+                    Icon(
+                      Icons.language,
+                      size: 30,
+                      color: Colors.blue[600],
+                    ),
+                    const SizedBox(width: 12),
                     Text(
-                      'Language',
-                      style: TextStyle(fontSize: 16),
+                      lang.language,
+                      style: const TextStyle(fontSize: 16),
                     )
                   ],
                 ),
@@ -90,97 +131,123 @@ class _SettingsPageState extends State<SettingsPage> {
           const SizedBox(height: 4),
           InkWell(
             onTap: () => Navigator.pushNamed(context, Routes.becomeTutor),
-            child: const Card(
+            child: Card(
               surfaceTintColor: Colors.white,
               elevation: 2,
               child: Padding(
-                padding: EdgeInsets.all(12),
+                padding: const EdgeInsets.all(12),
                 child: Row(
                   children: [
-                    Icon(Icons.assignment, size: 30),
-                    SizedBox(width: 12),
+                    Icon(
+                      Icons.assignment,
+                      size: 30,
+                      color: Colors.blue[600],
+                    ),
+                    const SizedBox(width: 12),
                     Text(
-                      'Become a Teacher',
-                      style: TextStyle(fontSize: 16),
+                      lang.becomeTeacher,
+                      style: const TextStyle(fontSize: 16),
                     )
                   ],
                 ),
               ),
             ),
           ),
-          const SizedBox(height: 24),
-          const Card(
+          const SizedBox(height: 4),
+          InkWell(
+            onTap: () => {throw UnimplementedError()},
+            child: Card(
+              surfaceTintColor: Colors.white,
+              elevation: 2,
+              child: Padding(
+                padding: const EdgeInsets.all(12),
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.privacy_tip_outlined,
+                      size: 30,
+                      color: Colors.blue[600],
+                    ),
+                    const SizedBox(width: 12),
+                    Text(
+                      lang.privatePolicy,
+                      style: const TextStyle(fontSize: 16),
+                    )
+                  ],
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(height: 4),
+          InkWell(
+            onTap: () => {throw UnimplementedError()},
+            child: Card(
+              surfaceTintColor: Colors.white,
+              elevation: 2,
+              child: Padding(
+                padding: const EdgeInsets.all(12),
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.privacy_tip_outlined,
+                      size: 30,
+                      color: Colors.blue[600],
+                    ),
+                    const SizedBox(width: 12),
+                    Text(
+                      lang.termAndCondition,
+                      style: const TextStyle(fontSize: 16),
+                    )
+                  ],
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(height: 4),
+          Card(
             surfaceTintColor: Colors.white,
             elevation: 2,
             child: Padding(
-              padding: EdgeInsets.all(12),
+              padding: const EdgeInsets.all(12),
               child: Row(
                 children: [
-                  Icon(Icons.privacy_tip_outlined, size: 30),
-                  SizedBox(width: 12),
+                  Icon(
+                    Icons.contact_mail_outlined,
+                    size: 30,
+                    color: Colors.blue[600],
+                  ),
+                  const SizedBox(width: 12),
                   Text(
-                    'Privacy Policy',
-                    style: TextStyle(fontSize: 16),
+                    lang.contact,
+                    style: const TextStyle(fontSize: 16),
                   )
                 ],
               ),
             ),
           ),
           const SizedBox(height: 4),
-          const Card(
-            surfaceTintColor: Colors.white,
-            elevation: 2,
-            child: Padding(
-              padding: EdgeInsets.all(12),
-              child: Row(
-                children: [
-                  Icon(Icons.newspaper_outlined, size: 30),
-                  SizedBox(width: 12),
-                  Text(
-                    'Terms & Conditions',
-                    style: TextStyle(fontSize: 16),
-                  )
-                ],
+          InkWell(
+            onTap: () => {throw UnimplementedError()},
+            child: Card(
+              surfaceTintColor: Colors.white,
+              elevation: 2,
+              child: Padding(
+                padding: const EdgeInsets.all(12),
+                child: Row(
+                  children: [
+                    Icon(Icons.contact_support_outlined,
+                        size: 30, color: Colors.blue[600]),
+                    const SizedBox(width: 12),
+                    Text(
+                      lang.guide,
+                      style: const TextStyle(fontSize: 16),
+                    )
+                  ],
+                ),
               ),
             ),
           ),
-          const SizedBox(height: 4),
-          const Card(
-            surfaceTintColor: Colors.white,
-            elevation: 2,
-            child: Padding(
-              padding: EdgeInsets.all(12),
-              child: Row(
-                children: [
-                  Icon(Icons.contact_mail_outlined, size: 30),
-                  SizedBox(width: 12),
-                  Text(
-                    'Contact',
-                    style: TextStyle(fontSize: 16),
-                  )
-                ],
-              ),
-            ),
-          ),
-          const SizedBox(height: 4),
-          const Card(
-            surfaceTintColor: Colors.white,
-            elevation: 2,
-            child: Padding(
-              padding: EdgeInsets.all(12),
-              child: Row(
-                children: [
-                  Icon(Icons.contact_support_outlined, size: 30),
-                  SizedBox(width: 12),
-                  Text(
-                    'Guide',
-                    style: TextStyle(fontSize: 16),
-                  )
-                ],
-              ),
-            ),
-          ),
-          const SizedBox(height: 48),
+          const SizedBox(height: 8),
           TextButton(
             onPressed: () async {
               final result = await _showLogOutConfirmDialog(context);
@@ -202,14 +269,14 @@ class _SettingsPageState extends State<SettingsPage> {
               minimumSize: const Size.fromHeight(44),
               backgroundColor: const Color.fromRGBO(255, 0, 0, 0.2),
             ),
-            child: const Row(
+            child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(Icons.logout, color: Colors.red),
-                SizedBox(width: 8),
+                const Icon(Icons.logout, color: Colors.red),
+                const SizedBox(width: 8),
                 Text(
-                  'Log Out',
-                  style: TextStyle(fontSize: 18, color: Colors.red),
+                  lang.sighOut,
+                  style: const TextStyle(fontSize: 18, color: Colors.red),
                 ),
               ],
             ),

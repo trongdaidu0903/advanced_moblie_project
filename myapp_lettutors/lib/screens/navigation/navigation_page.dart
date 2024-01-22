@@ -30,6 +30,7 @@ class _NavigationPageState extends State<NavigationPage> {
     'Courses',
     'Settings'
   ];
+
   int _chosenPageIndex = 0;
 
   @override

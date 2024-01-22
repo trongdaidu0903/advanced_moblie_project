@@ -206,7 +206,10 @@ class _LoginViewState extends State<LoginView> {
         // ...
       }
     } catch (e) {
-      print(e.toString());
+      // ignore: use_build_context_synchronously
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error Login with Google: ${e.toString()}')),
+      );
     }
   }
 
@@ -262,16 +265,16 @@ class _LoginViewState extends State<LoginView> {
     }
   }
 
-  // void _updateLanguage(AppProvider appProvider, String value) async {
-  //   SharedPreferences prefs = await SharedPreferences.getInstance();
-  //   if (value == 'English') {
-  //     appProvider.language = English();
-  //     await prefs.setString('language', 'EN');
-  //   } else {
-  //     appProvider.language = Vietnamese();
-  //     await prefs.setString('language', 'VI');
-  //   }
-  // }
+  void _updateLanguage(AppProvider appProvider, String value) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    if (value == 'English') {
+      appProvider.language = English();
+      await prefs.setString('language', 'EN');
+    } else {
+      appProvider.language = Vietnamese();
+      await prefs.setString('language', 'VI');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -295,6 +298,30 @@ class _LoginViewState extends State<LoginView> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
+                      // Align(
+                      //   alignment: Alignment.centerLeft,
+                      //   child: DropdownButton<String>(
+                      //     value: chosenLanguage,
+                      //     items: const [
+                      //       DropdownMenuItem<String>(
+                      //         value: 'English',
+                      //         child: Text('English'),
+                      //       ),
+                      //       DropdownMenuItem<String>(
+                      //         value: 'Tiếng Việt',
+                      //         child: Text('Tiếng Việt'),
+                      //       ),
+                      //     ],
+                      //     onChanged: (String? language) {
+                      //       if (language != null) {
+                      //         _updateLanguage(appProvider, language);
+                      //       }
+                      //       setState(() {
+                      //         chosenLanguage = language!;
+                      //       });
+                      //     },
+                      //   ),
+                      // ),
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 0),
                         child: Row(
@@ -393,7 +420,9 @@ class _LoginViewState extends State<LoginView> {
                         },
                         child: Text(
                           lang.forgotPassword,
-                          style: const TextStyle(fontSize: 16),
+                          style: const TextStyle(
+                              fontSize: 16,
+                              decoration: TextDecoration.underline),
                         ),
                       ),
                       Padding(
@@ -437,7 +466,9 @@ class _LoginViewState extends State<LoginView> {
                             },
                             child: Text(
                               lang.register,
-                              style: const TextStyle(fontSize: 16),
+                              style: const TextStyle(
+                                  fontSize: 16,
+                                  decoration: TextDecoration.underline),
                             ),
                           ),
                         ],

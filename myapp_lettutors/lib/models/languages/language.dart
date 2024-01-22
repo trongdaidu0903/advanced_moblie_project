@@ -25,4 +25,15 @@ abstract class Language {
   String get sendRecoveryEmail;
   String get sendRecoveryEmailSuccess;
   String get backToLogin;
+
+  //Settings Text
+  String get account;
+  String get language;
+  String get becomeTeacher;
+  String get privatePolicy;
+  String get contact;
+  String get guide;
+  String get sighOut;
+  String get termAndCondition;
+  String get selectLanguage;
 }
