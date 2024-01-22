@@ -88,6 +88,7 @@ class BecomeTeacherView extends StatefulWidget {
 
 class _BecomeTeacherViewState extends State<BecomeTeacherView> {
   BothImageData? image;
+  BothImageData? video;
 
   final TextEditingController _nameController =
       TextEditingController(text: "Pham Hai");
@@ -141,12 +142,11 @@ class _BecomeTeacherViewState extends State<BecomeTeacherView> {
           color: Colors.blue[600],
         ),
         title: Text(
-          'Become Tutor',
-          style: Theme.of(context)
-              .textTheme
-              .titleMedium!
-              .copyWith(fontWeight: FontWeight.bold),
+          "Become a tutor",
+          overflow: TextOverflow.ellipsis,
+          style: Theme.of(context).textTheme.displayMedium,
         ),
+        actions: const [SizedBox(width: 16)],
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
@@ -444,7 +444,14 @@ class _BecomeTeacherViewState extends State<BecomeTeacherView> {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 8),
               child: TextButton(
-                onPressed: () {},
+                onPressed: () async {
+                  await ImagePicService.selectedImage(ImageSource.gallery)
+                      .then((value) {
+                    setState(() {
+                      video = value;
+                    });
+                  });
+                },
                 child: const Text('Choose Video'),
               ),
             ),
