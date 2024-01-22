@@ -47,11 +47,14 @@ class _NavigationPageState extends State<NavigationPage> {
               width: 50,
               height: 50,
             ),
-            Expanded(
-              child: Text(
-                pagesTitles[_chosenPageIndex],
-                overflow: TextOverflow.ellipsis,
-                style: Theme.of(context).textTheme.displayMedium,
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Expanded(
+                child: Text(
+                  pagesTitles[_chosenPageIndex],
+                  overflow: TextOverflow.ellipsis,
+                  style: Theme.of(context).textTheme.displayMedium,
+                ),
               ),
             ),
           ],
@@ -90,7 +93,9 @@ class _NavigationPageState extends State<NavigationPage> {
       body: pages[_chosenPageIndex],
       bottomNavigationBar: BottomNavigationBar(
         selectedFontSize: 14,
+        selectedLabelStyle: const TextStyle(fontWeight: FontWeight.w600),
         unselectedFontSize: 12,
+        selectedItemColor: Colors.blue[600],
         type: BottomNavigationBarType.fixed,
         onTap: (value) {
           setState(() {
@@ -100,11 +105,11 @@ class _NavigationPageState extends State<NavigationPage> {
         elevation: 20,
         currentIndex: _chosenPageIndex,
         items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home_filled), label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.people), label: 'Tutors'),
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+          BottomNavigationBarItem(icon: Icon(Icons.school), label: 'Tutors'),
           BottomNavigationBarItem(
-              icon: Icon(Icons.schedule_outlined), label: 'Schedule'),
-          BottomNavigationBarItem(icon: Icon(Icons.school), label: 'Courses'),
+              icon: Icon(Icons.schedule), label: 'Schedule'),
+          BottomNavigationBarItem(icon: Icon(Icons.book), label: 'Courses'),
           BottomNavigationBarItem(
               icon: Icon(Icons.settings), label: 'Settings'),
         ],
