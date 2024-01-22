@@ -21,109 +21,119 @@ class HistoryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      margin: const EdgeInsets.symmetric(vertical: 12),
-      surfaceTintColor: Colors.white,
-      elevation: 2,
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                // const CircleAvatar(
-                //   backgroundImage: AssetImage('assets/tutor/keegan-avatar.png'),
-                //   radius: 32,
-                // ),
-                Container(
-                  width: 72,
-                  height: 72,
-                  clipBehavior: Clip.hardEdge,
-                  decoration: const BoxDecoration(
-                    shape: BoxShape.circle,
-                  ),
-                  child: CachedNetworkImage(
-                    imageUrl: bookingInfo.scheduleDetailInfo!.scheduleInfo!
-                            .tutorInfo!.avatar ??
-                        '',
-                    fit: BoxFit.cover,
-                    errorWidget: (context, url, error) => const Icon(
-                      Icons.error_outline_rounded,
-                      size: 32,
-                      color: Colors.redAccent,
+    return InkWell(
+      onTap: (() {
+        Navigator.pushNamed(
+          context,
+          Routes.teacherDetail,
+          arguments: {
+            'userId':
+                bookingInfo.scheduleDetailInfo?.scheduleInfo!.tutorInfo?.id,
+            'tutor': bookingInfo.scheduleDetailInfo?.scheduleInfo!.tutorInfo,
+          },
+        );
+      }),
+      child: Card(
+        margin: const EdgeInsets.symmetric(vertical: 12),
+        surfaceTintColor: Colors.white,
+        elevation: 2,
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Container(
+                    width: 72,
+                    height: 72,
+                    clipBehavior: Clip.hardEdge,
+                    decoration: const BoxDecoration(
+                      shape: BoxShape.circle,
+                    ),
+                    child: CachedNetworkImage(
+                      imageUrl: bookingInfo.scheduleDetailInfo!.scheduleInfo!
+                              .tutorInfo!.avatar ??
+                          '',
+                      fit: BoxFit.cover,
+                      errorWidget: (context, url, error) => const Icon(
+                        Icons.error_outline_rounded,
+                        size: 32,
+                        color: Colors.redAccent,
+                      ),
                     ),
                   ),
-                ),
-                const SizedBox(width: 12),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        bookingInfo.scheduleDetailInfo!.scheduleInfo!.tutorInfo!
-                                .name ??
-                            'null name',
-                        style: Theme.of(context).textTheme.headlineMedium,
-                      ),
-                      const SizedBox(height: 8),
-                      Text(
-                        DateFormat.yMMMEd().format(
-                            DateTime.fromMillisecondsSinceEpoch(bookingInfo
-                                    .scheduleDetailInfo!.startPeriodTimestamp ??
-                                0)),
-                        style: const TextStyle(
-                            fontSize: 15, fontWeight: FontWeight.bold),
-                      ),
-                      Text(
-                        _convertClassTime(),
-                        style: const TextStyle(fontSize: 15),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 12),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 12),
-              child: Text('No Requests For Lessons'),
-            ),
-            const SizedBox(height: 12),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 12),
-              child: Text("Tutor haven't reviewed yet"),
-            ),
-            const SizedBox(height: 12),
-            Row(
-              children: [
-                Expanded(
-                  child: TextButton(
-                    style: TextButton.styleFrom(foregroundColor: Colors.red),
-                    onPressed: () async {
-                      await showReportDialog(context);
-                    },
-                    child: const Text(
-                      'Report',
-                      style: TextStyle(fontSize: 16, color: Colors.red),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          bookingInfo.scheduleDetailInfo!.scheduleInfo!
+                                  .tutorInfo!.name ??
+                              'null name',
+                          style: Theme.of(context).textTheme.headlineMedium,
+                        ),
+                        const SizedBox(height: 8),
+                        Text(
+                          DateFormat.yMMMEd().format(
+                              DateTime.fromMillisecondsSinceEpoch(bookingInfo
+                                      .scheduleDetailInfo!
+                                      .startPeriodTimestamp ??
+                                  0)),
+                          style: const TextStyle(
+                              fontSize: 15, fontWeight: FontWeight.bold),
+                        ),
+                        Text(
+                          _convertClassTime(),
+                          style: const TextStyle(fontSize: 15),
+                        ),
+                      ],
                     ),
                   ),
-                ),
-                const SizedBox(width: 12),
-                Expanded(
-                  child: TextButton(
-                    onPressed: () {
-                      Navigator.pushNamed(context, Routes.writeReview);
-                    },
-                    child: const Text(
-                      'Add A Review',
-                      style: TextStyle(fontSize: 16),
+                ],
+              ),
+              const SizedBox(height: 12),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 12),
+                child: Text('No Requests For Lessons'),
+              ),
+              const SizedBox(height: 12),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 12),
+                child: Text("Tutor haven't reviewed yet"),
+              ),
+              const SizedBox(height: 12),
+              Row(
+                children: [
+                  Expanded(
+                    child: TextButton(
+                      style: TextButton.styleFrom(foregroundColor: Colors.red),
+                      onPressed: () async {
+                        await showReportDialog(context);
+                      },
+                      child: const Text(
+                        'Report',
+                        style: TextStyle(fontSize: 16, color: Colors.red),
+                      ),
                     ),
                   ),
-                ),
-              ],
-            )
-          ],
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: TextButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, Routes.writeReview);
+                      },
+                      child: const Text(
+                        'Add A Review',
+                        style: TextStyle(fontSize: 16),
+                      ),
+                    ),
+                  ),
+                ],
+              )
+            ],
+          ),
         ),
       ),
     );

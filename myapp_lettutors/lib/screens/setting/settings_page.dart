@@ -46,6 +46,7 @@ class _SettingsPageState extends State<SettingsPage> {
     final appProvider = context.watch<AppProvider>();
     final lang = appProvider.language;
     _loadLanguage(appProvider);
+    _loadTheme(appProvider);
     return SingleChildScrollView(
       padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
       child: Column(
@@ -121,6 +122,66 @@ class _SettingsPageState extends State<SettingsPage> {
                     const SizedBox(width: 12),
                     Text(
                       lang.language,
+                      style: const TextStyle(fontSize: 16),
+                    )
+                  ],
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(width: 4),
+          InkWell(
+            onTap: () {
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    title: Text(lang.selectTheme),
+                    content: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        ListTile(
+                          title: Text(lang.lightTheme),
+                          onTap: () {
+                            _updateTheme(appProvider, 0);
+                            Navigator.pop(context); // Ẩn hộp thoại
+                          },
+                        ),
+                        ListTile(
+                          title: Text(lang.darkTheme),
+                          onTap: () {
+                            _updateTheme(appProvider, 1);
+                            Navigator.pop(context); // Ẩn hộp thoại
+                          },
+                        ),
+                        ListTile(
+                          title: Text(lang.systemDefault),
+                          onTap: () {
+                            _updateTheme(appProvider, 2);
+                            Navigator.pop(context); // Ẩn hộp thoại
+                          },
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              );
+            },
+            child: Card(
+              surfaceTintColor: Colors.white,
+              elevation: 2,
+              child: Padding(
+                padding: const EdgeInsets.all(12),
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.sunny,
+                      size: 30,
+                      color: Colors.blue[600],
+                    ),
+                    const SizedBox(width: 12),
+                    Text(
+                      lang.selectTheme,
                       style: const TextStyle(fontSize: 16),
                     )
                   ],
@@ -267,16 +328,16 @@ class _SettingsPageState extends State<SettingsPage> {
             },
             style: TextButton.styleFrom(
               minimumSize: const Size.fromHeight(44),
-              backgroundColor: const Color.fromRGBO(255, 0, 0, 0.2),
+              backgroundColor: Colors.blue[600],
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Icon(Icons.logout, color: Colors.red),
+                const Icon(Icons.logout, color: Colors.white),
                 const SizedBox(width: 8),
                 Text(
                   lang.sighOut,
-                  style: const TextStyle(fontSize: 18, color: Colors.red),
+                  style: const TextStyle(fontSize: 18, color: Colors.white),
                 ),
               ],
             ),
@@ -285,6 +346,18 @@ class _SettingsPageState extends State<SettingsPage> {
         ],
       ),
     );
+  }
+
+  void _updateTheme(AppProvider appProvider, int i) async {
+    appProvider.setTheme(i);
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setInt('theme', i);
+  }
+
+  void _loadTheme(AppProvider appProvider) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    final theme = prefs.getInt('theme') ?? 0;
+    appProvider.setTheme(theme);
   }
 }
 

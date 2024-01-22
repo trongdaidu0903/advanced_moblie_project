@@ -36,4 +36,8 @@ abstract class Language {
   String get sighOut;
   String get termAndCondition;
   String get selectLanguage;
+  String get lightTheme;
+  String get darkTheme;
+  String get selectTheme;
+  String get systemDefault;
 }

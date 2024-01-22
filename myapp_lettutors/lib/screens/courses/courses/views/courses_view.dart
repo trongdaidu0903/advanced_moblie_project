@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:myapp_lettutors/constants/items_per_page.dart';
 import 'package:myapp_lettutors/models/course/course.dart';
 import 'package:myapp_lettutors/providers/auth_provider.dart';
 import 'package:myapp_lettutors/services/course_service.dart';
@@ -19,7 +18,7 @@ class _CoursesViewState extends State<CoursesView> {
   List<Course> courses = [];
 
   int _page = 1;
-  int _perPage = itemsPerPage.first;
+  final int _perPage = 5;
   int _count = 0;
   bool _isLoading = true;
 
@@ -109,61 +108,6 @@ class _CoursesViewState extends State<CoursesView> {
                     : SingleChildScrollView(
                         child: Column(
                           children: [
-                            Row(
-                              children: [
-                                const Expanded(
-                                  flex: 20,
-                                  child: Text(
-                                    'Items per page',
-                                    textAlign: TextAlign.right,
-                                  ),
-                                ),
-                                const SizedBox.shrink(),
-                                const SizedBox(width: 16),
-                                Expanded(
-                                  flex: 7,
-                                  child: DropdownButtonFormField<int>(
-                                    value: _perPage,
-                                    items: itemsPerPage
-                                        .map((itemPerPage) =>
-                                            DropdownMenuItem<int>(
-                                                value: itemPerPage,
-                                                child: Text('$itemPerPage')))
-                                        .toList(),
-                                    onChanged: (value) {
-                                      setState(() {
-                                        _perPage = value!;
-                                        _page = 1;
-                                        _isLoading = true;
-                                      });
-                                    },
-                                    icon: const Icon(
-                                      Icons.keyboard_arrow_down_rounded,
-                                      color: Colors.blue,
-                                    ),
-                                    decoration: InputDecoration(
-                                      contentPadding:
-                                          const EdgeInsets.symmetric(
-                                              vertical: 4, horizontal: 16),
-                                      filled: true,
-                                      fillColor: Colors.blue[50],
-                                      enabledBorder: const OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                            color: Colors.transparent),
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(24)),
-                                      ),
-                                      focusedBorder: const OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                            color: Colors.transparent),
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(24)),
-                                      ),
-                                    ),
-                                  ),
-                                )
-                              ],
-                            ),
                             ...List<Widget>.generate(
                               courses.length,
                               (index) => CourseCard(course: courses[index]),

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:myapp_lettutors/constants/items_per_page.dart';
 import 'package:myapp_lettutors/models/tutor/tutor.dart';
 import 'package:myapp_lettutors/services/tutor_service.dart';
 
@@ -14,7 +13,7 @@ class TutorSearchResult extends StatefulWidget {
 
 class _TutorSearchResultState extends State<TutorSearchResult> {
   int _page = 1;
-  int _perPage = itemsPerPage.first;
+  final int _perPage = 5;
   bool _isLoading = true;
   List<Tutor> _tutors = [];
   int _count = 0;
@@ -39,19 +38,6 @@ class _TutorSearchResultState extends State<TutorSearchResult> {
       _tutors = result['tutors'];
       _isLoading = false;
     });
-
-    // if (_countryController.text.isEmpty) {
-    //   _tutors = result;
-    // } else {
-    //   _tutors.clear();
-    //   for (var tutor in result) {
-    //     if (countryList[tutor.country] != null) {
-    //       if (countryList[tutor.country]!.toLowerCase().contains(_countryController.text)) {
-    //         _tutors.add(tutor);
-    //       }
-    //     }
-    //   }
-    // }
   }
 
   @override
@@ -69,7 +55,16 @@ class _TutorSearchResultState extends State<TutorSearchResult> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Search Results'),
+        elevation: 0,
+        leading: BackButton(
+          color: Colors.blue[600],
+        ),
+        title: Text(
+          "Search Result",
+          overflow: TextOverflow.ellipsis,
+          style: Theme.of(context).textTheme.displayMedium,
+        ),
+        actions: const [SizedBox(width: 16)],
       ),
       body: _isLoading
           ? const Center(
@@ -86,60 +81,6 @@ class _TutorSearchResultState extends State<TutorSearchResult> {
                         : 'Found $_count result(s)',
                     style: Theme.of(context).textTheme.headlineMedium,
                   ),
-                  _count > 0
-                      ? Row(
-                          children: [
-                            const Expanded(
-                              flex: 20,
-                              child: Text(
-                                'Tutors per page',
-                                textAlign: TextAlign.right,
-                              ),
-                            ),
-                            const SizedBox(width: 16),
-                            Expanded(
-                              flex: 7,
-                              child: DropdownButtonFormField<int>(
-                                value: _perPage,
-                                items: itemsPerPage
-                                    .map((itemPerPage) => DropdownMenuItem<int>(
-                                        value: itemPerPage,
-                                        child: Text('$itemPerPage')))
-                                    .toList(),
-                                onChanged: (value) {
-                                  setState(() {
-                                    _perPage = value!;
-                                    _page = 1;
-                                    _isLoading = true;
-                                  });
-                                },
-                                icon: const Icon(
-                                  Icons.keyboard_arrow_down_rounded,
-                                  color: Colors.blue,
-                                ),
-                                decoration: InputDecoration(
-                                  contentPadding: const EdgeInsets.symmetric(
-                                      vertical: 4, horizontal: 16),
-                                  filled: true,
-                                  fillColor: Colors.blue[50],
-                                  enabledBorder: const OutlineInputBorder(
-                                    borderSide:
-                                        BorderSide(color: Colors.transparent),
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(24)),
-                                  ),
-                                  focusedBorder: const OutlineInputBorder(
-                                    borderSide:
-                                        BorderSide(color: Colors.transparent),
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(24)),
-                                  ),
-                                ),
-                              ),
-                            )
-                          ],
-                        )
-                      : const SizedBox.shrink(),
                   const SizedBox(height: 8),
                   ...List<Widget>.generate(
                     _tutors.length,

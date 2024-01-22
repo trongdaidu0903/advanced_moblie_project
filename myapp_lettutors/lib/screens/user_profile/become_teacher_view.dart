@@ -137,7 +137,6 @@ class _BecomeTeacherViewState extends State<BecomeTeacherView> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Colors.white,
         leading: BackButton(
           color: Colors.blue[600],
         ),

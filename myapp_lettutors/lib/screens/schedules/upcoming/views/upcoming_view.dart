@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:myapp_lettutors/constants/items_per_page.dart';
 import 'package:myapp_lettutors/models/schedule/booking_info.dart';
 import 'package:myapp_lettutors/providers/auth_provider.dart';
 import 'package:myapp_lettutors/services/user_service.dart';
@@ -15,10 +14,10 @@ class UpcomingView extends StatefulWidget {
 }
 
 class _UpcomingClassViewState extends State<UpcomingView> {
-  List<BookingInfo> upcoming = [];
+  List<BookingInfo> upcomingClasses = [];
 
   final int _page = 1;
-  final int _perPage = itemsPerPage.first;
+  final int _perPage = 5;
   bool _isLoading = true;
 
   Future<void> _fetchUpcomingClasses(String token) async {
@@ -29,7 +28,7 @@ class _UpcomingClassViewState extends State<UpcomingView> {
     );
 
     setState(() {
-      upcoming = result['classes'];
+      upcomingClasses = result['classes'];
       _isLoading = false;
     });
   }
@@ -51,16 +50,10 @@ class _UpcomingClassViewState extends State<UpcomingView> {
             padding: const EdgeInsets.all(16),
             child: Column(
               children: [
-                Text(
-                  'You have 10 upcoming classes',
-                  style: Theme.of(context).textTheme.headlineMedium,
-                ),
-                const SizedBox(height: 16),
-                const SizedBox(height: 8),
                 ...List<Widget>.generate(
-                    upcoming.length,
+                    upcomingClasses.length,
                     (index) => UpcomingClassCard(
-                          bookingInfo: upcoming[index],
+                          bookingInfo: upcomingClasses[index],
                           onCancel: (value) {
                             if (value) {
                               setState(() {

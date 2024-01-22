@@ -95,4 +95,16 @@ class Vietnamese extends Language {
 
   @override
   String get selectLanguage => "Chọn ngôn ngữ";
+
+  @override
+  String get lightTheme => "Chế độ sáng";
+
+  @override
+  String get darkTheme => "Chế độ tối";
+
+  @override
+  String get selectTheme => "Đế độ xem";
+
+  @override
+  String get systemDefault => "Mặc định hệ thống";
 }

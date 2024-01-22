@@ -29,8 +29,7 @@ class MyHttpOverrides extends HttpOverrides {
 
 void main() {
   //Build variant
-  final flavor = String.fromEnvironment('FLAVOR');
-  print("🎚️ 🎚️ 🎚️ FLAVOR: $flavor");
+  const flavor = String.fromEnvironment('FLAVOR');
 
   if (flavor == 'dev') {
     EnvironmentConfig.setEnvironment(Environment.dev);
@@ -61,10 +60,9 @@ class LetTutor extends StatelessWidget {
       child: MaterialApp(
           title: 'LetTutor',
           debugShowCheckedModeBanner: false,
-          theme: ThemeData(
+          theme: ThemeData.dark().copyWith(
             useMaterial3: true,
             primaryColor: Colors.blue,
-            scaffoldBackgroundColor: Colors.white,
             textTheme: TextTheme(
               displayLarge: TextStyle(
                   fontSize: 40,
@@ -74,7 +72,6 @@ class LetTutor extends StatelessWidget {
               displayMedium: TextStyle(
                 fontSize: 26,
                 fontWeight: FontWeight.w700,
-                //letterSpacing: 1.0,
                 color: Colors.blue[600],
               ),
               displaySmall: const TextStyle(

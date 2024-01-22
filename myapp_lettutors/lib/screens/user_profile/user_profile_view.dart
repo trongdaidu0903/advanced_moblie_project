@@ -48,31 +48,8 @@ class _UserProfileViewState extends State<UserProfileView> {
     country = result?.country ?? 'US';
     level = result?.level ?? 'BEGINNER';
     _studyScheduleController.text = result?.studySchedule ?? 'null';
-    // _nameController.text = authProvider.currentUser.name ?? 'null name';
-    // emailAddress = authProvider.currentUser.email ?? 'null email';
-    // phoneNumber = authProvider.currentUser.phone ?? 'null phone number';
-    // birthday = authProvider.currentUser.birthday ?? 'yyyy-MM-dd';
-    // country = authProvider.currentUser.country ?? 'US';
-    // level = authProvider.currentUser.level ?? 'BEGINNER';
-
     chosenTopics = result?.learnTopics ?? [];
     chosenTestPreparations = result?.testPreparations ?? [];
-    // chosenTopics.clear();
-    // chosenTestPreparations.clear();
-    // for (int i = 0; i < result!.learnTopics!.length; ++i) {
-    //   final topicsName = authProvider.learnTopics.map((e) => e.name).toList();
-    //   final userTopicName = result.learnTopics![i].name;
-    //   if (topicsName.contains(userTopicName)) {
-    //     chosenTopics.add(i);
-    //   }
-    // }
-    // for (int i = 0; i < result.testPreparations!.length; ++i) {
-    //   final testPrepNames = authProvider.testPreparations.map((e) => e.name).toList();
-    //   final userTestPreparationName = result.testPreparations![i].name;
-    //   if (testPrepNames.contains(userTestPreparationName)) {
-    //     chosenTestPreparations.add(i);
-    //   }
-    // }
 
     setState(() {
       user = result;
@@ -134,12 +111,11 @@ class _UserProfileViewState extends State<UserProfileView> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Colors.white,
         leading: BackButton(
           color: Colors.blue[600],
         ),
         title: Text(
-          'Edit Profile',
+          'User Profile',
           style: Theme.of(context).textTheme.displayMedium,
         ),
       ),
@@ -198,6 +174,7 @@ class _UserProfileViewState extends State<UserProfileView> {
                     style: TextStyle(
                       fontSize: 16,
                       color: Colors.grey[900],
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                   const SizedBox(height: 4),
@@ -217,17 +194,22 @@ class _UserProfileViewState extends State<UserProfileView> {
                   ),
                   const SizedBox(height: 16),
                   Text(
-                    'Email Address',
-                    style: TextStyle(fontSize: 16, color: Colors.grey[900]),
+                    'Email',
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.grey[900],
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   const SizedBox(height: 4),
                   Text(emailAddress),
                   const SizedBox(height: 16),
                   Text(
-                    'Phone Number',
+                    'Phone',
                     style: TextStyle(
                       fontSize: 16,
                       color: Colors.grey[900],
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                   const SizedBox(height: 4),
@@ -238,6 +220,7 @@ class _UserProfileViewState extends State<UserProfileView> {
                     style: TextStyle(
                       fontSize: 16,
                       color: Colors.grey[900],
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                   const SizedBox(height: 4),
@@ -277,6 +260,7 @@ class _UserProfileViewState extends State<UserProfileView> {
                     style: TextStyle(
                       fontSize: 16,
                       color: Colors.grey[900],
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                   const SizedBox(height: 4),
@@ -294,6 +278,7 @@ class _UserProfileViewState extends State<UserProfileView> {
                     style: TextStyle(
                       fontSize: 16,
                       color: Colors.grey[900],
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                   const SizedBox(height: 4),
@@ -327,32 +312,13 @@ class _UserProfileViewState extends State<UserProfileView> {
                       });
                     },
                   ),
-                  // DropdownButtonFormField(
-                  //   decoration: InputDecoration(
-                  //     contentPadding: const EdgeInsets.symmetric(
-                  //       vertical: 4,
-                  //       horizontal: 8,
-                  //     ),
-                  //     hintStyle: TextStyle(color: Colors.grey[400]),
-                  //     border: const OutlineInputBorder(
-                  //       borderSide: BorderSide(color: Colors.grey, width: 2),
-                  //       borderRadius: BorderRadius.all(Radius.circular(10)),
-                  //     ),
-                  //   ),
-                  //   items: levels
-                  //       .map((e) => DropdownMenuItem(
-                  //             value: e,
-                  //             child: Text(e),
-                  //           ))
-                  //       .toList(),
-                  //   onChanged: (value) {},
-                  // ),
                   const SizedBox(height: 16),
                   Text(
                     'Topic',
                     style: TextStyle(
                       fontSize: 16,
                       color: Colors.grey[900],
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                   const SizedBox(height: 4),
@@ -362,7 +328,7 @@ class _UserProfileViewState extends State<UserProfileView> {
                     children: List<Widget>.generate(
                       authProvider.learnTopics.length,
                       (index) => ChoiceChip(
-                        backgroundColor: Colors.grey[100],
+                        backgroundColor: Colors.blue[600],
                         selectedColor: Colors.lightBlue[100],
                         selected: chosenTopics
                             .map((e) => e.id)
@@ -378,7 +344,7 @@ class _UserProfileViewState extends State<UserProfileView> {
                                     .contains(
                                         authProvider.learnTopics[index].id)
                                 ? Colors.blue[700]
-                                : Colors.black54,
+                                : Colors.white,
                           ),
                         ),
                         onSelected: (bool selected) {
@@ -397,25 +363,14 @@ class _UserProfileViewState extends State<UserProfileView> {
                       ),
                     ),
                   ),
-                  // DropdownButtonFormField(
-                  //   decoration: InputDecoration(
-                  //     contentPadding: const EdgeInsets.symmetric(
-                  //       vertical: 4,
-                  //       horizontal: 8,
-                  //     ),
-                  //     hintStyle: TextStyle(color: Colors.grey[400]),
-                  //     border: const OutlineInputBorder(
-                  //       borderSide: BorderSide(color: Colors.grey, width: 2),
-                  //       borderRadius: BorderRadius.all(Radius.circular(10)),
-                  //     ),
-                  //   ),
-                  //   items: learnTopics.map((e) => DropdownMenuItem(value: e, child: Text(e))).toList(),
-                  //   onChanged: (value) {},
-                  // ),
                   const SizedBox(height: 16),
                   Text(
                     'Test Preparation',
-                    style: TextStyle(fontSize: 16, color: Colors.grey[900]),
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.grey[900],
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   const SizedBox(height: 4),
                   Wrap(
@@ -424,7 +379,7 @@ class _UserProfileViewState extends State<UserProfileView> {
                     children: List<Widget>.generate(
                       authProvider.testPreparations.length,
                       (index) => ChoiceChip(
-                        backgroundColor: Colors.grey[100],
+                        backgroundColor: Colors.blue[600],
                         selectedColor: Colors.lightBlue[100],
                         selected: chosenTestPreparations
                             .map((e) => e.id)
@@ -440,7 +395,7 @@ class _UserProfileViewState extends State<UserProfileView> {
                                     .contains(
                                         authProvider.testPreparations[index].id)
                                 ? Colors.blue[700]
-                                : Colors.black54,
+                                : Colors.white,
                           ),
                         ),
                         onSelected: (bool selected) {
@@ -460,28 +415,13 @@ class _UserProfileViewState extends State<UserProfileView> {
                       ),
                     ),
                   ),
-                  // DropdownButtonFormField(
-                  //   decoration: InputDecoration(
-                  //     contentPadding: const EdgeInsets.symmetric(
-                  //       vertical: 4,
-                  //       horizontal: 8,
-                  //     ),
-                  //     hintStyle: TextStyle(color: Colors.grey[400]),
-                  //     border: const OutlineInputBorder(
-                  //       borderSide: BorderSide(color: Colors.grey, width: 2),
-                  //       borderRadius: BorderRadius.all(Radius.circular(10)),
-                  //     ),
-                  //   ),
-                  //   items:
-                  //       testPreparations.map((e) => DropdownMenuItem(value: e, child: Text(e))).toList(),
-                  //   onChanged: (value) {},
-                  // ),
                   const SizedBox(height: 16),
                   Text(
                     'Study Schedule',
                     style: TextStyle(
                       fontSize: 16,
                       color: Colors.grey[900],
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                   const SizedBox(height: 4),
@@ -509,7 +449,7 @@ class _UserProfileViewState extends State<UserProfileView> {
                       backgroundColor: Colors.blue,
                     ),
                     child: const Text(
-                      'SAVE',
+                      'Update Profile',
                       style: TextStyle(
                         fontSize: 18,
                         color: Colors.white,

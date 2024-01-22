@@ -23,7 +23,6 @@ class AuthService {
         'password': password,
       },
     );
-    print("🔗🔗🔗 API URL: " + baseUrl);
     final jsonDecode = json.decode(response.body);
 
     if (response.statusCode != 200) {

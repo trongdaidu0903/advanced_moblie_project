@@ -27,7 +27,7 @@ class _TutorDetailViewState extends State<TutorDetailView> {
   late TutorInfo _tutorInfo;
   late final List<String> _specialties;
   late final List<String> languages;
-  late final List<TutorFeedback> feedbacks;
+  List<TutorFeedback>? feedbacks;
   late String userId;
 
   bool _isLoading = true;

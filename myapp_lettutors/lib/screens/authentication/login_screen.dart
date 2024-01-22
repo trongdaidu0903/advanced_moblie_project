@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:myapp_lettutors/constants/routes.dart';
 import 'package:myapp_lettutors/models/languages/lang_en.dart';
@@ -192,19 +191,19 @@ class _LoginViewState extends State<LoginView> {
 
   Future<void> loginWithFacebook(AuthProvider authProvider) async {
     try {
-      final LoginResult result = await FacebookAuth.instance.login();
+      // final LoginResult result = await FacebookAuth.instance.login();
 
-      if (result.status == LoginStatus.success) {
-        final AccessToken accessToken =
-            result.accessToken!.token as AccessToken;
-        final userData = await FacebookAuth.instance.getUserData();
+      // if (result.status == LoginStatus.success) {
+      //   final AccessToken accessToken =
+      //       result.accessToken!.token as AccessToken;
+      //   final userData = await FacebookAuth.instance.getUserData();
 
-        // Xử lý dữ liệu người dùng
-        // ...
+      //   // Xử lý dữ liệu người dùng
+      //   // ...
 
-        // Chuyển hướng đến màn hình chính hoặc thực hiện các tác vụ khác
-        // ...
-      }
+      //   // Chuyển hướng đến màn hình chính hoặc thực hiện các tác vụ khác
+      //   // ...
+      // }
     } catch (e) {
       // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context).showSnackBar(
@@ -213,45 +212,45 @@ class _LoginViewState extends State<LoginView> {
     }
   }
 
-  void _handleFacebookLogin(AuthProvider authProvider) async {
-    final result = await FacebookAuth.instance.login();
-    if (result.status == LoginStatus.success) {
-      final accessToken = result.accessToken!.token;
-      try {
-        await AuthService.loginByFacebook(
-          accessToken: accessToken,
-          onSuccess: (user, token) async {
-            authProvider.logIn(user, token);
+  // void _handleFacebookLogin(AuthProvider authProvider) async {
+  //   final result = await FacebookAuth.instance.login();
+  //   if (result.status == LoginStatus.success) {
+  //     final accessToken = result.accessToken!.token;
+  //     try {
+  //       await AuthService.loginByFacebook(
+  //         accessToken: accessToken,
+  //         onSuccess: (user, token) async {
+  //           authProvider.logIn(user, token);
 
-            final prefs = await SharedPreferences.getInstance();
-            await prefs.setString(
-              'refresh_token',
-              authProvider.token!.refresh!.token!,
-            );
+  //           final prefs = await SharedPreferences.getInstance();
+  //           await prefs.setString(
+  //             'refresh_token',
+  //             authProvider.token!.refresh!.token!,
+  //           );
 
-            setState(() {
-              _isAuthenticating = false;
-              _isAuthenticated = true;
-            });
+  //           setState(() {
+  //             _isAuthenticating = false;
+  //             _isAuthenticated = true;
+  //           });
 
-            Future.delayed(const Duration(seconds: 1), () {
-              Navigator.pushNamedAndRemoveUntil(
-                context,
-                Routes.main,
-                (route) => false,
-              );
-            });
-          },
-        );
-      } catch (e) {
-        if (mounted) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Error Login with Google: ${e.toString()}')),
-          );
-        }
-      }
-    } else {}
-  }
+  //           Future.delayed(const Duration(seconds: 1), () {
+  //             Navigator.pushNamedAndRemoveUntil(
+  //               context,
+  //               Routes.main,
+  //               (route) => false,
+  //             );
+  //           });
+  //         },
+  //       );
+  //     } catch (e) {
+  //       if (mounted) {
+  //         ScaffoldMessenger.of(context).showSnackBar(
+  //           SnackBar(content: Text('Error Login with Google: ${e.toString()}')),
+  //         );
+  //       }
+  //     }
+  //   } else {}
+  // }
 
   void _loadLanguage(AppProvider appProvider) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -262,17 +261,6 @@ class _LoginViewState extends State<LoginView> {
     } else {
       chosenLanguage = 'Tiếng Việt';
       appProvider.setLanguage(Vietnamese());
-    }
-  }
-
-  void _updateLanguage(AppProvider appProvider, String value) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    if (value == 'English') {
-      appProvider.language = English();
-      await prefs.setString('language', 'EN');
-    } else {
-      appProvider.language = Vietnamese();
-      await prefs.setString('language', 'VI');
     }
   }
 

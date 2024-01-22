@@ -95,4 +95,16 @@ class English extends Language {
 
   @override
   String get selectLanguage => "Select Language";
+
+  @override
+  String get lightTheme => "Light Theme";
+
+  @override
+  String get darkTheme => "Dark Theme";
+
+  @override
+  String get selectTheme => "Change Theme";
+
+  @override
+  String get systemDefault => "System Default";
 }
