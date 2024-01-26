@@ -8,7 +8,7 @@ Trần Trọng Đại - 20120449
 - Framework: `Flutter`
 
 ## Self Assessment
-(https://github.com/trongdaidu0903/advanced_moblie_project/blob/milestone-4/20120449.pdf)
+- Link: (https://github.com/trongdaidu0903/advanced_moblie_project/blob/milestone-4/20120449.pdf)
 
 ## Video Demo Milestone-2
 - Link:
