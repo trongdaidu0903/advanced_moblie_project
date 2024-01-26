@@ -47,20 +47,31 @@ class _TutorFeedbackViewState extends State<TutorFeedbackView> {
                   child: Card(
                     elevation: 0,
                     child: ListTile(
-                      leading: const CircleAvatar(
+                      leading: CircleAvatar(
+                        backgroundImage: NetworkImage(tutorFeedbacks[index]
+                                .firstInfo
+                                ?.avatar ??
+                            'https://sm.ign.com/ign_nordic/cover/a/avatar-gen/avatar-generations_prsz.jpg'),
                         radius: 30,
                       ),
                       title: Text(
-                        'No name',
-                        style: Theme.of(context).textTheme.displayMedium,
+                        tutorFeedbacks[index].firstInfo?.name ?? 'Annymous',
+                        style: Theme.of(context).textTheme.bodyLarge,
                       ),
                       subtitle: Text(
                         tutorFeedbacks[index].content ?? 'No feedback',
-                        style: Theme.of(context).textTheme.displaySmall,
+                        style: Theme.of(context).textTheme.bodyMedium,
                       ),
-                      trailing: Text(
-                        tutorFeedbacks[index].rating.toString(),
-                        style: Theme.of(context).textTheme.displayMedium,
+                      trailing: ListView.builder(
+                        shrinkWrap: true,
+                        scrollDirection: Axis.horizontal,
+                        itemCount: tutorFeedbacks[index].rating,
+                        itemBuilder: (context, index) {
+                          return const Icon(
+                            Icons.star,
+                            color: Colors.yellow,
+                          );
+                        },
                       ),
                     ),
                   ),

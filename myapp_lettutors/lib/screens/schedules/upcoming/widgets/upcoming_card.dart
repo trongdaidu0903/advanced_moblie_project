@@ -5,6 +5,9 @@ import 'package:jitsi_meet_wrapper/jitsi_meet_wrapper.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:myapp_lettutors/constants/routes.dart';
 import 'package:myapp_lettutors/models/schedule/booking_info.dart';
+import 'package:myapp_lettutors/providers/auth_provider.dart';
+import 'package:myapp_lettutors/services/booking_service.dart';
+import 'package:provider/provider.dart';
 
 class UpcomingClassCard extends StatelessWidget {
   const UpcomingClassCard(
@@ -42,6 +45,8 @@ class UpcomingClassCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    AuthProvider authProvider = context.watch<AuthProvider>();
+    final String? token = authProvider.token?.access?.token;
     return InkWell(
       onTap: (() {
         Navigator.pushNamed(
@@ -140,7 +145,23 @@ class UpcomingClassCard extends StatelessWidget {
                                 child: const Text('NO'),
                               ),
                               TextButton(
-                                onPressed: () => Navigator.pop(context, true),
+                                onPressed: () => {
+                                  Navigator.pop(context, true),
+                                  BookingService.cancelBookedClass(
+                                    scheduleDetailIds: [
+                                      bookingInfo.scheduleDetailInfo?.id
+                                              .toString() ??
+                                          ""
+                                    ],
+                                    token: token!,
+                                  ),
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                      content: Text(
+                                          'NOTE: Classes can only be canceled 2 hours in advance !'),
+                                    ),
+                                  ),
+                                },
                                 child: const Text('YES'),
                               ),
                             ],
