@@ -1,12 +1,114 @@
+import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:myapp_lettutors/models/languages/lang_vi.dart';
 import 'package:myapp_lettutors/models/languages/language.dart';
 
 class AppProvider extends ChangeNotifier {
   Language language = Vietnamese();
-  ThemeMode themeMode = ThemeMode.light;
+
+  ThemeData themeLight = ThemeData.light().copyWith(
+      useMaterial3: true,
+      primaryColor: Colors.blue,
+      textTheme: TextTheme(
+        displayLarge: TextStyle(
+            fontSize: 40,
+            fontWeight: FontWeight.bold,
+            color: Colors.blue[600],
+            letterSpacing: 1.1),
+        displayMedium: TextStyle(
+          fontSize: 26,
+          fontWeight: FontWeight.w700,
+          color: Colors.blue[600],
+        ),
+        displaySmall: const TextStyle(
+          fontSize: 22,
+          fontWeight: FontWeight.bold,
+          color: Colors.black,
+        ),
+        headlineMedium: const TextStyle(
+          fontSize: 18,
+          fontWeight: FontWeight.w500,
+          color: Colors.black,
+        ),
+        bodyLarge: TextStyle(
+            fontSize: 17.0,
+            fontWeight: FontWeight.w600,
+            color: Colors.blue[600]),
+        bodyMedium: TextStyle(
+            fontSize: 16.0,
+            fontWeight: FontWeight.w500,
+            color: Colors.grey[900]),
+      ));
+
+  ThemeData themeDark = ThemeData.dark().copyWith(
+      useMaterial3: true,
+      primaryColor: Colors.blue,
+      textTheme: TextTheme(
+        displayLarge: TextStyle(
+            fontSize: 40,
+            fontWeight: FontWeight.bold,
+            color: Colors.blue[600],
+            letterSpacing: 1.1),
+        displayMedium: TextStyle(
+          fontSize: 26,
+          fontWeight: FontWeight.w700,
+          color: Colors.blue[600],
+        ),
+        displaySmall: const TextStyle(
+          fontSize: 22,
+          fontWeight: FontWeight.bold,
+          color: Colors.black,
+        ),
+        headlineMedium: const TextStyle(
+          fontSize: 18,
+          fontWeight: FontWeight.w500,
+          color: Colors.black,
+        ),
+        bodyLarge: TextStyle(
+            fontSize: 17.0,
+            fontWeight: FontWeight.w600,
+            color: Colors.blue[600]),
+        bodyMedium: TextStyle(
+            fontSize: 16.0,
+            fontWeight: FontWeight.w500,
+            color: Colors.grey[900]),
+      ));
 
   bool _isDarkMode = false;
+
+  ThemeData theme = ThemeData.light().copyWith(
+      useMaterial3: true,
+      primaryColor: Colors.blue,
+      textTheme: TextTheme(
+        displayLarge: TextStyle(
+            fontSize: 40,
+            fontWeight: FontWeight.bold,
+            color: Colors.blue[600],
+            letterSpacing: 1.1),
+        displayMedium: TextStyle(
+          fontSize: 26,
+          fontWeight: FontWeight.w700,
+          color: Colors.blue[600],
+        ),
+        displaySmall: const TextStyle(
+          fontSize: 22,
+          fontWeight: FontWeight.bold,
+          color: Colors.black,
+        ),
+        headlineMedium: const TextStyle(
+          fontSize: 18,
+          fontWeight: FontWeight.w500,
+          color: Colors.black,
+        ),
+        bodyLarge: TextStyle(
+            fontSize: 17.0,
+            fontWeight: FontWeight.w600,
+            color: Colors.blue[600]),
+        bodyMedium: TextStyle(
+            fontSize: 16.0,
+            fontWeight: FontWeight.w500,
+            color: Colors.grey[900]),
+      ));
 
   bool get isDarkMode => _isDarkMode;
 
@@ -15,42 +117,23 @@ class AppProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void toggleTheme(int i) {
-    switch (i) {
-      case 0:
-        themeMode = ThemeMode.light;
-        _isDarkMode = false;
-        break;
-      case 1:
-        themeMode = ThemeMode.dark;
-        _isDarkMode = true;
-        break;
-      case 2:
-        themeMode = ThemeMode.system;
-        _isDarkMode = false;
-        break;
-      default:
-        themeMode = ThemeMode.light;
-        break;
-    }
-  }
-
   void setTheme(int i) {
     switch (i) {
       case 0:
-        themeMode = ThemeMode.light;
+        theme = themeLight;
+        AdaptiveTheme.of(context).setLight();
         _isDarkMode = false;
         break;
       case 1:
-        themeMode = ThemeMode.dark;
+        theme = themeDark;
         _isDarkMode = true;
         break;
       case 2:
-        themeMode = ThemeMode.system;
+        theme = themeLight;
         _isDarkMode = false;
         break;
       default:
-        themeMode = ThemeMode.light;
+        theme = themeLight;
         break;
     }
   }

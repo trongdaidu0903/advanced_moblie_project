@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:myapp_lettutors/constants/routes.dart';
 import 'package:myapp_lettutors/envs/environment.dart';
@@ -57,57 +58,63 @@ class LetTutor extends StatelessWidget {
           create: (_) => AuthProvider(),
         ),
       ],
-      child: MaterialApp(
-          title: 'LetTutor',
-          debugShowCheckedModeBanner: false,
-          theme: ThemeData.light().copyWith(
-            useMaterial3: true,
-            primaryColor: Colors.blue,
-            textTheme: TextTheme(
-              displayLarge: TextStyle(
-                  fontSize: 40,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.blue[600],
-                  letterSpacing: 1.1),
-              displayMedium: TextStyle(
-                fontSize: 26,
-                fontWeight: FontWeight.w700,
-                color: Colors.blue[600],
-              ),
-              displaySmall: const TextStyle(
-                fontSize: 22,
-                fontWeight: FontWeight.bold,
-                color: Colors.black,
-              ),
-              headlineMedium: const TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.w500,
-                color: Colors.black,
-              ),
-              bodyLarge: TextStyle(
-                  fontSize: 17.0,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.blue[600]),
-              bodyMedium: TextStyle(
-                  fontSize: 16.0,
-                  fontWeight: FontWeight.w500,
-                  color: Colors.grey[900]),
-            ),
-          ),
-          home: const LoginView(),
-          routes: {
-            Routes.login: (context) => const LoginView(),
-            Routes.forgotPassword: (context) => const ForgotPasswordView(),
-            Routes.register: (context) => const RegisterView(),
-            Routes.main: (context) => const NavigationPage(),
-            Routes.userProfile: (context) => const UserProfileView(),
-            Routes.becomeTutor: (context) => const BecomeTeacherView(),
-            Routes.courseDetail: (context) => const CourseDetailView(),
-            Routes.teacherDetail: (context) => const TutorDetailView(),
-            Routes.review: (context) => const TutorFeedbackView(),
-            Routes.writeReview: (context) => const WriteReviewView(),
-            Routes.tutorSearchResult: (context) => const TutorSearchResult(),
-          }),
+      child: AdaptiveTheme(
+        light: ThemeData.light(),
+        dark: ThemeData.dark(),
+        initial: AdaptiveThemeMode.light,
+        builder: (theme, darkTheme) => MaterialApp(
+            title: 'LetTutor',
+            debugShowCheckedModeBanner: false,
+            theme: theme,
+            darkTheme: darkTheme,
+            // theme: ThemeData.light().copyWith(
+            //     useMaterial3: true,
+            //     primaryColor: Colors.blue,
+            //     textTheme: TextTheme(
+            //       displayLarge: TextStyle(
+            //           fontSize: 40,
+            //           fontWeight: FontWeight.bold,
+            //           color: Colors.blue[600],
+            //           letterSpacing: 1.1),
+            //       displayMedium: TextStyle(
+            //         fontSize: 26,
+            //         fontWeight: FontWeight.w700,
+            //         color: Colors.blue[600],
+            //       ),
+            //       displaySmall: const TextStyle(
+            //         fontSize: 22,
+            //         fontWeight: FontWeight.bold,
+            //         color: Colors.black,
+            //       ),
+            //       headlineMedium: const TextStyle(
+            //         fontSize: 18,
+            //         fontWeight: FontWeight.w500,
+            //         color: Colors.black,
+            //       ),
+            //       bodyLarge: TextStyle(
+            //           fontSize: 17.0,
+            //           fontWeight: FontWeight.w600,
+            //           color: Colors.blue[600]),
+            //       bodyMedium: TextStyle(
+            //           fontSize: 16.0,
+            //           fontWeight: FontWeight.w500,
+            //           color: Colors.grey[900]),
+            //     )),
+            home: const LoginView(),
+            routes: {
+              Routes.login: (context) => const LoginView(),
+              Routes.forgotPassword: (context) => const ForgotPasswordView(),
+              Routes.register: (context) => const RegisterView(),
+              Routes.main: (context) => const NavigationPage(),
+              Routes.userProfile: (context) => const UserProfileView(),
+              Routes.becomeTutor: (context) => const BecomeTeacherView(),
+              Routes.courseDetail: (context) => const CourseDetailView(),
+              Routes.teacherDetail: (context) => const TutorDetailView(),
+              Routes.review: (context) => const TutorFeedbackView(),
+              Routes.writeReview: (context) => const WriteReviewView(),
+              Routes.tutorSearchResult: (context) => const TutorSearchResult(),
+            }),
+      ),
     );
   }
 }

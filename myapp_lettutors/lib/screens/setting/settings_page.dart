@@ -1,3 +1,4 @@
+import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:myapp_lettutors/constants/routes.dart';
 import 'package:myapp_lettutors/models/languages/lang_en.dart';
@@ -144,6 +145,7 @@ class _SettingsPageState extends State<SettingsPage> {
                           title: Text(lang.lightTheme),
                           onTap: () {
                             _updateTheme(appProvider, 0);
+                            AdaptiveTheme.of(context).setLight();
                             Navigator.pop(context); // Ẩn hộp thoại
                           },
                         ),
@@ -151,6 +153,7 @@ class _SettingsPageState extends State<SettingsPage> {
                           title: Text(lang.darkTheme),
                           onTap: () {
                             _updateTheme(appProvider, 1);
+                            AdaptiveTheme.of(context).setDark();
                             Navigator.pop(context); // Ẩn hộp thoại
                           },
                         ),
