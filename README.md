@@ -19,7 +19,27 @@ Trần Trọng Đại - 20120449
 (https://drive.google.com/file/d/1C7I3ANg9pdYIUJ_s2PejQwut4Zc04tMK/view?usp=sharing)
 
 ## Video Demo Milestone-4
-- Link: update later
+- Link:
+(https://drive.google.com/drive/folders/1Fzgh4eCmicwzMVcKOm4S20dKpi8Fsql3?usp=sharing)
+
+## Screenshots
+(https://github.com/trongdaidu0903/advanced_moblie_project/blob/milestone-4/screenshots/Screenshot_1706341412.png)
+(https://github.com/trongdaidu0903/advanced_moblie_project/blob/milestone-4/screenshots/Screenshot_1706341419.png)
+(https://github.com/trongdaidu0903/advanced_moblie_project/blob/milestone-4/screenshots/Screenshot_1706341425.png)
+(https://github.com/trongdaidu0903/advanced_moblie_project/blob/milestone-4/screenshots/Screenshot_1706341452.png)
+(https://github.com/trongdaidu0903/advanced_moblie_project/blob/milestone-4/screenshots/Screenshot_1706341466.png)
+(https://github.com/trongdaidu0903/advanced_moblie_project/blob/milestone-4/screenshots/Screenshot_1706341472.png)
+(https://github.com/trongdaidu0903/advanced_moblie_project/blob/milestone-4/screenshots/Screenshot_1706341476.png)
+(https://github.com/trongdaidu0903/advanced_moblie_project/blob/milestone-4/screenshots/Screenshot_1706341479.png)
+(https://github.com/trongdaidu0903/advanced_moblie_project/blob/milestone-4/screenshots/Screenshot_1706341483.png)
+(https://github.com/trongdaidu0903/advanced_moblie_project/blob/milestone-4/screenshots/Screenshot_1706341487.png)
+(https://github.com/trongdaidu0903/advanced_moblie_project/blob/milestone-4/screenshots/Screenshot_1706341504.png)
+(https://github.com/trongdaidu0903/advanced_moblie_project/blob/milestone-4/screenshots/Screenshot_1706341507.png)
+(https://github.com/trongdaidu0903/advanced_moblie_project/blob/milestone-4/screenshots/Screenshot_1706341510.png)
+(https://github.com/trongdaidu0903/advanced_moblie_project/blob/milestone-4/screenshots/Screenshot_1706341513.png)
+(https://github.com/trongdaidu0903/advanced_moblie_project/blob/milestone-4/screenshots/Screenshot_1706341517.png)
+(https://github.com/trongdaidu0903/advanced_moblie_project/blob/milestone-4/screenshots/Screenshot_1706341549.png)
+(https://github.com/trongdaidu0903/advanced_moblie_project/blob/milestone-4/screenshots/Screenshot_1706341561.png)
 
 ## Widgets Tree
 ![Widgets Tree](https://github.com/trongdaidu0903/advanced_moblie_project/blob/main/widgets_tree.png)
