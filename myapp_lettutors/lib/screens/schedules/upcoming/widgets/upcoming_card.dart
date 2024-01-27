@@ -136,7 +136,10 @@ class UpcomingClassCard extends StatelessWidget {
                         await showDialog(
                           context: context,
                           builder: (context) => AlertDialog(
-                            title: const Text('Cancel class'),
+                            title: Text(
+                              'Cancel class',
+                              style: Theme.of(context).textTheme.bodyLarge,
+                            ),
                             content: const Text(
                                 'Are you sure to cancel this class?'),
                             actions: [

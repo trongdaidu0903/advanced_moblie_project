@@ -380,7 +380,10 @@ Future<bool> _showLogOutConfirmDialog(BuildContext context) async {
     context: context,
     builder: (context) {
       return AlertDialog(
-        title: const Text('Log Out'),
+        title: Text(
+          'Log Out',
+          style: Theme.of(context).textTheme.displayMedium,
+        ),
         content: const Text('Are you sure you want to log out?'),
         actions: [
           TextButton(

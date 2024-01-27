@@ -91,30 +91,30 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Align(
-              alignment: Alignment.centerRight,
-              child: DropdownButton<String>(
-                value: chosenLanguage,
-                items: const [
-                  DropdownMenuItem<String>(
-                    value: 'English',
-                    child: Text('English'),
-                  ),
-                  DropdownMenuItem<String>(
-                    value: 'Tiếng Việt',
-                    child: Text('Tiếng Việt'),
-                  ),
-                ],
-                onChanged: (String? language) {
-                  if (language != null) {
-                    _updateLanguage(appProvider, language);
-                  }
-                  setState(() {
-                    chosenLanguage = language!;
-                  });
-                },
-              ),
-            ),
+            // Align(
+            //   alignment: Alignment.centerRight,
+            //   child: DropdownButton<String>(
+            //     value: chosenLanguage,
+            //     items: const [
+            //       DropdownMenuItem<String>(
+            //         value: 'English',
+            //         child: Text('English'),
+            //       ),
+            //       DropdownMenuItem<String>(
+            //         value: 'Tiếng Việt',
+            //         child: Text('Tiếng Việt'),
+            //       ),
+            //     ],
+            //     onChanged: (String? language) {
+            //       if (language != null) {
+            //         _updateLanguage(appProvider, language);
+            //       }
+            //       setState(() {
+            //         chosenLanguage = language!;
+            //       });
+            //     },
+            //   ),
+            // ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 36),
               child: Row(

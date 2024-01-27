@@ -348,7 +348,7 @@ class _LoginViewState extends State<LoginView> {
                           ),
                           border: const OutlineInputBorder(
                               borderSide:
-                                  BorderSide(color: Colors.grey, width: 2),
+                                  BorderSide(color: Colors.blue, width: 2),
                               borderRadius:
                                   BorderRadius.all(Radius.circular(10))),
                         ),
@@ -418,16 +418,16 @@ class _LoginViewState extends State<LoginView> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            TextButton(
-                              onPressed: () {
-                                loginWithFacebook(authProvider);
-                              },
-                              child: Image.asset(
-                                'assets/logo/facebook.png',
-                                width: 40,
-                                height: 40,
-                              ),
-                            ),
+                            // TextButton(
+                            //   onPressed: () {
+                            //     loginWithFacebook(authProvider);
+                            //   },
+                            //   child: Image.asset(
+                            //     'assets/logo/facebook.png',
+                            //     width: 40,
+                            //     height: 40,
+                            //   ),
+                            // ),
                             TextButton(
                               onPressed: () {
                                 _handleGoogleLogin(authProvider);

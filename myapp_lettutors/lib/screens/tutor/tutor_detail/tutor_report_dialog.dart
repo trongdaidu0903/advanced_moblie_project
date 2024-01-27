@@ -27,7 +27,10 @@ class _TutorReportDialogState extends State<TutorReportDialog> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: const Text('Report Tutor'),
+      title: Text(
+        'Report Tutor',
+        style: Theme.of(context).textTheme.bodyLarge,
+      ),
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: [

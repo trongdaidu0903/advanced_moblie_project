@@ -15,16 +15,12 @@ class _WriteReviewViewState extends State<WriteReviewView> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Colors.white,
         leading: BackButton(
           color: Colors.blue[600],
         ),
         title: Text(
           'Review',
-          style: Theme.of(context)
-              .textTheme
-              .titleMedium!
-              .copyWith(fontWeight: FontWeight.bold),
+          style: Theme.of(context).textTheme.displayMedium,
         ),
       ),
       body: Padding(
@@ -34,10 +30,7 @@ class _WriteReviewViewState extends State<WriteReviewView> {
           children: [
             Text(
               'Rating',
-              style: Theme.of(context)
-                  .textTheme
-                  .titleLarge!
-                  .copyWith(fontWeight: FontWeight.bold),
+              style: Theme.of(context).textTheme.displaySmall,
             ),
             const SizedBox(
               height: 8,
@@ -65,10 +58,7 @@ class _WriteReviewViewState extends State<WriteReviewView> {
             const SizedBox(height: 24),
             Text(
               'Description',
-              style: Theme.of(context)
-                  .textTheme
-                  .titleLarge!
-                  .copyWith(fontWeight: FontWeight.bold),
+              style: Theme.of(context).textTheme.displaySmall,
             ),
             const SizedBox(height: 8),
             TextField(

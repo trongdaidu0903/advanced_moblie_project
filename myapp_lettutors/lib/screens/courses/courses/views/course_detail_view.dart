@@ -83,7 +83,6 @@ class _CourseDetailState extends State<CourseDetailView> {
                       style: const TextStyle(
                         fontSize: 26,
                         fontWeight: FontWeight.bold,
-                        color: Colors.black,
                       ),
                     ),
                   ),

@@ -192,25 +192,25 @@ class _TutorCardState extends State<TutorCard> {
                 maxLines: 5,
                 overflow: TextOverflow.ellipsis,
               ),
-              Align(
-                alignment: Alignment.centerRight,
-                child: OutlinedButton.icon(
-                  onPressed: () {
-                    _handleTutorDetailView();
-                  },
-                  icon: Icon(
-                    Icons.bookmark_add,
-                    color: Colors.cyanAccent[800],
-                  ),
-                  label: Text(
-                    'Book',
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: Colors.cyanAccent[800],
-                    ),
-                  ),
-                ),
-              )
+              // Align(
+              //   alignment: Alignment.centerRight,
+              //   child: OutlinedButton.icon(
+              //     onPressed: () {
+              //       _handleTutorDetailView();
+              //     },
+              //     icon: Icon(
+              //       Icons.bookmark_add,
+              //       color: Colors.cyanAccent[800],
+              //     ),
+              //     label: Text(
+              //       'Book',
+              //       style: TextStyle(
+              //         fontSize: 16,
+              //         color: Colors.cyanAccent[800],
+              //       ),
+              //     ),
+              //   ),
+              // )
             ],
           ),
         ),

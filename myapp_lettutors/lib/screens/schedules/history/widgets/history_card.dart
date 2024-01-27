@@ -145,7 +145,10 @@ Future<bool> showReportDialog(BuildContext context) {
     context: context,
     builder: (context) {
       return AlertDialog(
-        title: const Text('Report Lesson'),
+        title: Text(
+          'Report Lesson',
+          style: Theme.of(context).textTheme.displayMedium,
+        ),
         content: SingleChildScrollView(
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -168,7 +171,7 @@ Future<bool> showReportDialog(BuildContext context) {
                           style: Theme.of(context).textTheme.headlineMedium,
                         ),
                         const SizedBox(height: 4),
-                        const Text('2022-10-20    10:00 - 10:55')
+                        //const Text('2022-10-20    10:00 - 10:55')
                       ],
                     ),
                   ),

@@ -37,34 +37,31 @@ class _BookingConfirmDialogState extends State<BookingConfirmDialog> {
     final accessToken = authProvider.token?.access?.token ?? '';
 
     return AlertDialog(
-      title: const Text('Book This Tutor'),
+      title: Text(
+        'Book This Tutor',
+        style: Theme.of(context).textTheme.displayMedium,
+      ),
       content: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Text(
-            'Booking time',
-            style: Theme.of(context)
-                .textTheme
-                .titleLarge!
-                .copyWith(fontWeight: FontWeight.bold),
-          ),
-          const SizedBox(height: 4),
-          Text(
-            '  $start - $end',
-            style: const TextStyle(fontSize: 16),
-          ),
-          Text(
-            '  $date',
-            style: const TextStyle(fontSize: 16),
-          ),
-          const SizedBox(height: 8),
+          // Text(
+          //   'Booking time',
+          //   style: Theme.of(context).textTheme.displaySmall,
+          // ),
+          // const SizedBox(height: 4),
+          // Text(
+          //   '  $start - $end',
+          //   style: const TextStyle(fontSize: 16),
+          // ),
+          // Text(
+          //   '  $date',
+          //   style: const TextStyle(fontSize: 16),
+          // ),
+          // const SizedBox(height: 8),
           Text(
             'Note',
-            style: Theme.of(context)
-                .textTheme
-                .titleLarge!
-                .copyWith(fontWeight: FontWeight.bold),
+            style: Theme.of(context).textTheme.displaySmall,
           ),
           const SizedBox(height: 4),
           SizedBox(
