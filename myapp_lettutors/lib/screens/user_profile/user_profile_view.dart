@@ -171,11 +171,7 @@ class _UserProfileViewState extends State<UserProfileView> {
                   const SizedBox(height: 16),
                   Text(
                     'Name',
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: Colors.grey[900],
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: Theme.of(context).textTheme.bodyMedium,
                   ),
                   const SizedBox(height: 4),
                   TextField(
@@ -195,33 +191,21 @@ class _UserProfileViewState extends State<UserProfileView> {
                   const SizedBox(height: 16),
                   Text(
                     'Email',
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: Colors.grey[900],
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: Theme.of(context).textTheme.bodyMedium,
                   ),
                   const SizedBox(height: 4),
                   Text(emailAddress),
                   const SizedBox(height: 16),
                   Text(
                     'Phone',
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: Colors.grey[900],
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: Theme.of(context).textTheme.bodyMedium,
                   ),
                   const SizedBox(height: 4),
                   Text(phoneNumber),
                   const SizedBox(height: 16),
                   Text(
                     'Country',
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: Colors.grey[900],
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: Theme.of(context).textTheme.bodyMedium,
                   ),
                   const SizedBox(height: 4),
                   DropdownButtonFormField(
@@ -231,7 +215,7 @@ class _UserProfileViewState extends State<UserProfileView> {
                         vertical: 4,
                         horizontal: 8,
                       ),
-                      hintStyle: TextStyle(color: Colors.grey[400]),
+                      hintStyle: TextStyle(color: Theme.of(context).hintColor),
                       border: const OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.grey, width: 2),
                         borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -257,11 +241,7 @@ class _UserProfileViewState extends State<UserProfileView> {
                   const SizedBox(height: 16),
                   Text(
                     'Birthday',
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: Colors.grey[900],
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: Theme.of(context).textTheme.bodyMedium,
                   ),
                   const SizedBox(height: 4),
                   SelectDate(
@@ -275,11 +255,7 @@ class _UserProfileViewState extends State<UserProfileView> {
                   const SizedBox(height: 16),
                   Text(
                     'Level',
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: Colors.grey[900],
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: Theme.of(context).textTheme.bodyMedium,
                   ),
                   const SizedBox(height: 4),
                   DropdownButtonFormField(
@@ -289,7 +265,7 @@ class _UserProfileViewState extends State<UserProfileView> {
                         vertical: 4,
                         horizontal: 8,
                       ),
-                      hintStyle: TextStyle(color: Colors.grey[400]),
+                      hintStyle: TextStyle(color: Theme.of(context).hintColor),
                       border: const OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.grey, width: 2),
                         borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -315,11 +291,7 @@ class _UserProfileViewState extends State<UserProfileView> {
                   const SizedBox(height: 16),
                   Text(
                     'Topic',
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: Colors.grey[900],
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: Theme.of(context).textTheme.bodyMedium,
                   ),
                   const SizedBox(height: 4),
                   Wrap(
@@ -366,11 +338,7 @@ class _UserProfileViewState extends State<UserProfileView> {
                   const SizedBox(height: 16),
                   Text(
                     'Test Preparation',
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: Colors.grey[900],
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: Theme.of(context).textTheme.bodyMedium,
                   ),
                   const SizedBox(height: 4),
                   Wrap(
@@ -418,11 +386,7 @@ class _UserProfileViewState extends State<UserProfileView> {
                   const SizedBox(height: 16),
                   Text(
                     'Study Schedule',
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: Colors.grey[900],
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: Theme.of(context).textTheme.bodyMedium,
                   ),
                   const SizedBox(height: 4),
                   TextField(

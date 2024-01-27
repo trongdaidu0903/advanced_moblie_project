@@ -46,17 +46,12 @@ class _CourseDetailState extends State<CourseDetailView> {
 
     return Scaffold(
       appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.white,
-        leading: const BackButton(),
-        title: Text(
-          'Course Detail',
-          style: Theme.of(context)
-              .textTheme
-              .titleLarge!
-              .copyWith(fontWeight: FontWeight.bold),
-        ),
-      ),
+          elevation: 0,
+          leading: const BackButton(),
+          title: Text(
+            'Course Detail',
+            style: Theme.of(context).textTheme.displayMedium,
+          )),
       body: _isLoading
           ? const Center(
               child: CircularProgressIndicator(),

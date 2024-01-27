@@ -91,7 +91,6 @@ class _TutorDetailViewState extends State<TutorDetailView> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Colors.white,
         leading: BackButton(
           color: Colors.blue[600],
         ),

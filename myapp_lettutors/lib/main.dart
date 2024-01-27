@@ -59,8 +59,8 @@ class LetTutor extends StatelessWidget {
         ),
       ],
       child: AdaptiveTheme(
-        light: ThemeData.light(),
-        dark: ThemeData.dark(),
+        light: _buildLightTheme(),
+        dark: _buildDarkTheme(),
         initial: AdaptiveThemeMode.light,
         builder: (theme, darkTheme) => MaterialApp(
             title: 'LetTutor',
@@ -116,5 +116,75 @@ class LetTutor extends StatelessWidget {
             }),
       ),
     );
+  }
+
+  ThemeData _buildLightTheme() {
+    return ThemeData.light().copyWith(
+        useMaterial3: true,
+        primaryColor: Colors.blue,
+        textTheme: TextTheme(
+          displayLarge: TextStyle(
+              fontSize: 40,
+              fontWeight: FontWeight.bold,
+              color: Colors.blue[600],
+              letterSpacing: 1.1),
+          displayMedium: TextStyle(
+            fontSize: 26,
+            fontWeight: FontWeight.w700,
+            color: Colors.blue[600],
+          ),
+          displaySmall: const TextStyle(
+            fontSize: 22,
+            fontWeight: FontWeight.bold,
+            color: Colors.black,
+          ),
+          headlineMedium: const TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.w500,
+            color: Colors.black,
+          ),
+          bodyLarge: TextStyle(
+              fontSize: 17.0,
+              fontWeight: FontWeight.w600,
+              color: Colors.blue[600]),
+          bodyMedium: TextStyle(
+              fontSize: 16.0,
+              fontWeight: FontWeight.w500,
+              color: Colors.grey[900]),
+        ));
+  }
+
+  ThemeData _buildDarkTheme() {
+    return ThemeData.dark().copyWith(
+        useMaterial3: true,
+        primaryColor: Colors.blue,
+        textTheme: TextTheme(
+          displayLarge: TextStyle(
+              fontSize: 40,
+              fontWeight: FontWeight.bold,
+              color: Colors.blue[300],
+              letterSpacing: 1.1),
+          displayMedium: TextStyle(
+            fontSize: 26,
+            fontWeight: FontWeight.w700,
+            color: Colors.blue[300],
+          ),
+          displaySmall: const TextStyle(
+            fontSize: 22,
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+          ),
+          headlineMedium: const TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.w500,
+            color: Colors.white,
+          ),
+          bodyLarge: TextStyle(
+              fontSize: 17.0,
+              fontWeight: FontWeight.w600,
+              color: Colors.blue[300]),
+          bodyMedium: const TextStyle(
+              fontSize: 16.0, fontWeight: FontWeight.w500, color: Colors.white),
+        ));
   }
 }

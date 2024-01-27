@@ -70,7 +70,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     const SizedBox(width: 12),
                     Text(
                       lang.account,
-                      style: const TextStyle(fontSize: 16),
+                      style: Theme.of(context).textTheme.bodyMedium,
                     )
                   ],
                 ),
@@ -84,7 +84,10 @@ class _SettingsPageState extends State<SettingsPage> {
                 context: context,
                 builder: (BuildContext context) {
                   return AlertDialog(
-                    title: Text(lang.selectLanguage),
+                    title: Text(
+                      lang.selectLanguage,
+                      style: Theme.of(context).textTheme.bodyMedium,
+                    ),
                     content: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
@@ -123,7 +126,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     const SizedBox(width: 12),
                     Text(
                       lang.language,
-                      style: const TextStyle(fontSize: 16),
+                      style: Theme.of(context).textTheme.bodyMedium,
                     )
                   ],
                 ),
@@ -137,7 +140,10 @@ class _SettingsPageState extends State<SettingsPage> {
                 context: context,
                 builder: (BuildContext context) {
                   return AlertDialog(
-                    title: Text(lang.selectTheme),
+                    title: Text(
+                      lang.selectTheme,
+                      style: Theme.of(context).textTheme.bodyMedium,
+                    ),
                     content: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
@@ -146,7 +152,7 @@ class _SettingsPageState extends State<SettingsPage> {
                           onTap: () {
                             _updateTheme(appProvider, 0);
                             AdaptiveTheme.of(context).setLight();
-                            Navigator.pop(context); // Ẩn hộp thoại
+                            Navigator.pop(context);
                           },
                         ),
                         ListTile(
@@ -154,14 +160,14 @@ class _SettingsPageState extends State<SettingsPage> {
                           onTap: () {
                             _updateTheme(appProvider, 1);
                             AdaptiveTheme.of(context).setDark();
-                            Navigator.pop(context); // Ẩn hộp thoại
+                            Navigator.pop(context);
                           },
                         ),
                         ListTile(
                           title: Text(lang.systemDefault),
                           onTap: () {
                             _updateTheme(appProvider, 2);
-                            Navigator.pop(context); // Ẩn hộp thoại
+                            Navigator.pop(context);
                           },
                         ),
                       ],
@@ -185,7 +191,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     const SizedBox(width: 12),
                     Text(
                       lang.selectTheme,
-                      style: const TextStyle(fontSize: 16),
+                      style: Theme.of(context).textTheme.bodyMedium,
                     )
                   ],
                 ),
@@ -210,7 +216,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     const SizedBox(width: 12),
                     Text(
                       lang.becomeTeacher,
-                      style: const TextStyle(fontSize: 16),
+                      style: Theme.of(context).textTheme.bodyMedium,
                     )
                   ],
                 ),
@@ -235,7 +241,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     const SizedBox(width: 12),
                     Text(
                       lang.privatePolicy,
-                      style: const TextStyle(fontSize: 16),
+                      style: Theme.of(context).textTheme.bodyMedium,
                     )
                   ],
                 ),
@@ -260,7 +266,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     const SizedBox(width: 12),
                     Text(
                       lang.termAndCondition,
-                      style: const TextStyle(fontSize: 16),
+                      style: Theme.of(context).textTheme.bodyMedium,
                     )
                   ],
                 ),
@@ -283,7 +289,7 @@ class _SettingsPageState extends State<SettingsPage> {
                   const SizedBox(width: 12),
                   Text(
                     lang.contact,
-                    style: const TextStyle(fontSize: 16),
+                    style: Theme.of(context).textTheme.bodyMedium,
                   )
                 ],
               ),
@@ -304,7 +310,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     const SizedBox(width: 12),
                     Text(
                       lang.guide,
-                      style: const TextStyle(fontSize: 16),
+                      style: Theme.of(context).textTheme.bodyMedium,
                     )
                   ],
                 ),
@@ -352,6 +358,11 @@ class _SettingsPageState extends State<SettingsPage> {
   }
 
   void _updateTheme(AppProvider appProvider, int i) async {
+    if (i == 0) {
+      AdaptiveTheme.of(context).setLight();
+    } else if (i == 1) {
+      AdaptiveTheme.of(context).setDark();
+    }
     appProvider.setTheme(i);
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setInt('theme', i);

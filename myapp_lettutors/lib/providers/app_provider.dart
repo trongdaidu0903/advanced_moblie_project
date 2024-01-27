@@ -1,4 +1,3 @@
-import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:myapp_lettutors/models/languages/lang_vi.dart';
 import 'package:myapp_lettutors/models/languages/language.dart';
@@ -121,7 +120,6 @@ class AppProvider extends ChangeNotifier {
     switch (i) {
       case 0:
         theme = themeLight;
-        AdaptiveTheme.of(context).setLight();
         _isDarkMode = false;
         break;
       case 1:
